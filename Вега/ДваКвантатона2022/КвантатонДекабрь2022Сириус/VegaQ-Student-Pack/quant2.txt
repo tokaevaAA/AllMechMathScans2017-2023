@@ -1,0 +1,305 @@
+Quantathon: set 2 by kramkov
+
+INTEREST RATE OPTIONS IN HULL-WHITE MODEL
+
+PARAMETERS OF HULL-WHITE MODEL:
+
+interest rate = 0.07
+sigma = 0.02
+lambda = 0.05
+initial time = 0
+
+quality = 200
+
+CALLABLE CAPPED FLOATER IN INTEREST RATE MODEL
+
+cap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.077
+
+spread over LIBOR = 0.01
+
+RISK REPORT: 
+
+price = 998.351
+delta = 578.48
+one percent gamma = -477.101
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           879.198
+ 0.15           903.709
+ 0.13           928.906
+ 0.11           954.604
+ 0.09           979.469
+ 0.07           998.351
+ 0.05            1002.4
+ 0.03           1002.48
+ 0.01           1002.49
+-0.01           1002.51
+-0.03           1002.52
+
+CAP ON SWAP RATE IN INTEREST RATE MODEL
+
+cap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.077
+
+swap period = 0.5
+number of swap payments = 12
+
+RISK REPORT: 
+
+price = 4.36882
+delta = -404.811
+one percent gamma = 298.131
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           111.095
+ 0.15           88.3099
+ 0.13           65.0981
+ 0.11           41.6402
+ 0.09           19.2871
+ 0.07           4.36882
+ 0.05          0.672471
+ 0.03         0.0646337
+ 0.01        0.00349514
+-0.01       9.36009e-05
+-0.03       1.04045e-06
+
+CALLABLE RANGE ACCRUED NOTE IN INTEREST RATE MODEL
+
+note parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+
+number of lookup times = 4
+lower barrier for LIBOR = 0.063
+upper barrier for LIBOR = 0.077
+period for LIBOR = 0.25
+
+RISK REPORT: 
+
+price = 937.196
+delta = 1401.05
+one percent gamma = -1932.04
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           779.181
+ 0.15           802.052
+ 0.13           825.869
+ 0.11           852.373
+ 0.09            888.06
+ 0.07           937.196
+ 0.05            941.67
+ 0.03           956.838
+ 0.01           980.173
+-0.01           999.213
+-0.03            1007.3
+
+PUTABLE ANNUITY IN INTEREST RATE MODEL
+
+annuity parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+
+RISK REPORT: 
+
+price = 996.569
+delta = 566.832
+one percent gamma = -169.493
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17            919.76
+ 0.15           935.053
+ 0.13           950.662
+ 0.11           966.571
+ 0.09           982.512
+ 0.07           996.569
+ 0.05           1004.69
+ 0.03           1009.83
+ 0.01           1014.86
+-0.01           1019.92
+-0.03              1025
+
+CONSTANT MATURITY SWAPTION IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay float and receive fixed
+
+maturity = 0.5
+number of periods in CMS swap rate = 3
+
+RISK REPORT: 
+
+price = 6.94409
+delta = 629.283
+one percent gamma = 354.017
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17      -2.76476e-13
+ 0.15      -5.36349e-11
+ 0.13       3.10735e-06
+ 0.11        0.00813227
+ 0.09           0.59096
+ 0.07           6.94409
+ 0.05           26.1615
+ 0.03           53.0206
+ 0.01           81.9583
+-0.01           112.285
+-0.03           144.044
+
+CONSTANT MATURITY SWAPTION IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay fixed and receive float
+
+maturity = 0.5
+number of periods in CMS swap rate = 3
+
+RISK REPORT: 
+
+price = 7.92117
+delta = -657.708
+one percent gamma = 323.478
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           115.363
+ 0.15           94.6551
+ 0.13           72.9061
+ 0.11           50.0813
+ 0.09           26.7031
+ 0.07           7.92117
+ 0.05          0.781843
+ 0.03         0.0129487
+ 0.01       6.32424e-06
+-0.01      -1.88397e-10
+-0.03      -9.71145e-13
+
+AMERICAN CONSTANT MATURITY SWAPTION IN INTEREST RATE MODEL
+
+CMS periods = 3
+
+exercise  times:
+[0] = 0.125
+[1] = 0.25
+[2] = 0.375
+[3] = 0.5
+[4] = 0.625
+[5] = 0.75
+[6] = 0.875
+[7] = 1
+[8] = 1.125
+[9] = 1.25
+[10] = 1.375
+[11] = 1.5
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay float and receive fixed
+
+RISK REPORT: 
+
+price = 11.5957
+delta = 621.4
+one percent gamma = 226.311
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17         0.0001518
+ 0.15        0.00446519
+ 0.13          0.069781
+ 0.11            0.6186
+ 0.09           3.31945
+ 0.07           11.5957
+ 0.05           28.7332
+ 0.03           54.7578
+ 0.01            83.988
+-0.01           114.227
+-0.03           145.479
+
+AMERICAN CONSTANT MATURITY SWAPTION IN INTEREST RATE MODEL
+
+CMS periods = 3
+
+exercise  times:
+[0] = 0.125
+[1] = 0.25
+[2] = 0.375
+[3] = 0.5
+[4] = 0.625
+[5] = 0.75
+[6] = 0.875
+[7] = 1
+[8] = 1.125
+[9] = 1.25
+[10] = 1.375
+[11] = 1.5
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay fixed and receive float
+
+RISK REPORT: 
+
+price = 12.8109
+delta = -621.917
+one percent gamma = 196.927
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           124.991
+ 0.15           101.814
+ 0.13           77.8476
+ 0.11           53.0761
+ 0.09           29.3225
+ 0.07           12.8109
+ 0.05           4.08515
+ 0.03          0.859867
+ 0.01          0.110327
+-0.01        0.00806142
+-0.03       0.000313729
+

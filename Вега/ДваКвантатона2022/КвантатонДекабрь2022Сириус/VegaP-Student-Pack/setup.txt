@@ -1,0 +1,40 @@
+setup by Vega
+
+START OF SETUP
+
+Test of GSL and CBLAS
+
+vectors and matrix
+
+    X       Y                       A                   
+    0       5       0       5      10      15      20   
+    1       6       1       6      11      16      21   
+    2       7       2       7      12      17      22   
+    3       8       3       8      13      18      23   
+    4       9       4       9      14      19      24   
+
+vector X:
+[0] = 0
+[1] = 1
+[2] = 2
+[3] = 3
+[4] = 4
+
+vector Y:
+[0] = 5
+[1] = 6
+[2] = 7
+[3] = 8
+[4] = 9
+
+scalar product of X and Y = 80
+
+product of matrix A and vector X:
+[0] = 35
+[1] = 86
+[2] = 137
+[3] = 188
+[4] = 239
+
+END OF SETUP
+

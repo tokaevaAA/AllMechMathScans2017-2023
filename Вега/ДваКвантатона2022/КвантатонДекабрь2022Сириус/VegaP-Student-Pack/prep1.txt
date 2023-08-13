@@ -1,0 +1,239 @@
+Set 1 by Vega
+
+DATA CURVES FOR FINANCIAL MODELS
+
+SIMPLE YIELD CALCULATOR
+
+initial time = 2
+maturity = 3.5
+discount factor = 0.900325
+
+yield = 0.07
+
+CONSTRUCTION OF YIELD CURVE FROM DISCOUNT CURVE
+
+initial time = 2
+interest rate = 0.07
+
+VALUES VERSUS TIME:
+
+    time           value
+   2.001            0.07
+ 2.46441            0.07
+ 2.92783            0.07
+ 3.39124            0.07
+ 3.85466            0.07
+ 4.31807            0.07
+ 4.78149            0.07
+  5.2449            0.07
+ 5.70832            0.07
+ 6.17173            0.07
+ 6.63515            0.07
+
+YIELD SHAPE 1
+
+lambda = 0.05
+initial time = 2
+
+VALUES VERSUS TIME:
+
+    time           value
+   2.001        0.999975
+ 2.46441        0.988479
+ 2.92783        0.977159
+ 3.39124        0.966012
+ 3.85466        0.955034
+ 4.31807        0.944224
+ 4.78149        0.933577
+  5.2449        0.923092
+ 5.70832        0.912766
+ 6.17173        0.902595
+ 6.63515        0.892578
+
+YIELD SHAPE 2
+
+lambda = 0.05
+initial time = 2
+
+VALUES VERSUS TIME:
+
+    time           value
+   2.001      2.49992e-05
+ 2.46441       0.0114322
+ 2.92783       0.0224907
+ 3.39124       0.0332094
+ 3.85466       0.0435973
+ 4.31807       0.0536627
+ 4.78149       0.0634141
+  5.2449       0.0728596
+ 5.70832       0.0820071
+ 6.17173       0.0908645
+ 6.63515       0.0994391
+
+NELSON-SIEGEL YIELD CURVE
+
+c0 = 0.02
+c1 = 0.04
+c2 = 0.06
+lambda = 0.05
+initial time = 1.5
+
+VALUES VERSUS TIME:
+
+    time           value
+     1.5            0.06
+  1.9878       0.0602361
+ 2.47561       0.0604567
+ 2.96341       0.0606626
+ 3.45122        0.060854
+ 3.93902       0.0610314
+ 4.42683       0.0611954
+ 4.91463       0.0613463
+ 5.40244       0.0614846
+ 5.89024       0.0616107
+ 6.37805       0.0617249
+
+NELSON-SIEGEL DISCOUNT CURVE
+
+c0 = 0.02
+c1 = 0.04
+c2 = 0.06
+lambda = 0.05
+initial time = 1.5
+
+VALUES VERSUS TIME:
+
+    time           value
+     1.5               1
+  1.9878        0.971044
+ 2.47561        0.942724
+ 2.96341        0.915052
+ 3.45122        0.888039
+ 3.93902        0.861692
+ 4.42683        0.836015
+ 4.91463         0.81101
+ 5.40244        0.786675
+ 5.89024        0.763009
+ 6.37805        0.740006
+
+DISCOUNT CURVE BY LINEAR INTERPOLATION OF YIELDS
+
+initial time = 1
+
+Input discount factors:
+
+      time           value      
+       1.5          0.9674      
+         2        0.939098      
+       2.5        0.914449      
+         3        0.892917      
+       3.5        0.874059      
+         4        0.857504      
+       4.5         0.84294      
+         5        0.830103      
+       5.5        0.818769      
+         6        0.808748      
+       6.5        0.799874      
+         7        0.792008      
+
+initial short-term rate = 0.0673981
+
+VALUES VERSUS TIME:
+
+    time           value
+       1               1
+ 1.58537        0.962273
+ 2.17073        0.930272
+  2.7561        0.903019
+ 3.34146         0.87973
+ 3.92683        0.859768
+  4.5122        0.842602
+ 5.09756        0.827742
+ 5.68293        0.814901
+ 6.26829        0.803789
+ 6.85366        0.794159
+
+SIMPLE FORWARD FX CALCULATOR
+
+spot FX rate = 100
+domestic discount factor = 0.95
+foreign discount factor = 0.92
+
+forward FX rate = 96.8421
+
+FORWARD PRICES FOR A CASH FLOW
+
+interest rate = 0.07
+initial time = 1
+
+cash flow:
+
+      time           value      
+   1.91667             100      
+   2.33333         143.116      
+      2.75         155.467      
+   3.16667         152.255      
+   3.58333          160.78      
+         4          92.632      
+
+VALUES VERSUS TIME:
+
+    time           value
+       1         701.789
+ 1.28979          716.17
+ 1.57957         730.846
+ 1.86936         745.822
+ 2.15914         659.394
+ 2.44893         528.628
+ 2.73871          539.46
+  3.0285         391.987
+ 3.31828          246.14
+ 3.60807         90.1251
+ 3.89785          91.972
+
+FORWARD PRICES FOR A COUPON BOND
+
+interest rate = 0.07
+initial time = 1
+
+bond parameters:
+
+notional = 1
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+
+clean prices:
+
+VALUES VERSUS TIME:
+
+    time           value
+       1         0.99913
+ 1.13304        0.999166
+ 1.26608        0.999269
+ 1.39911        0.999316
+ 1.53215        0.999411
+ 1.66519         0.99947
+ 1.79823        0.999558
+ 1.93126        0.999629
+  2.0643        0.999709
+ 2.19734        0.999792
+ 2.33038        0.999864
+
+dirty prices:
+
+VALUES VERSUS TIME:
+
+    time           value
+       1         0.99913
+ 1.13304         1.00848
+ 1.26608         1.00039
+ 1.39911         1.00975
+ 1.53215         1.00166
+ 1.66519         1.01103
+ 1.79823         1.00293
+ 1.93126         1.01232
+  2.0643         1.00421
+ 2.19734         1.01361
+ 2.33038         1.00549
+

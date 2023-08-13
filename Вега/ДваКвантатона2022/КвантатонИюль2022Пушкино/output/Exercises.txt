@@ -1,0 +1,242 @@
+Exercises by Vega
+
+OPTIONS ON A SINGLE STOCK IN BLACK MODEL
+
+PARAMETERS OF BLACK MODEL:
+
+interest rate = 0.07
+spot price = 100
+convenience yield = 0.02
+sigma = 0.2
+lambda = 0.05
+initial time = 0
+
+quality = 200
+
+EUROPEAN STRADDLE OPTION IN ASSET MODEL
+
+strike = 100
+maturity = 0.5
+
+RISK REPORT: 
+
+price = 11.0622
+delta = 18.9767
+one percent gamma = 5.39883
+
+OPTION VALUES VERSUS SPOT:
+
+    spot            option
+ 90.4837           11.7418
+ 92.3116           11.2193
+ 94.1765           10.8778
+ 96.0789           10.7313
+ 98.0199           10.7904
+     100           11.0622
+  102.02           11.5498
+ 104.081           12.2521
+ 106.184           13.1645
+ 108.329            14.279
+ 110.517            15.585
+
+CORRIDOR OPTION IN ASSET MODEL
+
+notional = 100
+lower barrier = 95
+upper barrier = 110
+
+barrier times:
+[0] = 0.0416667
+[1] = 0.0833333
+[2] = 0.125
+[3] = 0.166667
+[4] = 0.208333
+[5] = 0.25
+[6] = 0.291667
+[7] = 0.333333
+[8] = 0.375
+[9] = 0.416667
+[10] = 0.458333
+[11] = 0.5
+
+RISK REPORT: 
+
+price = 54.3701
+delta = 97.8176
+one percent gamma = -56.506
+
+OPTION VALUES VERSUS SPOT:
+
+    spot            option
+ 90.4837           27.3615
+ 92.3116           33.5957
+ 94.1765           40.1726
+ 96.0789           46.3612
+ 98.0199           51.3156
+     100           54.3701
+  102.02           55.1814
+ 104.081           53.6778
+ 106.184           49.9946
+ 108.329           44.5193
+ 110.517           37.9394
+
+AMERICAN BUTTERFLY OPTION IN ASSET MODEL
+
+strike = 100
+strike step = 5
+
+exercise times:
+[0] = 0.0416667
+[1] = 0.0833333
+[2] = 0.125
+[3] = 0.166667
+[4] = 0.208333
+[5] = 0.25
+[6] = 0.291667
+[7] = 0.333333
+[8] = 0.375
+[9] = 0.416667
+[10] = 0.458333
+[11] = 0.5
+
+RISK REPORT: 
+
+price = 3.13504
+delta = -2.25429
+one percent gamma = -4.959
+
+OPTION VALUES VERSUS SPOT:
+
+    spot            option
+ 90.4837           1.89534
+ 92.3116           2.21762
+ 94.1765           2.55296
+ 96.0789             2.864
+ 98.0199           3.08241
+     100           3.13504
+  102.02            2.9942
+ 104.081           2.70164
+ 106.184           2.33757
+ 108.329           1.97015
+ 110.517            1.6334
+
+DOWN-AND-REBATE OPTION IN ASSET MODEL
+
+lower barrier = 90
+notional = 100
+
+barrier times:
+[0] = 0.04
+[1] = 0.08
+[2] = 0.12
+[3] = 0.16
+[4] = 0.2
+[5] = 0.24
+[6] = 0.28
+[7] = 0.32
+[8] = 0.36
+[9] = 0.4
+
+RISK REPORT: 
+
+price = 27.9394
+delta = -356.367
+one percent gamma = 32.4473
+
+OPTION VALUES VERSUS SPOT:
+
+    spot            option
+ 90.4837           77.1707
+ 92.3116           66.3357
+ 94.1765           55.2199
+ 96.0789           44.8544
+ 98.0199           35.7249
+     100           27.9394
+  102.02           21.4493
+ 104.081           16.1544
+ 106.184           11.9306
+ 108.329           8.63728
+ 110.517           6.12799
+
+UP-AND-IN AMERICAN PUT OPTION IN ASSET MODEL
+
+strike = 100
+upper barrier = 110
+
+exercise times:
+[0] = 0.0416667
+[1] = 0.0833333
+[2] = 0.125
+[3] = 0.166667
+[4] = 0.208333
+[5] = 0.25
+[6] = 0.291667
+[7] = 0.333333
+[8] = 0.375
+[9] = 0.416667
+[10] = 0.458333
+[11] = 0.5
+
+barrier times:
+[0] = 0.04
+[1] = 0.08
+[2] = 0.12
+[3] = 0.16
+[4] = 0.2
+[5] = 0.24
+[6] = 0.28
+[7] = 0.32
+[8] = 0.36
+[9] = 0.4
+
+RISK REPORT: 
+
+price = 0.238012
+delta = 3.86599
+one percent gamma = 0.542512
+
+OPTION VALUES VERSUS SPOT:
+
+    spot            option
+ 90.4837         0.0389199
+ 92.3116         0.0577431
+ 94.1765         0.0842673
+ 96.0789          0.120978
+ 98.0199          0.170944
+     100          0.238012
+  102.02          0.326728
+ 104.081          0.440146
+ 106.184          0.573026
+ 108.329           0.70323
+ 110.517          0.793241
+
+FX CANCELLABLE SWAP IN ASSET MODEL
+
+domestic notional = 10000
+domestic fixed rate = 0.07
+foreign notional = 100
+spread for foreign float rate = 0.005
+period between payments = 0.25
+number of payments = 4
+
+RISK REPORT: 
+
+price = 55.2781
+delta = 47.8696
+one percent gamma = 0.464137
+
+OPTION VALUES VERSUS SPOT:
+
+    spot            option
+ 90.4837           50.7162
+ 92.3116           51.5934
+ 94.1765           52.4879
+ 96.0789              53.4
+ 98.0199           54.3299
+     100           55.2781
+  102.02           56.2448
+ 104.081           57.2304
+ 106.184           58.2354
+ 108.329           59.2599
+ 110.517           60.3044
+
