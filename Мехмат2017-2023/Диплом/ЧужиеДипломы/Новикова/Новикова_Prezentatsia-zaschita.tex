@@ -1,0 +1,394 @@
+\documentclass[10pt]{beamer}
+\usepackage{amsfonts, amsmath, amssymb, amscd, amsthm, graphicx,enumerate}
+\usepackage[english,main=russian]{babel}
+\usepackage{mathrsfs}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareGraphicsExtensions{.png}
+\usetheme{Berlin}
+\usecolortheme{default}
+\usefonttheme[onlymath]{serif}
+
+\captionsetup{justification=centering}
+
+
+
+\newcommand{\p}{{\sf P}}
+\newcommand{\e}{{\sf E}}
+% THEOREM Environments ---------------------------------------------------
+\newtheorem{thm}{Теорема}[section]
+\renewcommand{\proofname}{Доказательство}
+\newtheorem{cor}[thm]{Следствие}
+\newtheorem{lem}[thm]{Лемма}
+\newtheorem{prop}[thm]{Предложение}
+\newtheorem{prob}[thm]{Problem}
+\newtheorem{conj}[thm]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Определение}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ex}[thm]{Example}
+
+\makeatletter
+\defbeamertemplate*{footline}{my theme}{
+	\leavevmode%
+	\hbox{%
+	\begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+		\usebeamerfont{author in head/foot}%
+		\insertshortauthor
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+		\usebeamerfont{title in head/foot}\insertshorttitle
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+		\usebeamerfont{date in head/foot}
+		\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+	\end{beamercolorbox}}%
+}
+\makeatother
+
+
+\begin{document}
+
+\title[Планирование инвестиций страховой компании]{\bf Планирование инвестиций страховой компании\\}
+\author[Новикова А.В.]{Новикова Александра Валерьевна\, \\ \tiny{(науч. рук. -- проф.\,Булинская Екатерина Вадимовна)}}
+\date{\small{МГУ им. М.В.Ломоносова\\механико-математический факультет\\ кафедра теории вероятностей, 609 группа\\}\vspace{0.5cm} 
+\tiny{Москва\\1 июня 2022 г.}}
+
+%1------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}
+\titlepage
+\end{frame}
+%2------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Цели и этапы работы}
+
+\begin{enumerate}
+\item{Получить удобную формулу для расчёта вероятности разорения страховой компании к определённому моменту времени в условиях гамма-распределения требований;}
+\item{Исследовать результат на зависимость от параметров инвестиционной составляющей, распределения требований и горизонта оценки;}
+\item{\textit{Дополнительно.} Создать инструмент вычисления по получаемой формуле.}
+\end{enumerate}
+\end{frame}
+
+\section{Описание модели}
+%3------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Модель риска с регулярными инвестициями. Определение} 
+	Фиксация баланса происходит в конце каждого фиксированного периода (недели, месяца, года). 
+	\begin{block}{Определение}
+		Баланс страховой компании, регулярно инвестирующей фиксированную долю текущего капитала $\delta$ в \textbf{безрисковый} актив на $m$ периодов с процентной ставкой $\beta$ за период, выражается как 
+ 	$$S_i=\min \lbrace (1-\delta)S_{i-1}, S_{i-1} \rbrace + c + b_m \delta S^{+}_{i-(m+1)} - X_i, i \geqslant 1;$$
+ 	$$S_0 = x.$$
+ 	где  $x$ -- начальный капитал компании;  $c$ -- сумма поступивших за период премий; $\delta$ -- постоянная доля капитала, инвестируемая в актив; $b_m = (1+\beta)^m$; $X_i$ -- размер требований, поступивших за период $i$. 
+	\end{block} 
+\end{frame}
+
+%4------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Упрощение модели}
+	 В данной работе изучаются независимые требования $X_i$, которые могут иметь разное распределение. \pause 
+	 \begin{block}{Определение}
+	 	\textbf{Моментом разорения} страховой компании называют первый момент времени, когда её капитал перестаёт быть положительным, а именно
+	 	$$\tau = \inf \lbrace n > 0, S_n \leqslant 0 \rbrace$$
+	 \end{block}\pause
+	 Тогда выражение для капитала компании можно упростить:
+	 $$S_i=(1-\delta)S_{i-1} + c + b_m \delta S_{i-(m+1)} - X_i,$$ $$S_0 = x$$
+\end{frame}
+
+%5------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Упрощение модели}
+	\begin{block}{Утверждение 2.1}
+		Пусть $S_0 = x$. Тогда
+		\begin{equation}\label{bas_s}
+			S_i = f_i - \sum_{j=1}^i g_{i,j} X_j = f_i - (\mathbf{GX})_i, i \geqslant 1, 
+		\end{equation}
+		где $f_0 = x$ и 
+		\begin{eqnarray*}
+		f_i=
+		\begin{cases} 
+			(1-\delta)f_{i-1} + c,\, i = \overline{1, m};\\ 
+			(1-\delta)f_{i-1} + b_m \delta f_{i-(m+1)} + c,\, i>m.				
+		\end{cases}\\
+		g_{i,j}=
+		\begin{cases} 
+			(1-\delta)g_{i-1,j} + b_m \delta g_{i-(m+1),j},\, j = \overline{1, i-(m+1)};\\ 
+			(1-\delta)g_{i-1,j},\, j = \overline{i-m, i-1};\\ 
+			1,\, j = i; \\
+			0,\, \textit{иначе}.
+		\end{cases}
+		\end{eqnarray*}
+	\end{block}
+\end{frame}
+
+%6------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}\frametitle{Упрощение модели}
+%	\begin{block}{Утверждение 2.2}
+%		Для определённой в лемме 1 матрицы $G$ верно
+%	\begin{equation*}
+%		(G^{-1})_{i,j} = 
+%		\begin{cases} 
+%			1, &i = j;\\ 
+%			\delta - 1, &i-j = 1; \\ 
+%			-b_m \delta, &i-j = m+1; \\ 
+%			0, &\textit{иначе}. \end{cases}
+%	\end{equation*}
+%	\end{block}
+%\end{frame}
+
+\section{Вероятность разорения к моменту времени}
+%7------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Общая теорема}
+	Для дальнейшего изучения пригодится следующий общий результат:
+	\begin{block}{Теорема 2.1}
+		Вероятность разорения компании к моменту окончания периода n равна 
+		\begin{equation}
+			\p(\tau \leqslant n) = 1 - \int\limits_0^{f_1}\cdots \int\limits_0^{f_n} \prod\limits_{i=1}^n p_{X_i} (v_i(y_1, \ldots, y_n))  dy_1 \ldots dy_n,
+		\end{equation}
+	где $v_i(y_1, \ldots, y_n) = \left(G_n^{-1} (y_1,\ldots, y_n)^T \right)_i$, а $p_{X_i}(y)$ -- плотность распределения с.в. $X_i$.
+	\end{block}
+\end{frame}
+
+%8------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Случай $Gamma(2,\lambda_i)$}
+%	$\;\; \p(\tau \leqslant n) = 1 - \p(\tau > n) = 1 - \p(S_1 > 0, \dots, S_n > 0) = 1 - \p(g_{1,1}X_1 < f_1, \ldots, \sum\limits_{i=1}^n g_{n,i} X_i < f_n)$. \pause
+	\begin{block}{Лемма 3.1}
+		Пусть $X_i \sim Gamma(2, \lambda_i)$, т.е. $p_{X_i} (x) = \lambda_i^2 x e^{-\lambda_i x}$. Тогда
+	\begin{equation*}\label{my_trick}
+		\p(\tau \leqslant n) = 1 -
+		\prod_{i=1}^n (-1)^n \lambda^2_i \frac{\partial^n}{\partial \lambda_1 \dots \partial \lambda_n} \int\limits_{l_1}^{f_1}\cdots \int\limits_{l_n}^{f_n} e^{-\sum\limits_{i=1}^n \tilde a_i y_i} dy_1 \ldots dy_n,
+	\end{equation*}
+	где 
+		$$l_p = 
+		\begin{cases} 
+			(1-\delta)y_{p-1} + b_m \delta y_{p-(m+1)},& p = \overline{m+2, n}, \\ 
+			(1-\delta)y_{p-1},& p = \overline{2, m+1}, \\ 
+			0,& p=1;
+		\end{cases}$$
+		$$\tilde a_i = 
+		\begin{cases} 
+			\lambda_i - (1-\delta)\lambda_{i+1} - b_m \delta \lambda_{i+m+1},& i = \overline{1, n-(m+1)}, \\
+		 	\lambda_i - (1-\delta)\lambda_{i+1},& i = \overline{n-m, n-1}, \\ 
+			\lambda_n,& i = n. 
+		\end{cases}$$
+	\end{block}
+\end{frame}
+
+%9------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}\frametitle{Случай $Gamma(2,\lambda_i)$}
+%	\begin{block}{Лемма 3.1. Продолжение}
+%		где $$\tilde{f_p} = f_p - \sum\limits_{i=1}^{p-1} g_{p,i} v_i;$$ 
+%		$$l_p = 
+%		\begin{cases} 
+%			(1-\delta)y_{p-1} + b_m \delta y_{p-(m+1)},& p = \overline{m+2, n}, \\ 
+%			(1-\delta)y_{p-1},& p = \overline{2, m+1}, \\ 
+%			0,& p=1;
+%		\end{cases}$$
+%		$$\tilde a_i = 
+%		\begin{cases} 
+%			\lambda_i - (1-\delta)\lambda_{i+1} - b_m \delta \lambda_{i+m+1},& i = \overline{1, n-(m+1)}, \\
+%		 	\lambda_i - (1-\delta)\lambda_{i+1},& i = \overline{n-m, n-1}, \\ 
+%			\lambda_n,& i = n. 
+%		\end{cases}$$
+%	\end{block}
+%\end{frame}
+
+%10------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Случай $Gamma(2,\lambda_i)$}
+	\begin{block}{Теорема 3.1}\label{main_th}
+		\;Пусть $X_i \sim Gamma(2, \lambda_i)$, т.е. $p_{X_i} (y) = \lambda_i^2 y e^{-\lambda_i y}$. Тогда
+		\begin{multline}
+			\p(\tau \leqslant n) = 1 - \p(\tau>n) = 1 - \prod_{i=1}^n \lambda^2_i \\ \times \sum_{k=0}^{2^n-1} (-1)^{k_1 + \ldots + k_n} \left( \prod_{p=1}^n \tilde a_p^k \right)^{-1} \exp \left(-\sum_{p=1}^n k_p \tilde a_p^k f_p\right) B_n^k,
+		\end{multline}
+	где $$
+	\begin{cases}
+		B_1^k = k_1 f_1 + \frac{1}{\tilde a_1^k}, \\
+		B_i^k = \sum\limits_{p=1}^i \frac{\partial \tilde a_p^k}{\partial \lambda_i} \left( k_p f_p + \frac{1}{\tilde a_p^k} \right) B_{i-1}^k - \frac{\partial B_{i-1}^k}{\partial \lambda_i},\, i \geqslant 1;
+	\end{cases}
+	$$
+	\end{block}
+\end{frame}
+
+%11------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Случай $Gamma(2,\lambda_i)$}
+	\begin{block}{Теорема 3.1. Продолжение}
+		\begin{equation*}
+		\left(\begin{array}{c}\tilde a_1^k \\ \vdots \\ \tilde a_n^k \end{array} \right) = 
+		U_n^k
+		\left(\begin{array}{c} \tilde a_1 \\ \vdots \\ \tilde a_n \end{array} \right)
+		=  \left(\begin{array}{c} \sum\limits_{p=1}^n u_{1,p}^k \tilde a_p \\ \vdots \\ \sum\limits_{p=n}^n u_{n,p}^k \tilde a_p \end{array} \right);
+		\end{equation*}
+		$$ U_{n}^k = (u_{i,j}^k)_{i,j=1}^{n} = (E_n + (1-k_1)L_1) \ldots (E_n + (1-k_n)L_n); $$
+		$$\tilde a_i = 
+		\begin{cases} 
+			\lambda_i - (1-\delta)\lambda_{i+1} - b_m \delta \lambda_{i+m+1},& i = \overline{1, n-(m+1)}, \\
+		 	\lambda_i - (1-\delta)\lambda_{i+1},& i = \overline{n-m, n-1}, \\ 
+			\lambda_n,& i = n. 
+		\end{cases}$$
+	\end{block}
+\end{frame}
+
+%12------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Случай $Gamma(2,\lambda_i)$}
+	\begin{block}{Теорема 3.1. Продолжение}
+		$\; \; k_1, \ldots, k_n \in \lbrace 0,1 \rbrace$ получаются из двоичного представления $k = \overline{k_n k_{n-1}\ldots k_2 k_1}$, $E_n$ -- единичная матрица порядка $n$, а
+		$$(L_i)_{st} = 
+		\begin{cases} 
+			b_m \delta,& \textit{если} \, (s,t) = (i-(m+1),i), \\ 
+			1-\delta,& \textit{если} \, (s,t) = (i-1,i), \\ 
+			0,& \textit{иначе}. 
+		\end{cases}$$
+	\end{block}
+\end{frame}
+
+
+%13------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Случай $Gamma(d_i,\lambda_i),\, d_i \in \mathbb N$}
+	Принцип подсчёта вероятности разорения к моменту окончания периода $n$ можно обобщить.
+	\begin{block}{Следствие 3.1}
+		Пусть $X_i \sim Gamma(d_i, \lambda_i)$, т.е. $p_{X_i} (y) = \Gamma^{-1}(d_i)\,\lambda_i^{d_i} \, y^{d_i-1} e^{-\lambda_i y}$. Тогда
+		\begin{multline*}
+			\p(\tau \leqslant n) = 1 - \p(\tau>n) \\= 1 - \prod_{i=1}^n \frac{\lambda^{d_i}_i}{ \Gamma(d_i)} \, (-1)^{\sum_{i=1}^n d_i - n}  \frac{\partial^{\sum_{i=1}^n d_i - n}}{(\partial \lambda_1)^{d_1-1} \dots (\partial \lambda_n)^{d_n-1}} \\ \times \sum_{k=0}^{2^n-1} (-1)^{k_1 + \ldots + k_n} \left( \prod_{p=1}^n \tilde a_p^k \right)^{-1} \exp \left(-\sum_{p=1}^n k_p \tilde a_p^k f_p\right).
+		\end{multline*}
+	\end{block}
+\end{frame}
+	
+
+\section{Анализ результатов при $\lambda_i = \lambda$}
+
+%14------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Полезные замечания}
+	\textbf{Напоминание:}
+	$$
+	\p(\tau \leqslant n) = 1 - \lambda^{2n} \sum_{k=0}^{2^n-1} (-1)^{k_1 + \ldots + k_n} \left( \prod_{p=1}^n \tilde a_p^k \right)^{-1} e^{-\sum\limits_{p=1}^n k_p \tilde a_p^k f_p} B_n^k
+	$$
+	\begin{enumerate}
+		\item{При $\lambda = 0$ вероятность разорения равна 1 при любом горизонте оценки;}
+		\item{$\p(\tau \leqslant n) (\lambda) \sim \lambda^n e^{-c\lambda}$ при $\lambda \uparrow \infty$.}
+	\end{enumerate}
+\end{frame}
+
+\lstset{
+	language=C,
+	basicstyle=\small\ttfamily, % размер и начертание шрифта для подсветки кода
+	keywordstyle=\color{blue},
+	commentstyle=\color{brown},
+	emph={d_lambda, calc_b, d_sum, sum, res_count, w_k, prod_k, exp_k, make_U_k, clear_U_k, make_a_k, clear_a_k, Pow, detect_sign}, emphstyle=\color{red}\bfseries,
+	numbers=left,               % где поставить нумерацию строк (слева\справа)
+	numberstyle=\tiny,           % размер шрифта для номеров строк
+	stepnumber=1,                   % размер шага между двумя номерами строк
+	numbersep=10pt,                % как далеко отстоят номера строк от подсвечиваемого кода
+	backgroundcolor=\color{white}, % цвет фона подсветки - используем \usepackage{color}
+	showspaces=false,            % показывать или нет пробелы специальными отступами
+	showstringspaces=false,      % показывать или нет пробелы в строках	
+	showtabs=false,             % показывать или нет табуляцию в строках
+	frame=false,              % рисовать рамку вокруг кода
+	tabsize=2,                 % размер табуляции по умолчанию равен 2 пробелам
+	captionpos=t,              % позиция заголовка вверху [t] или внизу [b] 
+	breaklines=true,           % автоматически переносить строки (да\нет)
+	breakatwhitespace=true, % переносить строки только если есть пробел
+	escapeinside={\%*}{*)}
+	}
+
+%15------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}[fragile]\frametitle{Фрагмент кода. Расчёт $B_i^k$}
+%	\begin{lstlisting}
+%double calc_b(int n, int m, unsigned int k, int i, unsigned int lambda_ind, double *U, double* f_par, double* a_k, bool null_flag, double u, double delta)
+%{
+%	if (i == 1)
+%		return sum(n, m, 1, k, U, f_par, a_k, null_flag, u, delta);
+%	else
+%		return sum(n, m, i, k, U, f_par, a_k, null_flag, u, delta) * calc_b(n, m, k, i-1, lambda_ind, U, f_par, a_k, null_flag, u, delta) - d_lambda(calc_b, n, m, k, i-1, lambda_ind | Pow(2, n-i), U, f_par, a_k, null_flag, u, delta);
+%}
+%	\end{lstlisting}
+%	\ldots
+%\end{frame}
+
+\lstset{
+	language=C++,
+	basicstyle=\small\ttfamily, % размер и начертание шрифта для подсветки кода
+	numbers=left,               % где поставить нумерацию строк (слева\справа)
+	numberstyle=\tiny,           % размер шрифта для номеров строк
+	stepnumber=1,                   % размер шага между двумя номерами строк
+	numbersep=10pt,                % как далеко отстоят номера строк от подсвечиваемого кода
+	backgroundcolor=\color{white}, % цвет фона подсветки - используем \usepackage{color}
+	showspaces=false,            % показывать или нет пробелы специальными отступами
+	showstringspaces=false,      % показывать или нет пробелы в строках	
+	showtabs=false,             % показывать или нет табуляцию в строках
+	frame=false,              % рисовать рамку вокруг кода
+	tabsize=2,                 % размер табуляции по умолчанию равен 2 пробелам
+	captionpos=t,              % позиция заголовка вверху [t] или внизу [b] 
+	breaklines=true,           % автоматически переносить строки (да\нет)
+	breakatwhitespace=false, % переносить строки только если есть пробел
+	escapeinside={\%*}{*)}
+}
+	
+%16------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}[fragile]\frametitle{Фрагмент кода. Дифференцирование по $\lambda$}
+%\ldots
+%	\begin{lstlisting}
+%double s = 0.0;
+%if (lambda_mask == 0)
+%	return f(n, m, k, i, lambda_mask, U, f_par, a_k, null_flag, u, delta);
+%for(int j = 0; j < Pow(2, n-i); ++j)
+%	if ((j | lambda_mask) == lambda_mask)
+%		s += d_sum(n, m, i, k, j ^ lambda_mask, f_par, a_k, null_flag, U, u, delta) * d_lambda(f, n, m, k, i-1, j, U, f_par, a_k, null_flag, u, delta);
+%	else continue;
+%return s - d_lambda(f, n, m, k, i-1, lambda_mask | Pow(2, n-i), U, f_par, a_k, null_flag, u, delta);
+%	\end{lstlisting}
+%	\ldots
+%\end{frame}
+
+%17------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Зависимость от $\lambda$ в динамике по $n$}
+	\begin{figure}[h]
+	\center{\includegraphics[scale = 0.4]{classic_7y}}
+	\caption*{График $P(\tau\leqslant n)$ для $Gamma(2,\lambda)$ распределения требований в зависимости от $\lambda$, $m=3,\, x=5,\, c=2,\, \beta=5\%,\, \delta=0.8$}
+	\end{figure}
+\end{frame}
+
+%18------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Зависимость от $\lambda$ в динамике по $\delta$}
+	\begin{figure}[p]
+	\begin{minipage}[h]{0.49\linewidth}
+	\center{\includegraphics[width=1\linewidth]{delta_four_1} \\ $m=1$}
+	\end{minipage}
+		\hfill
+	\begin{minipage}[h]{0.49\linewidth}
+	\center{\includegraphics[width=1\linewidth]{delta_four} \\ $m=2$}
+	\end{minipage}
+	\caption*{График $P(\tau\leqslant n)$ для $Gamma(2,\lambda)$ распределения требований в зависимости от $\lambda$, $n=4,\,x=5,\, c=2,\,\beta=5\%$.}
+	\end{figure}
+\end{frame}
+
+%19------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Зависимость от $\lambda$ в динамике по $\beta$}
+	\begin{figure}[p]
+	\center{\includegraphics[scale = 0.45]{classic_n_four_beta}}
+	\caption*{График $P(\tau\leqslant n)$ для $Gamma(2,\lambda)$ распределения требований в зависимости от $\lambda$, $n=4,\,m=2,\, x=5,\, c=2,\,\delta=0.8$.}
+	\label{cap_2}
+	\end{figure}
+\end{frame}
+
+\section{Заключение}
+%20------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Результаты работы}
+	\begin{enumerate}
+		\item{Получена формула для вычисления $\p (\tau \leqslant n)$ и создан калькулятор для её реализации при условии $X_i \sim Gamma(2,\lambda_i)$;}
+		\item{Анализ подтверждает предположения о характере зависимости вероятности разорения к определённому моменту времени от различных параметров модели.}
+	\end{enumerate}
+\end{frame}
+
+%24------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{thebibliography}{5}
+	\addcontentsline{toc}{section}{\refname}
+	\bibitem{kol} E.\,V.\,Bulinskaya, A.\,D.\,Kolesnik. Reliability of a descrete-time system with investment, \textit{Springer Book: Distributed Computer and Communication Networks, 365-376}, 2018
+	\bibitem{shi} E.\,V.\,Bulinskaya, B.\,Shigida. Discrete-time model of company capital dynamics with investment of a certain part of surplus in a non-risky asset for a fixed period, \textit{Methodology and Computing in Applied Probability, 103-121}, 2021
+	\bibitem{dist} D.\,C.\,M.\,Dickson, H.\,R.\,Waters. The distribution of the time to ruin in the classical risk model, \textit{Astin Bulletin 32(2), 299-313}, 2002
+	\bibitem{ger} H.\,U.\,Gerber. Mathematical fun with the compound binomial process,  \textit{Astin Bulletin: The journal of the IAA 18(2), 161-168}, 1988
+	\bibitem{li} S.\,Li, Y.\,Lu, J.\,Garrido. A review of discrete-time risk models,  \textit{Revista de la Real Academia Ciencias Naturales. Serie A Matem\'aticas 103, 321–337}, 2009
+	\end{thebibliography}
+
+%25------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}
+\center{\Large{Благодарю за внимание!}}
+\end{frame}
+
+\end{document}
