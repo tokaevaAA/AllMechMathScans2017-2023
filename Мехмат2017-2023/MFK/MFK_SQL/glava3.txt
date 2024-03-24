@@ -1,0 +1,111 @@
+Токаева Александра, мехмат, 3 курс, 09.03.20
+Дз по главе 3
+
+1)Сначала создадим таблицу aircrafts:
+
+aleksandra=# CREATE TABLE aircrafts ( aircraft_code char( 3 ) NOT NULL, model text NOT NULL, range integer NOT NULL, CHECK ( range > 0 ), PRIMARY KEY ( aircraft_code ) );
+
+2)Проверим, что она создалась:
+
+aleksandra=# \d aircrafts;
+
+3)Получим это:
+                  Table "public.aircrafts"
+    Column     |     Type     | Collation | Nullable | Default 
+---------------+--------------+-----------+----------+---------
+ aircraft_code | character(3) |           | not null | 
+ model         | text         |           | not null | 
+ range         | integer      |           | not null | 
+Indexes:
+    "aircrafts_pkey" PRIMARY KEY, btree (aircraft_code)
+Check constraints:
+    "aircrafts_range_check" CHECK (range > 0)
+
+4)Заполним таблицу:
+
+aleksandra=# INSERT INTO aircrafts ( aircraft_code, model, range ) VALUES ( 'SU9', 'Sukhoi SuperJet-100', 3000 ), ( '773', 'Boeing 777-300', 11100 ),( '763', 'Boeing 767-300', 7900 ), ( '733', 'Boeing 737-300', 4200 ),( '320', 'Airbus A320-200', 5700 ),( '321', 'Airbus A321-200', 5600 ),( '319', 'Airbus A319-100', 6700 ),( 'CN1', 'Cessna 208 Caravan', 1200 ), ( 'CR2', 'Bombardier CRJ-200', 2700 );
+
+5) Посмотрим на нее:
+
+aleksandra=# SELECT * FROM  aircrafts; 
+
+6) Получим это:
+
+ aircraft_code |        model        | range 
+---------------+---------------------+-------
+ SU9           | Sukhoi SuperJet-100 |  3000
+ 773           | Boeing 777-300      | 11100
+ 763           | Boeing 767-300      |  7900
+ 733           | Boeing 737-300      |  4200
+ 320           | Airbus A320-200     |  5700
+ 321           | Airbus A321-200     |  5600
+ 319           | Airbus A319-100     |  6700
+ CN1           | Cessna 208 Caravan  |  1200
+ CR2           | Bombardier CRJ-200  |  2700
+(9 rows)
+
+
+
+Задание 1:
+Попробуем добавить самолет с уже существующим кодом:
+
+aleksandra=# INSERT INTO aircrafts VALUES ( 'SU9', 'Sukhoi SuperJet-100', 3000 );
+
+Получим ошибку:
+
+ERROR:  duplicate key value violates unique constraint "aircrafts_pkey"
+DETAIL:  Key (aircraft_code)=(SU9) already exists.
+
+Это абсолютно логично, потому что ключи ( а у нас ключи- это aircraft_code, мы сами так написали при создании таблицы) должны быть уникальными, вот поэтому и не хочет добавляться   повторяющийся ключ;
+
+Задание 2:
+Напишем команду для выборки всех строк из таблицы aircrafts, чтобы строки были упорядочены по убыванию значения атрибута «Максимальная дальность полета, км» (range).
+
+aleksandra=# SELECT * FROM aircrafts ORDER BY range DESC;
+
+Получим это:
+
+ aircraft_code |        model        | range 
+---------------+---------------------+-------
+ 773           | Boeing 777-300      | 11100
+ 763           | Boeing 767-300      |  7900
+ 319           | Airbus A319-100     |  6700
+ 320           | Airbus A320-200     |  5700
+ 321           | Airbus A321-200     |  5600
+ 733           | Boeing 737-300      |  4200
+ SU9           | Sukhoi SuperJet-100 |  3000
+ CR2           | Bombardier CRJ-200  |  2700
+ CN1           | Cessna 208 Caravan  |  1200
+(9 rows)
+
+
+Задание3:
+Увеличим для "SU9" дальность полета в два раза:
+
+aleksandra=# UPDATE aircrafts SET range = range*2  WHERE aircraft_code = 'SU9';
+
+Посмотрим, что получилось:
+
+aleksandra=# SELECT * FROM aircrafts WHERE aircraft_code = 'SU9';
+
+Получим:
+
+ aircraft_code |        model        | range 
+---------------+---------------------+-------
+ SU9           | Sukhoi SuperJet-100 |  6000
+(1 row)
+
+
+Задание4:
+
+Попробуем задать запрос на удаление, подобрав такое  условие, которому гарантированно не соответствует ни одна строка в таблице «Самолеты» (aircrafts).
+
+Например:
+
+aleksandra=# DELETE  FROM aircrafts WHERE aircraft_code = '773' AND  range < 100;
+
+База данных ответит:
+
+DELETE 0
+
+Ну логично, потому что самолета, удовлетворяющего обоим условиям, в таблице нет. EOF

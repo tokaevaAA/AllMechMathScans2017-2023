@@ -1,0 +1,42 @@
+%!PS
+%%BoundingBox: -26 -26 26 26 
+%%HiResBoundingBox: -25.25 -25.25 25.25 25.25 
+%%Creator: MetaPost 1.999
+%%CreationDate: 2020.04.03:1939
+%%Pages: 1
+%%BeginProlog
+%%EndProlog
+%%Page: 1 1
+ 1 0 0 setrgbcolor 0 0.5 dtransform truncate idtransform setlinewidth pop
+ [] 0 setdash 1 setlinejoin 10 setmiterlimit
+newpath 15 0 moveto
+15 3.97842 13.41934 7.79343 10.60638 10.60638 curveto
+7.79343 13.41934 3.97842 15 0 15 curveto
+-3.97842 15 -7.79343 13.41934 -10.60638 10.60638 curveto
+-13.41934 7.79343 -15 3.97842 -15 0 curveto
+-15 -3.97842 -13.41934 -7.79343 -10.60638 -10.60638 curveto
+-7.79343 -13.41934 -3.97842 -15 0 -15 curveto
+3.97842 -15 7.79343 -13.41934 10.60638 -10.60638 curveto
+13.41934 -7.79343 15 -3.97842 15 0 curveto closepath stroke
+ 0 0 1 setrgbcolor
+newpath 20 0 moveto
+20 5.30457 17.89246 10.39124 14.14185 14.14185 curveto
+10.39124 17.89246 5.30457 20 0 20 curveto
+-5.30457 20 -10.39124 17.89246 -14.14185 14.14185 curveto
+-17.89246 10.39124 -20 5.30457 -20 0 curveto
+-20 -5.30457 -17.89246 -10.39124 -14.14185 -14.14185 curveto
+-10.39124 -17.89246 -5.30457 -20 0 -20 curveto
+5.30457 -20 10.39124 -17.89246 14.14185 -14.14185 curveto
+17.89246 -10.39124 20 -5.30457 20 0 curveto closepath stroke
+ 0 1 0 setrgbcolor
+newpath 25 0 moveto
+25 6.6307 22.36557 12.98904 17.6773 17.6773 curveto
+12.98904 22.36557 6.6307 25 0 25 curveto
+-6.6307 25 -12.98904 22.36557 -17.6773 17.6773 curveto
+-22.36557 12.98904 -25 6.6307 -25 0 curveto
+-25 -6.6307 -22.36557 -12.98904 -17.6773 -17.6773 curveto
+-12.98904 -22.36557 -6.6307 -25 0 -25 curveto
+6.6307 -25 12.98904 -22.36557 17.6773 -17.6773 curveto
+22.36557 -12.98904 25 -6.6307 25 0 curveto closepath stroke
+showpage
+%%EOF

@@ -1,0 +1,48 @@
+\input chert 
+\gdef\mpxshipout{\shipout\hbox\bgroup
+  \setbox0=\hbox\bgroup}
+\gdef\stopmpxshipout{\egroup  \dimen0=\ht0 \advance\dimen0\dp0
+  \dimen1=\ht0 \dimen2=\dp0
+  \setbox0=\hbox\bgroup
+    \box0
+    \ifnum\dimen0>0 \vrule width1sp height\dimen1 depth\dimen2 
+    \else \vrule width1sp height1sp depth0sp\relax
+    \fi\egroup
+  \ht0=0pt \dp0=0pt \box0 \egroup}
+\mpxshipout% line 169 ./pictures.mp
+$A$%
+\stopmpxshipout
+\mpxshipout% line 170 ./pictures.mp
+$B$%
+\stopmpxshipout
+\mpxshipout% line 171 ./pictures.mp
+$C$%
+\stopmpxshipout
+\mpxshipout% line 172 ./pictures.mp
+$K$%
+\stopmpxshipout
+\mpxshipout% line 173 ./pictures.mp
+$O\mkern-1mu_1$%
+\stopmpxshipout
+\mpxshipout% line 174 ./pictures.mp
+$O\mkern-1mu_2$%
+\stopmpxshipout
+\mpxshipout% line 175 ./pictures.mp
+$L$%
+\stopmpxshipout
+\mpxshipout% line 176 ./pictures.mp
+$M$%
+\stopmpxshipout
+\mpxshipout% line 177 ./pictures.mp
+$N$%
+\stopmpxshipout
+\mpxshipout% line 179 ./pictures.mp
+$a$%
+\stopmpxshipout
+\mpxshipout% line 180 ./pictures.mp
+$a$%
+\stopmpxshipout
+\mpxshipout% line 181 ./pictures.mp
+$a$%
+\stopmpxshipout
+\end{document}

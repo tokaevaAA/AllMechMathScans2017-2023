@@ -1,0 +1,47 @@
+This is TeX, Version 3.14159265 (TeX Live 2015) (preloaded format=tex 2016.3.19)  28 APR 2020 09:29
+**mproof pictures.2
+(/usr/local/texlive/2015/texmf-dist/tex/generic/metapost/mproof.tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/epsf/epsf.tex
+This is `epsf.tex' v2.7.4 <14 February 2011>
+\epsffilein=\read0
+\epsfframemargin=\dimen16
+\epsfframethickness=\dimen17
+\epsfrsize=\dimen18
+\epsftmp=\dimen19
+\epsftsize=\dimen20
+\epsfxsize=\dimen21
+\epsfysize=\dimen22
+\pspoints=\dimen23
+)
+\m=\count26
+\n=\count27
+)
+(pictures.2
+! Could not open file pictures.2, ignoring it.
+\epsfgetbb ...Could not open file #1, ignoring it}
+                                                  \else {\chardef \other = 1...
+
+\next #1->\epsfgetbb {#1}
+                         \epsfsetgraph {#1}
+\munch ...\else #1$$\epsfverbosetrue \epsfbox {#1}
+                                                  $$\par \okbreak \fi \munch 
+\munchline #1^^M->\catcode `\^^M=5 \munch #1\\ 
+                                               \vfill \end 
+<*> mproof pictures.2
+                     
+? 
+! Emergency stop.
+\epsfgetbb ...Could not open file #1, ignoring it}
+                                                  \else {\chardef \other = 1...
+
+\next #1->\epsfgetbb {#1}
+                         \epsfsetgraph {#1}
+\munch ...\else #1$$\epsfverbosetrue \epsfbox {#1}
+                                                  $$\par \okbreak \fi \munch 
+\munchline #1^^M->\catcode `\^^M=5 \munch #1\\ 
+                                               \vfill \end 
+<*> mproof pictures.2
+                     
+End of file on the terminal!
+
+No pages of output.

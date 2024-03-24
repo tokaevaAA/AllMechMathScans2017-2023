@@ -1,0 +1,111 @@
+Токаева Александра, мехмат, 3 курс, 03.05.20
+Дз по главе 10
+
+3)Самостоятельно выполните команду EXPLAIN для запроса, содержащего общее табличное выражение (CTE). Посмотрите, на каком уровне находится узел пла- на, отвечающий за это выражение, как он оформляется. Учтите, что общие таб- личные выражения всегда материализуются, т. е. вычисляются однократно и результат их вычисления сохраняется в памяти, а затем все последующие об- ращения в рамках запроса направляются уже к этому материализованному ре- зультату.
+
+
+demo=# explain with a1 as (select distinct city from airports)  select count(*) from a1 join (select distinct city from airports) as a2 on a1.city <> a2.city;
+                                          QUERY PLAN                                          
+----------------------------------------------------------------------------------------------
+ Aggregate  (cost=189.16..189.17 rows=1 width=8)
+   ->  Nested Loop  (cost=6.60..163.91 rows=10100 width=0)
+         Join Filter: (airports.city <> airports_1.city)
+         ->  HashAggregate  (cost=3.30..4.31 rows=101 width=17)
+               Group Key: airports.city
+               ->  Seq Scan on airports  (cost=0.00..3.04 rows=104 width=17)
+         ->  Materialize  (cost=3.30..5.82 rows=101 width=17)
+               ->  HashAggregate  (cost=3.30..4.31 rows=101 width=17)
+                     Group Key: airports_1.city
+                     ->  Seq Scan on airports airports_1  (cost=0.00..3.04 rows=104 width=17)
+(10 rows)
+
+
+Мы видим, что узел с созданием общего табличного выражения - самый низкий, то есть самый глубокий; для этого делается последовательный просмотр таблицы airports, потом хеш-группировка по городу, потом материализация; Параллельно этому узлу есть узел с подготовкой вложенного запроса; оба эти запроса входят во вложенный цикл  слияния с фильтром на не совпадение городов; а еще выше применяется аггрегатная функция count(*);
+
+
+
+6)Выполните команду EXPLAIN для запроса, в котором использована какая- нибудь из оконных функций. Найдите в плане выполнения запроса узел с име- нем WindowAgg. Попробуйте объяснить, почему он занимает именно этот уро- вень в плане.
+
+
+
+
+demo=# explain SELECT                                                           airport_name,                                                                   city,                                                                           round( latitude::numeric, 2 ) AS ltd, timezone,                                 rank() OVER (                                                                     PARTITION BY timezone                                                           ORDER BY latitude DESC                                                        )                                                                                 FROM airports                                                                   WHERE timezone IN ( 'Asia/Irkutsk', 'Asia/Krasnoyarsk' )                        ORDER BY timezone, rank;
+
+
+                                       QUERY PLAN                                        
+------------------------------------------------------------------------------------------
+ Sort  (cost=4.11..4.14 rows=13 width=97)
+   Sort Key: timezone, (rank() OVER (?))
+   ->  WindowAgg  (cost=3.54..3.87 rows=13 width=97)
+         ->  Sort  (cost=3.54..3.57 rows=13 width=57)
+               Sort Key: timezone, latitude DESC
+               ->  Seq Scan on airports  (cost=0.00..3.30 rows=13 width=57)
+                     Filter: (timezone = ANY ('{Asia/Irkutsk,Asia/Krasnoyarsk}'::text[]))
+(7 rows)
+
+
+Мы видим, что самый внутренний узел - это отбор по условию WHERE, потом идет сортировка по ORDER BY latitude DESC   из PARTITION, потом агрегатная функция из PARTITION, а потом сортировка по уловию ORDER BY timezone, rank;
+
+
+8)Замена коррелированного подзапроса соединением таблиц является одним из способов повышения производительности.
+Предположим, что мы задались вопросом: сколько маршрутов обслуживают са- молеты каждого типа? При этом нужно учитывать, что может иметь место такая ситуация, когда самолеты какого-либо типа не обслуживают ни одного марш- рута. Поэтому необходимо использовать не только представление «Маршруты» (routes), но и таблицу «Самолеты» (aircrafts).
+Это первый вариант запроса, в нем используется коррелированный подзапрос.
+
+ EXPLAIN ANALYZE
+SELECT
+a.aircraft_code AS a_code, a.model,
+( SELECT count( r.aircraft_code )
+FROM routes r
+WHERE r.aircraft_code = a.aircraft_code 
+) AS num_routes
+    FROM aircrafts a
+    GROUP BY 1, 2
+    ORDER BY 3 DESC;
+
+
+Sort  (cost=236.31..236.34 rows=9 width=56) (actual time=3.002..3.004 rows=9 loops=1)
+   Sort Key: ((SubPlan 1)) DESC
+   Sort Method: quicksort  Memory: 25kB
+   ->  HashAggregate  (cost=1.11..236.17 rows=9 width=56) (actual time=0.580..2.989 rows=9 loops=1)
+         Group Key: a.aircraft_code
+         ->  Seq Scan on aircrafts a  (cost=0.00..1.09 rows=9 width=48) (actual time=0.015..0.017 rows=9 loops=1)
+         SubPlan 1
+           ->  Aggregate  (cost=26.10..26.11 rows=1 width=8) (actual time=0.326..0.326 rows=1 loops=9)
+                 ->  Seq Scan on routes r  (cost=0.00..25.88 rows=89 width=4) (actual time=0.082..0.311 rows=79 loops=9)
+                       Filter: (aircraft_code = a.aircraft_code)
+                       Rows Removed by Filter: 631
+ Planning Time: 1.985 ms
+ Execution Time: 3.461 ms
+(13 rows)
+
+
+А в этом варианте коррелированный подзапрос раскрыт и заменен внешним соединением:
+EXPLAIN ANALYZE
+SELECT a.aircraft_code AS a_code,
+a.model,
+count( r.aircraft_code ) AS num_routes FROM aircrafts a
+LEFT OUTER JOIN routes r
+ON r.aircraft_code = a.aircraft_code
+    GROUP BY 1, 2
+    ORDER BY 3 DESC;
+
+
+
+Sort  (cost=31.83..31.85 rows=9 width=56) (actual time=1.454..1.455 rows=9 loops=1)
+   Sort Key: (count(r.aircraft_code)) DESC
+   Sort Method: quicksort  Memory: 25kB
+   ->  HashAggregate  (cost=31.60..31.69 rows=9 width=56) (actual time=1.436..1.440 rows=9 loops=1)
+         Group Key: a.aircraft_code
+         ->  Hash Right Join  (cost=1.20..28.05 rows=710 width=52) (actual time=0.062..0.923 rows=711 loops=1)
+               Hash Cond: (r.aircraft_code = a.aircraft_code)
+               ->  Seq Scan on routes r  (cost=0.00..24.10 rows=710 width=4) (actual time=0.007..0.196 rows=710 loops=1)
+               ->  Hash  (cost=1.09..1.09 rows=9 width=48) (actual time=0.032..0.032 rows=9 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                     ->  Seq Scan on aircrafts a  (cost=0.00..1.09 rows=9 width=48) (actual time=0.014..0.019 rows=9 loops=1)
+ Planning Time: 0.373 ms
+ Execution Time: 1.543 ms
+
+
+Мы видим, что второй метод без коррелированного подзапроса быстрее, потому что в нем в нижнем узле используется хеширование, а в первом (с корректированным подзапросом) используется просто последовательный просмотр строк с фильтрацией. А хеширование - явно быстрее.
+                                                                                                                             
+

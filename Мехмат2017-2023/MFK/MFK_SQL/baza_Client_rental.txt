@@ -1,0 +1,77 @@
+Токаева Александра, мехмат, 3 курс, 04.05.20
+База данных ClientRental
+
+Создадим таблицу Owner:
+
+aleksandra=#  create table owner (owner_no char(4) not null, owner_name varchar(20) not null, primary key (owner_no) );
+CREATE TABLE
+aleksandra=# insert into owner values ('CO40','Tina Murphy'), ('CO93','Tony Shaw');
+INSERT 0 2
+aleksandra=# select * from owner;
+ owner_no | owner_name  
+----------+-------------
+ CO40     | Tina Murphy
+ CO93     | Tony Shaw
+(2 rows)
+
+
+Создадим таблицу client:
+
+aleksandra=#  create table client (client_no char(4) not null, client_name varchar(20) not null, primary key (client_no) );
+CREATE TABLE
+aleksandra=# insert into client values ('CR76','John Kay'),('CR56','Alice Stewart');
+INSERT 0 2
+aleksandra=# select * from client;
+ client_no |  client_name  
+-----------+---------------
+ CR76      | John Kay
+ CR56      | Alice Stewart
+(2 rows)
+
+
+Создадим таблицу property_for_rent:
+
+aleksandra=# create table property_for_rent ( property_no varchar(4) not null, property_adress varchar(35) not null, rent numeric(3) not null, owner_no char(4) not null, primary key (property_no), foreign key (owner_no) references owner(owner_no));
+CREATE TABLE
+aleksandra=# insert into property_for_rent values ('PG4','6 Lawrence St, Glasgow', 350, 'CO40'),('PG16','5 Novar Dr, Glasgow', 450, 'CO93'), ('PG36','2 Manor Rd, Glasgow', 375, 'CO93');
+INSERT 0 3
+aleksandra=# select * from property_for_rent;
+ property_no |    property_adress     | rent | owner_no 
+-------------+------------------------+------+----------
+ PG4         | 6 Lawrence St, Glasgow |  350 | CO40
+ PG16        | 5 Novar Dr, Glasgow    |  450 | CO93
+ PG36        | 2 Manor Rd, Glasgow    |  375 | CO93
+(3 rows)
+
+
+Создадим таблицу rental:
+
+aleksandra=# create table rental ( client_no char(4) not null, property_no varchar(4) not null, rental_start timestamp not null, rental_finish timestamp not null, primary key(client_no, property_no), foreign key (client_no) references client(client_no));
+CREATE TABLE
+aleksandra=# insert into rental values ('CR76', 'PG4', '1-Jul-12','31-Aug-13'), ('CR76','PG16','1-Sep-13','1-Sep-14'),('CR56','PG4','1-Sep-11','10-Jun-12'),('CR56','PG36','10-Oct-12','1-Dec-13'),('CR56','PG16','1-Nov-14','10-Aug-15');
+INSERT 0 5
+aleksandra=# select * from rental;
+ client_no | property_no |    rental_start     |    rental_finish    
+-----------+-------------+---------------------+---------------------
+ CR76      | PG4         | 2012-07-01 00:00:00 | 2013-08-31 00:00:00
+ CR76      | PG16        | 2013-09-01 00:00:00 | 2014-09-01 00:00:00
+ CR56      | PG4         | 2011-09-01 00:00:00 | 2012-06-10 00:00:00
+ CR56      | PG36        | 2012-10-10 00:00:00 | 2013-12-01 00:00:00
+ CR56      | PG16        | 2014-11-01 00:00:00 | 2015-08-10 00:00:00
+(5 rows)
+
+
+
+Сделаем запрос:
+
+aleksandra=# select r.client_no, c.client_name, r.property_no,r.rental_start,r.rental_finish  from rental r join client c on r.client_no = c.client_no;
+
+ client_no |  client_name  | property_no |    rental_start     |    rental_finish    
+-----------+---------------+-------------+---------------------+---------------------
+ CR76      | John Kay      | PG4         | 2012-07-01 00:00:00 | 2013-08-31 00:00:00
+ CR76      | John Kay      | PG16        | 2013-09-01 00:00:00 | 2014-09-01 00:00:00
+ CR56      | Alice Stewart | PG4         | 2011-09-01 00:00:00 | 2012-06-10 00:00:00
+ CR56      | Alice Stewart | PG36        | 2012-10-10 00:00:00 | 2013-12-01 00:00:00
+ CR56      | Alice Stewart | PG16        | 2014-11-01 00:00:00 | 2015-08-10 00:00:00
+(5 rows)
+

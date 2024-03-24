@@ -1,0 +1,41 @@
+
+
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst}
+\usepackage{misccorr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\usepackage [ metapost ] { mfpic }
+
+\begin{document}
+
+Привет Привет Привет Привет Привет
+
+\opengraphsfile {graph−mfp}
+
+
+
+\mfpic [1][57.2]{ −100}{300}{ −1.2}{1.2}
+% Оси координат
+\axes
+\xmarks{−90,90,180,270}
+\ymarks{−1,1}
+% Рисуем синус точками
+\dotted\function {−90,270,4.5}{sind (x)}
+% Рисуем косинус пунктиром
+\dashed\function {−90,270,4.5}{cosd(x)}
+% Рисуем тангенс сплошной линией \function{−50,50,10}{tand(x)}
+\function {130,230,10}{tand(x)}
+% Заканчиваем создание графика
+\endmfpic
+% Закрываем mp-файл
+
+\closegraphsfile
+
+
+Пока  Пока Пока
+\end{document}

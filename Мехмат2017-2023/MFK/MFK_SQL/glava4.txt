@@ -1,0 +1,605 @@
+Токаева Александра, мехмат, 3 курс, 09.03.20
+Дз по главе 4
+
+Задание1:
+Создадим таблицу измерений:
+
+aleksandra=# CREATE TABLE test_numeric_1 ( measurement numeric(5, 2),description text);
+
+Заполним ее:
+
+aleksandra=# INSERT INTO test_numeric_1 VALUES ( 999.9999, 'Какое-то измерение ' );
+
+Получаем ошибку:
+
+ERROR:  numeric field overflow
+DETAIL:  A field with precision 5, scale 2 must round to an absolute value less than 10^3.
+
+А следующие три строки работают: 
+
+aleksandra=# INSERT INTO test_numeric_1 VALUES ( 999.9009, 'Какое-то измерение ' );
+INSERT 0 1
+
+aleksandra=# INSERT INTO test_numeric_1 VALUES ( 999.1111, 'Какое-то измерение ' );
+INSERT 0 1
+
+aleksandra=# INSERT INTO test_numeric_1 VALUES ( 998.9999, 'Какое-то измерение ' );
+INSERT 0 1
+
+Посмотрим на таблицу:
+
+aleksandra=# SELECT * FROM test_numeric_1;
+
+Получим: 
+
+ measurement |     description     
+-------------+---------------------
+      999.90 | Какое-то измерение 
+      999.11 | Какое-то измерение 
+      999.00 | Какое-то измерение 
+(3 rows)
+
+
+Мы видим, что в таблице числа имеют точность два знака после запятой, как мы просили при создании таблицы, а не четыре, с которыми мы их вводили.
+
+При попытке ввода числа, количество цифр в котором слева от десятичной точки (запятой) превышает допустимое, получаем ошибку:
+
+aleksandra=# INSERT INTO test_numeric_1 VALUES ( 1998.125, 'Какое-то измерение ' );
+
+ERROR:  numeric field overflow
+DETAIL:  A field with precision 5, scale 2 must round to an absolute value less than 10^3.
+
+
+Задание2:
+
+Создаем таблицу:
+
+aleksandra=# CREATE TABLE test_numeric ( measurement numeric, description text);
+
+Вставляем 4 строки:
+
+aleksandra=# INSERT INTO test_numeric VALUES ( 1234567890.0987654321, 'Точность 20 знаков, масштаб 10 знаков' ), ( 1.5 , 'Точность 2 знака, масштаб 1 знак' ), ( 0.12345678901234567890, 'Точность 21 знак, масштаб 20 знаков' ), ( 1234567890,'Точность 10 знаков, масштаб 0 знаков (целое число)' );
+INSERT 0 4
+
+Смотрим на них:
+
+aleksandra=# SELECT * FROM test_numeric;  
+
+Получаем:
+
+
+                                            measurement       |                    description                     
+------------------------+----------------------------------------------------
+  1234567890.0987654321 | Точность 20 знаков, масштаб 10 знаков
+                    1.5 | Точность 2 знака, масштаб 1 знак
+ 0.12345678901234567890 | Точность 21 знак, масштаб 20 знаков
+             1234567890 | Точность 10 знаков, масштаб 0 знаков (целое число)
+(4 rows)
+
+
+Задание3:
+
+Проверим, что значение NaN считается равным другому значению NaN, а также что значение NaN считается большим любого другого «нормального» значения, т.е. не-NaN.
+
+aleksandra=# SELECT 'NaN'::numeric > 10000;
+ ?column? 
+----------
+ t
+(1 row)
+
+
+aleksandra=# SELECT 'NaN'::numeric = 'NaN'::numeric;
+ ?column? 
+----------
+ t
+(1 row)
+
+
+Задание4:
+
+При работе с числами типов real и double precision нужно помнить, что сравнение двух чисел с плавающей точкой на предмет равенства их значений может привести к неожиданным результатам.
+Например, сравним два очень маленьких числа (они представлены в экспоненциальной форме записи):
+
+
+aleksandra=# SELECT '5e-324'::double precision > '4e-324'::double precision;
+ ?column? 
+----------
+ f
+(1 row)
+
+
+aleksandra=# SELECT '5e-324'::double precision;
+ float8 
+--------
+ 5e-324
+(1 row)
+
+
+aleksandra=# SELECT '4e-324'::double precision;
+ float8 
+--------
+ 5e-324
+(1 row)
+
+
+Самостоятельно проведите аналогичные эксперименты с очень большими числами, находящимися на границе допустимого диапазона для чисел типов real и double precision.
+
+
+aleksandra=# SELECT '1e+308 '::double precision + 1 = '1e+308 '::double precision;
+ ?column? 
+----------
+ t
+(1 row)
+
+Видим, что прибавление единицы на границе допустимых значений уже не чувствуется.
+
+Задание5
+
+aleksandra=# SELECT 'Inf'::double precision > 1E+308;
+ ?column? 
+----------
+ t
+(1 row)
+
+
+aleksandra=# SELECT '-Inf'::double precision < 4e-324;
+ ?column? 
+----------
+ t
+(1 row)
+
+
+Задание6
+
+Убедимся, что  значение NaN считается равным другому значению NaN, а также что значение NaN считается большим любого другого «нормального» значения, т. е. не-NaN.
+
+aleksandra=# SELECT 0.0 * 'Inf'::real;
+ ?column? 
+----------
+      NaN
+(1 row)
+
+
+aleksandra=# select 'NaN'::real > 'Inf'::real;
+ ?column? 
+----------
+ t
+(1 row)
+
+
+Задание7 
+
+aleksandra=# CREATE TABLE test_serial ( id serial,name text);
+CREATE TABLE
+aleksandra=# INSERT INTO test_serial ( name ) VALUES ( 'Вишневая' );
+INSERT 0 1
+aleksandra=# INSERT INTO test_serial ( name ) VALUES ( 'Грушевая' );
+INSERT 0 1
+aleksandra=# INSERT INTO test_serial ( name ) VALUES ( 'Зеленая' );
+INSERT 0 1
+aleksandra=# select * from test_serial;
+ id |   name   
+----+----------
+  1 | Вишневая
+  2 | Грушевая
+  3 | Зеленая
+(3 rows)
+
+
+
+aleksandra=# INSERT INTO test_serial ( id, name ) VALUES ( 10, 'Прохладная' );
+INSERT 0 1
+aleksandra=# INSERT INTO test_serial ( name ) VALUES ( 'Луговая' );
+INSERT 0 1
+aleksandra=# select * from test_serial;
+ id |    name    
+----+------------
+  1 | Вишневая
+  2 | Грушевая
+  3 | Зеленая
+ 10 | Прохладная
+  4 | Луговая
+(5 rows)
+
+Мы видим, что явное задание значения для столбца id не влияет на автоматическое генерирование значений этого столбца.
+
+Задание8
+
+aleksandra=# CREATE TABLE test_serial ( id serial PRIMARY KEY,name text);
+CREATE TABLE
+aleksandra=# INSERT INTO test_serial ( name ) VALUES ( 'Вишневая' );
+INSERT 0 1
+aleksandra=# select * from test_serial;
+ id |   name   
+----+----------
+  1 | Вишневая
+(1 row)
+
+aleksandra=# INSERT INTO test_serial ( id, name ) VALUES ( 2, 'Прохладная' );
+INSERT 0 1
+aleksandra=# select * from test_serial;
+ id |    name    
+----+------------
+  1 | Вишневая
+  2 | Прохладная
+(2 rows)
+
+aleksandra=# INSERT INTO test_serial ( name ) VALUES ( 'Грушевая' );
+ERROR:  duplicate key value violates unique constraint "test_serial_pkey"
+DETAIL:  Key (id)=(2) already exists.
+
+Ну логично, потому что первичный ключ 2 в таблице уже есть, а он должен быть уникальным; 
+
+aleksandra=# INSERT INTO test_serial ( name ) VALUES ( 'Грушевая' );
+INSERT 0 1
+aleksandra=# select * from test_serial;
+ id |    name    
+----+------------
+  1 | Вишневая
+  2 | Прохладная
+  3 | Грушевая
+(3 rows)
+
+Теперь все в порядке, потому что генератор последовательных id уже отработал ( ну уже выдавал) число 2, поэтому сейчас уже для Грушевой выдаст id=3, и коллизии не будет.
+
+
+aleksandra=# INSERT INTO test_serial ( name ) VALUES ( 'Зеленая' );
+INSERT 0 1
+aleksandra=# select * from test_serial;
+ id |    name    
+----+------------
+  1 | Вишневая
+  2 | Прохладная
+  3 | Грушевая
+  4 | Зеленая
+(4 rows)
+
+aleksandra=# DELETE FROM test_serial WHERE id = 4;
+DELETE 1
+aleksandra=# 
+aleksandra=# select * from test_serial;
+ id |    name    
+----+------------
+  1 | Вишневая
+  2 | Прохладная
+  3 | Грушевая
+(3 rows)
+
+aleksandra=# INSERT INTO test_serial ( name ) VALUES ( 'Луговая' );
+INSERT 0 1
+aleksandra=# select * from test_serial;
+ id |    name    
+----+------------
+  1 | Вишневая
+  2 | Прохладная
+  3 | Грушевая
+  5 | Луговая
+(4 rows)
+
+Вы увидите, что в нумерации образовалась «дыра». Это из-за того, что при формировании нового значения из последовательности поиск максимального значения, уже имеющегося в столбце, не выполняется. Генератор просто едет дальше, ведь четверку он уже выдавал.
+
+
+Задание12
+
+aleksandra=# SHOW datestyle;
+ DateStyle 
+-----------
+ ISO, MDY
+(1 row)
+
+
+
+aleksandra=# SELECT '18-05-2016'::date;
+ERROR:  date/time field value out of range: "18-05-2016"
+LINE 1: SELECT '18-05-2016'::date;
+               ^
+HINT:  Perhaps you need a different "datestyle" setting.
+
+
+Порядок «год, месяц, день» является универсальным, его можно использовать всегда, незави- симо от настроек параметра datestyle.
+
+
+aleksandra=# SELECT '2016-05-18'::date;
+    date    
+------------
+ 2016-05-18
+(1 row)
+
+Поменяем datastyle:
+
+aleksandra=# SET datestyle TO 'DMY';
+SET
+aleksandra=# 
+aleksandra=# SHOW datestyle;
+ DateStyle 
+-----------
+ ISO, DMY
+(1 row)
+
+
+Теперь все наоборот:
+
+aleksandra=# SELECT '18-05-2016'::date;
+    date    
+------------
+ 2016-05-18
+(1 row)
+
+aleksandra=# SELECT '05-18-2016'::date;
+ERROR:  date/time field value out of range: "05-18-2016"
+LINE 1: SELECT '05-18-2016'::date;
+               ^
+HINT:  Perhaps you need a different "datestyle" setting.
+
+Поменяем datastyle в исходное состояние:
+
+aleksandra=# SET datestyle TO DEFAULT;
+SET
+aleksandra=# 
+aleksandra=# SHOW datestyle;
+ DateStyle 
+-----------
+ ISO, MDY
+(1 row)
+
+
+aleksandra=# SET datestyle TO 'Postgres, DMY';
+SET
+aleksandra=# SHOW datestyle;
+   DateStyle   
+---------------
+ Postgres, DMY
+(1 row)
+
+
+Задание 15
+
+Выведем текущие дату и время:
+
+aleksandra=# SELECT current_timestamp;
+          current_timestamp          
+-------------------------------------
+ Mon 09 Mar 17:36:36.951782 2020 MSK
+(1 row)
+
+Извлечем из них минуты и секунды:
+
+aleksandra=# SELECT to_char( current_timestamp, 'mi:ss' );
+ to_char 
+---------
+ 36:41
+(1 row)
+
+
+Теперь день:
+aleksandra=# SELECT to_char( current_timestamp, 'dd' );
+ to_char 
+---------
+ 09
+(1 row)
+
+И полностью дату:
+
+aleksandra=# SELECT to_char( current_timestamp, 'yyyy-mm-dd' );
+  to_char   
+------------
+ 2020-03-09
+(1 row)
+
+
+Задание21
+
+aleksandra=# SELECT ( '2016-01-31'::date + '1 mon'::interval ) AS new_date;
+         new_date         
+--------------------------
+ Mon 29 Feb 00:00:00 2016
+(1 row)
+
+aleksandra=# SELECT ( '2016-02-29'::date + '1 mon'::interval ) AS new_date;
+         new_date         
+--------------------------
+ Tue 29 Mar 00:00:00 2016
+(1 row)
+
+Задание23
+
+aleksandra=# SELECT ( '2016-09-16'::date - '2015-09-01'::date );
+ ?column? 
+----------
+      381
+(1 row)
+
+aleksandra=# SELECT ( '2016-09-16'::timestamp - '2015-09-01'::timestamp );
+ ?column? 
+----------
+ 381 days
+(1 row)
+
+Задание24
+
+
+aleksandra=# SELECT ( '20:34:35'::time - 1 );
+ERROR:  operator does not exist: time without time zone - integer
+LINE 1: SELECT ( '20:34:35'::time - 1 );
+                                  ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+aleksandra=# 
+aleksandra=# 
+aleksandra=# SELECT ( '2016-09-16'::date - 1 );
+  ?column?  
+------------
+ 15-09-2016
+
+
+Задание30
+
+aleksandra=# CREATE TABLE test_bool ( a boolean, b text);
+CREATE TABLE
+aleksandra=# INSERT INTO test_bool VALUES ( TRUE, 'yes' );
+INSERT 0 1
+aleksandra=# INSERT INTO test_bool VALUES ( yes, 'yes' );
+ERROR:  column "yes" does not exist
+LINE 1: INSERT INTO test_bool VALUES ( yes, 'yes' );
+                                       ^
+aleksandra=# INSERT INTO test_bool VALUES ( 'yes', true );
+INSERT 0 1
+aleksandra=# INSERT INTO test_bool VALUES ( 'yes', TRUE );
+INSERT 0 1
+aleksandra=# INSERT INTO test_bool VALUES ( '1', 'true' );
+INSERT 0 1
+aleksandra=# INSERT INTO test_bool VALUES ( 1, 'true' );
+ERROR:  column "a" is of type boolean but expression is of type integer
+LINE 1: INSERT INTO test_bool VALUES ( 1, 'true' );
+                                       ^
+HINT:  You will need to rewrite or cast the expression.
+aleksandra=# INSERT INTO test_bool VALUES ( 't', 'true' );
+INSERT 0 1
+aleksandra=# INSERT INTO test_bool VALUES ( 't', truth );
+ERROR:  column "truth" does not exist
+LINE 1: INSERT INTO test_bool VALUES ( 't', truth );
+                                            ^
+aleksandra=# INSERT INTO test_bool VALUES ( true, true );
+INSERT 0 1
+aleksandra=# INSERT INTO test_bool VALUES ( 1::boolean, 'true' );
+INSERT 0 1
+aleksandra=# INSERT INTO test_bool VALUES ( 111::boolean, 'true' );
+INSERT 0 1
+
+Задание33
+
+Создаем таблицу:
+
+aleksandra=# CREATE TABLE pilots ( pilot_name text, schedule integer[], meal text[] );
+
+Заполняем:
+
+aleksandra=# INSERT INTO pilots VALUES ( 'Ivan', '{ 1, 3, 5, 6, 7 }'::integer[],'{ "сосиска", "макароны", "кофе" }'::text[]),  ( 'Petr', '{ 1, 2, 5, 7 }'::integer [], '{ "котлета", "каша", "кофе" }'::text[] ), ( 'Pavel', '{ 2, 5 }'::integer[], '{ "сосиска", "каша", "кофе" }'::text[]),( 'Boris', '{ 3, 5, 6 }'::integer[],'{ "котлета", "каша", "чай" }'::text[]);
+INSERT 0 4
+
+Посмотрим на нее:
+
+aleksandra=# select * from pilots;
+ pilot_name |  schedule   |          meal           
+------------+-------------+-------------------------
+ Ivan       | {1,3,5,6,7} | {сосиска,макароны,кофе}
+ Petr       | {1,2,5,7}   | {котлета,каша,кофе}
+ Pavel      | {2,5}       | {сосиска,каша,кофе}
+ Boris      | {3,5,6}     | {котлета,каша,чай}
+(4 rows)
+
+
+Давайте получим список пилотов, предпочитающих на обед сосиски:
+
+aleksandra=# SELECT * FROM pilots WHERE meal[ 1 ] = 'сосиска';
+ pilot_name |  schedule   |          meal           
+------------+-------------+-------------------------
+ Ivan       | {1,3,5,6,7} | {сосиска,макароны,кофе}
+ Pavel      | {2,5}       | {сосиска,каша,кофе}
+(2 rows)
+
+
+Создадим новую таблицу с меню на все полеты:
+
+aleksandra=#CREATE TABLE new_pilots ( pilot_name text, schedule integer[], meal text[][]);
+
+Заполним ее:
+
+aleksandra=# INSERT INTO new_pilots VALUES ( 'Ivan', '{ 1, 3, 5, 6, 7 }'::integer[],'{ { "сосиска", "макароны", "кофе" },  { "котлета", "каша", "кофе" }, { "сосиска", "каша", "кофе" },{ "котлета", "каша", "чай" } }'::text[][]);
+INSERT 0 1
+
+aleksandra=# INSERT INTO new_pilots VALUES ( 'Boris', '{ 1,2, 3 }'::integer[],'{ { "котлета", "макароны", "кофе" },  { "котлета", "каша", "кофе" }, { "котлета", "каша", "чай" } }'::text[][]);
+INSERT 0 1
+
+aleksandra=# select * from new_pilots;                                                                pilot_name |  schedule   |                                         meal                                         
+------------+-------------+--------------------------------------------------------------------------------------
+ Ivan       | {1,3,5,6,7} | {{сосиска,макароны,кофе},{котлета,каша,кофе},{сосиска,каша,кофе},{котлета,каша,чай}}
+ Boris      | {1,2,3}     | {{котлета,макароны,кофе},{котлета,каша,кофе},{котлета,каша,чай}}
+(2 rows)
+
+Выберем из нее тех, кто в первый полет ест котлету, а не сосиску:
+
+aleksandra=# select * from new_pilots where meal[1][1]='котлета';
+
+ pilot_name | schedule |                               meal                               
+------------+----------+------------------------------------------------------------------
+ Boris      | {1,2,3}  | {{котлета,макароны,кофе},{котлета,каша,кофе},{котлета,каша,чай}}
+(1 row)
+
+
+Задание35
+
+Создадим таблицу:
+
+aleksandra=# CREATE TABLE pilot_hobbies(pilot_name text,hobbies jsonb);
+CREATE TABLE
+aleksandra=# INSERT INTO pilot_hobbies VALUES ( 'Ivan', '{ "sports": [ "футбол", "плавание" ],"home_lib": true, "trips": 3}'::jsonb), ( 'Petr',
+aleksandra(#            '{ "sports": [ "теннис", "плавание" ],
+aleksandra=# INSERT INTO pilot_hobbies VALUES ( 'Ivan', '{ "sports": [ "футбол", "плавание" ],"home_lib": true, "trips": 3}'::jsonb), ( 'Petr', '{ "sports": [ "теннис", "плавание" ], "home_lib": true, "trips": 2}'::jsonb), ( 'Pavel', '{ "sports": [ "плавание" ], "home_lib": false, "trips": 4}'::jsonb),( 'Boris',  '{ "sports": [ "футбол", "плавание", "теннис" ], "home_lib": true, "trips": 0}'::jsonb);
+INSERT 0 4
+aleksandra=# select * from pilot_hobbies;
+ pilot_name |                                  hobbies                                   
+------------+----------------------------------------------------------------------------
+ Ivan       | {"trips": 3, "sports": ["футбол", "плавание"], "home_lib": true}
+ Petr       | {"trips": 2, "sports": ["теннис", "плавание"], "home_lib": true}
+ Pavel      | {"trips": 4, "sports": ["плавание"], "home_lib": false}
+ Boris      | {"trips": 0, "sports": ["футбол", "плавание", "теннис"], "home_lib": true}
+(4 rows)
+
+
+Мы можем выбрать всех футболистов таким способом:
+
+aleksandra=# SELECT * FROM pilot_hobbies  WHERE hobbies @> '{ "sports": [ "футбол" ] }'::jsonb;
+ pilot_name |                                  hobbies                                   
+------------+----------------------------------------------------------------------------
+ Ivan       | {"trips": 3, "sports": ["футбол", "плавание"], "home_lib": true}
+ Boris      | {"trips": 0, "sports": ["футбол", "плавание", "теннис"], "home_lib": true}
+(2 rows)
+
+
+Можно было эту задачу решить и таким способом:
+
+aleksandra=# SELECT pilot_name, hobbies->'sports' AS sports  FROM pilot_hobbies WHERE hobbies->'sports' @> '[ "футбол" ]'::jsonb;
+ pilot_name |              sports              
+------------+----------------------------------
+ Ivan       | ["футбол", "плавание"]
+ Boris      | ["футбол", "плавание", "теннис"]
+(2 rows)
+
+
+
+aleksandra=# SELECT count( * ) FROM pilot_hobbies WHERE hobbies ? 'sport';
+ count 
+-------
+     0
+(1 row)
+
+aleksandra=# SELECT count( * ) FROM pilot_hobbies WHERE hobbies ? 'sports';
+ count 
+-------
+     4
+(1 row)
+
+Изменим хобби Бориса на хоккей:
+
+aleksandra=# UPDATE pilot_hobbies SET hobbies = hobbies || '{ "sports": [ "хоккей" ] }' WHERE pilotname = 'Boris';
+UPDATE 1
+aleksandra=# 
+aleksandra=# SELECT pilot_name, hobbies FROM pilot_hobbies  WHERE pilot_name = 'Boris';
+ pilot_name |                       hobbies                        
+------------+------------------------------------------------------
+ Boris      | {"trips": 0, "sports": ["хоккей"], "home_lib": true}
+(1 row)
+
+Добавим к хоккею футбол:
+
+aleksandra=# UPDATE pilot_hobbies  SET hobbies = jsonb_set( hobbies, '{ sports, 1 }', '"футбол"' )WHERE pilot_name = 'Boris';
+UPDATE 1
+aleksandra=# SELECT pilot_name, hobbies FROM pilot_hobbies  WHERE pilot_name = 'Boris';               pilot_name |                            hobbies                             
+------------+----------------------------------------------------------------
+ Boris      | {"trips": 0, "sports": ["хоккей", "футбол"], "home_lib": true}
+(1 row)
+
+EOF
+
+
+

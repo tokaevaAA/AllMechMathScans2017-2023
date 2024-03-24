@@ -1,0 +1,24 @@
+This is TeX, Version 3.14159265 (TeX Live 2015) (preloaded format=tex 2016.3.19)  28 APR 2020 09:50
+**mproof pictures.1
+(/usr/local/texlive/2015/texmf-dist/tex/generic/metapost/mproof.tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/epsf/epsf.tex
+This is `epsf.tex' v2.7.4 <14 February 2011>
+\epsffilein=\read0
+\epsfframemargin=\dimen16
+\epsfframethickness=\dimen17
+\epsfrsize=\dimen18
+\epsftmp=\dimen19
+\epsftsize=\dimen20
+\epsfxsize=\dimen21
+\epsfysize=\dimen22
+\pspoints=\dimen23
+)
+\m=\count26
+\n=\count27
+)
+(pictures.1
+pictures.1: BoundingBox: llx = -228 lly = -26 urx = 228 ury = 142 
+pictures.1: scaled width = 457.70471pt scaled height = 168.62805pt
+)
+[1]
+Output written on mproof.dvi (1 page, 408 bytes).

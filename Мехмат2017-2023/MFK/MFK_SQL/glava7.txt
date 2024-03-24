@@ -1,0 +1,128 @@
+Токаева Александра, мехмат, 3 курс, 02.05.20
+Дз по главе 7
+
+1) Добавьте в определение таблицы aircrafts_log значение по умолчанию current_timestamp и соответствующим образом измените команды INSERT, приведенные в тексте главы.
+
+
+demo=# set search_path to bookings;
+SET
+demo=# CREATE TEMP TABLE aircrafts_tmp AS SELECT * FROM aircrafts WITH NO DATA;
+CREATE TABLE AS
+demo=# ALTER TABLE aircrafts_tmp
+demo-# ADD PRIMARY KEY ( aircraft_code );
+ALTER TABLE
+demo=# ALTER TABLE aircrafts_tmp ADD UNIQUE ( model );
+ALTER TABLE
+demo=# 
+demo=# 
+demo=# CREATE TEMP TABLE aircrafts_log AS SELECT * FROM aircrafts WITH NO DATA;
+CREATE TABLE AS
+demo=# 
+demo=# 
+demo=# ALTER TABLE aircrafts_log
+demo-# ADD COLUMN when_add timestamp;
+ALTER TABLE
+demo=# 
+demo=# 
+demo=# ALTER TABLE aircrafts_log ADD COLUMN operation text;
+ALTER TABLE
+
+
+demo=# WITH add_row AS  ( INSERT INTO aircrafts_tmp    SELECT * FROM aircrafts                                                     RETURNING * )        
+INSERT INTO aircrafts_log      SELECT add_row.aircraft_code, add_row.model, add_row.range, add_row.specifications,   current_timestamp, 'INSERT' FROM add_row;
+INSERT 0 9
+demo=# 
+demo=# 
+demo=# select * from aircrafts_log;
+ aircraft_code |        model        | range |                     specifications                      |          when_add          | operation 
+---------------+---------------------+-------+---------------------------------------------------------+----------------------------+-----------
+ 773           | Boeing 777-300      | 11100 |                                                         | 2020-05-02 16:19:45.574302 | INSERT
+ 763           | Boeing 767-300      |  7900 |                                                         | 2020-05-02 16:19:45.574302 | INSERT
+ SU9           | Sukhoi SuperJet-100 |  3000 |                                                         | 2020-05-02 16:19:45.574302 | INSERT
+ 321           | Airbus A321-200     |  5600 |                                                         | 2020-05-02 16:19:45.574302 | INSERT
+ 319           | Airbus A319-100     |  6700 |                                                         | 2020-05-02 16:19:45.574302 | INSERT
+ 733           | Boeing 737-300      |  4200 |                                                         | 2020-05-02 16:19:45.574302 | INSERT
+ CN1           | Cessna 208 Caravan  |  1200 |                                                         | 2020-05-02 16:19:45.574302 | INSERT
+ CR2           | Bombardier CRJ-200  |  2700 |                                                         | 2020-05-02 16:19:45.574302 | INSERT
+ 320           | Airbus A320-200     |  5700 | {"crew": 2, "engines": {"num": 2, "type": "IAE V2500"}} | 2020-05-02 16:19:45.574302 | INSERT
+(9 rows)
+
+Добавим новый столбец cur_timestamp:
+
+
+demo=# ALTER TABLE aircrafts_log ADD COLUMN cur_timestamp timestamp DeFAULT current_timestamp;
+ALTER TABLE
+
+
+
+demo=# select * from aircrafts_log;                                              aircraft_code |        model        | range |                     specifications                      |          when_add          | operation |       cur_timestamp        
+---------------+---------------------+-------+---------------------------------------------------------+----------------------------+-----------+----------------------------
+ 773           | Boeing 777-300      | 11100 |                                                         | 2020-05-02 16:19:45.574302 | INSERT    | 2020-05-02 16:21:21.585011
+ 763           | Boeing 767-300      |  7900 |                                                         | 2020-05-02 16:19:45.574302 | INSERT    | 2020-05-02 16:21:21.585011
+ SU9           | Sukhoi SuperJet-100 |  3000 |                                                         | 2020-05-02 16:19:45.574302 | INSERT    | 2020-05-02 16:21:21.585011
+ 321           | Airbus A321-200     |  5600 |                                                         | 2020-05-02 16:19:45.574302 | INSERT    | 2020-05-02 16:21:21.585011
+ 319           | Airbus A319-100     |  6700 |                                                         | 2020-05-02 16:19:45.574302 | INSERT    | 2020-05-02 16:21:21.585011
+ 733           | Boeing 737-300      |  4200 |                                                         | 2020-05-02 16:19:45.574302 | INSERT    | 2020-05-02 16::...skipping...
+ aircraft_code |        model        | range |                     specifications                      |          when_add          | operation |       cur_timestamp   
+
+
+
+
+
+2)В предложении RETURNING можно указывать не только символ «∗», означающий выбор всех столбцов таблицы, но и более сложные выражения, сформированные на основе этих столбцов. В тексте главы мы копировали содержимое таблицы «Самолеты» в таблицу aircrafts_tmp, используя в предложении RETURNING именно «∗». Однако возможен и другой вариант запроса:
+WITH add_row AS
+( INSERT INTO aircrafts_tmp
+SELECT * FROM aircrafts
+RETURNING aircraft_code, model, range,
+current_timestamp, 'INSERT'
+)
+INSERT INTO aircrafts_log
+SELECT ? FROM add_row;
+Что нужно написать в этом запросе вместо вопросительного знака?
+
+
+
+Ответ: 
+demo=# WITH add_row AS  ( INSERT INTO aircrafts_tmp   SELECT * FROM aircrafts   RETURNING aircraft_code, model, range, specifications,   current_timestamp, 'INSERT'  )    
+ INSERT INTO aircrafts_log   SELECT aircraft_code, model, range, specifications, current_timestamp, 'INSERT' FROM add_row;
+INSERT 0 9
+
+
+Кстати, надо заметить, что в книге пропущено слово  specifications, но ее надо добавить, иначе команда не выполняется;
+
+4) В тексте главы в предложениях ON CONFLICT команды INSERT мы использова- ли только выражения, состоящие из имени одного столбца. Однако в таблице «Места» (seats) первичный ключ является составным и включает два столбца.
+Напишите команду INSERT для вставки новой строки в эту таблицу и преду- смотрите возможный конфликт добавляемой строки со строкой, уже имеющей- ся в таблице. Сделайте два варианта предложения ON CONFLICT: первый — с ис- пользованием перечисления имен столбцов для проверки наличия дублирова- ния, второй — с использованием предложения ON CONSTRAINT.
+Для того чтобы не изменить содержимое таблицы «Места», создайте ее копию и выполняйте все эти эксперименты с таблицей-копией.
+
+Решение :
+
+
+demo=# set search_path to bookings;
+SET
+demo=# CREATE TEMP TABLE seats_tmp ( LIKE seats INCLUDING CONSTRAINTS INCLUDING INDEXES );
+CREATE TABLE
+
+
+demo=# insert into seats_tmp select * from seats;
+INSERT 0 1339
+
+Изменим fare_conditions у первой строчки на 'Comfort' первым способом:
+
+demo=# insert into seats_tmp values (319,'2A','Comfort') on conflict (aircraft_code,seat_no) do update set fare_conditions=excluded.fare_conditions returning *; 
+ aircraft_code | seat_no | fare_conditions 
+---------------+---------+-----------------
+ 319           | 2A      | Comfort
+(1 row)
+
+А теперь другим способом на 'Economy':
+
+demo=# insert into seats_tmp values (319,'2A','Economy') on conflict on constraint seats_tmp_pkey do update set fare_conditions=excluded.fare_conditions returning *;
+ aircraft_code | seat_no | fare_conditions 
+---------------+---------+-----------------
+ 319           | 2A      | Economy
+(1 row)
+
+
+
+
+

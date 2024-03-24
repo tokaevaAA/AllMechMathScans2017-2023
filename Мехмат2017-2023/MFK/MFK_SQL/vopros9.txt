@@ -1,0 +1,67 @@
+Токаева Александра, мехмат, 3 курс, 22.04.20
+Ответ на вопрос 9: создание, модификация и удаление таблиц;
+
+1)Создаем командой create table, удаляем командой drop table;
+
+REATE TABLE aircrafts ( aircraft_code char( 3 ) NOT NULL, model text NOT NULL, range integer NOT NULL, CHECK ( range > 0 ), PRIMARY KEY ( aircraft_code ) );
+
+2)Заполняем значениями:
+
+aleksandra=# INSERT INTO aircrafts VALUES ( 'SU9', 'Sukhoi SuperJet-100', 3000 );
+
+
+3)Удаляем строки с нужными свойствами:
+
+DELETE DROM  aircrafts WHERE aircraft_code='SU9';
+
+4)Добавляем новый столбец в таблицу:
+
+ALTER TABLE ADD COLUMN new_colomn jsonb;
+
+5) Избавляемся от ограничения:
+
+ALTER TABLE progress  DROP CONSTRAINT progress_mark_check;
+
+6) Добавляем проверку:
+
+ALTER TABLE progress
+aleksandra-#      ADD CHECK (
+aleksandra(# ( test_form = 'экзамен' AND mark IN ( 3, 4, 5 ) ) OR
+aleksandra(# ( test_form = 'зачет' AND mark IN ( 0, 1 ) )
+aleksandra(# );
+
+7) Изменяем данные:
+
+UPDATE aircrafts
+  SET specifications =
+      '{ "crew": 2,
+         "engines": { "type": "IAE V2500",
+"num": 2 }
+}'::jsonb
+WHERE aircraft_code = '320';
+
+
+8) Делаем выборку:
+
+sélect *, length(name) from students;
+
+9) Обработка случаев:
+
+ALTER TABLE seats
+DROP CONSTRAINT seats_fare_conditions_check,
+ALTER COLUMN fare_conditions SET DATA TYPE integer
+USING ( CASE WHEN fare_conditions = 'Economy' THEN 1 WHEN fare_conditions = 'Business' THEN 2
+ELSE 3 END
+);
+
+
+10) Объединение таблиц:
+SELECT r.aircraft_code, a.model, count( * ) AS num_routes FROM routes r
+JOIN aircrafts a ON r.aircraft_code = a.aircraft_code GROUP BY 1, 2
+  ORDER BY 3 DESC;
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+mktextfm chert10
+mktextfm chert10
+mktextfm chert10
+mktextfm chert10
+mktextfm chert10
+mktextfm chert10
+mktextfm chert10
+mktextfm chert10
+mktextfm chert10
+mktexpk --mfmode / --bdpi 600 --mag 0+540/600 --dpi 540 chert10
+mktexpk --mfmode / --bdpi 600 --mag 0+540/600 --dpi 540 chert10

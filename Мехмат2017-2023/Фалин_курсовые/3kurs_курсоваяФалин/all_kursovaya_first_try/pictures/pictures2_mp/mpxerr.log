@@ -1,0 +1,17 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=etex 2016.3.19)  28 APR 2020 09:29
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**mpnh5vW5.tex
+(./mpnh5vW5.tex
+! I can't find file `chert'.
+l.1 \input chert
+                
+(Press Enter to retry, or Control-D to exit)
+Please type another input file name
+! Emergency stop.
+l.1 \input chert
+                
+*** (job aborted, file error in nonstop mode)
+
+No pages of output.

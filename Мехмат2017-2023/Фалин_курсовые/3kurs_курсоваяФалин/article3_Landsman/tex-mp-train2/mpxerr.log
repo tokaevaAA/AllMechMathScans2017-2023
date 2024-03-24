@@ -1,0 +1,35 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=etex 2016.3.19)  1 APR 2020 14:37
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**mpm648g5.tex
+(./mpm648g5.tex
+! Undefined control sequence.
+l.1 \documentclass
+                  {article}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.2 \usepackage
+               {palatino,concmath,ccfonts}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.3 \begin
+          {document}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[1] [1] [1] [1] [1] [1] [1] )
+Output written on mpm648g5.dvi (7 pages, 784 bytes).

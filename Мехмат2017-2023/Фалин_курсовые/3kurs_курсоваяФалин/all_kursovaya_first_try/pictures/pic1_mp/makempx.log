@@ -1,0 +1,1 @@
+makempx fatal: ./pictures.mp: Command failed: etex --parse-first-line --interaction=nonstopmode mpIIQEqS.tex; see mpxerr.log

@@ -1,0 +1,54 @@
+This is TeX, Version 3.14159265 (TeX Live 2015) (preloaded format=tex 2016.3.19)  3 APR 2020 20:23
+**mproof pictures.1
+(/usr/local/texlive/2015/texmf-dist/tex/generic/metapost/mproof.tex
+(/usr/local/texlive/2015/texmf-dist/tex/generic/epsf/epsf.tex
+This is `epsf.tex' v2.7.4 <14 February 2011>
+\epsffilein=\read0
+\epsfframemargin=\dimen16
+\epsfframethickness=\dimen17
+\epsfrsize=\dimen18
+\epsftmp=\dimen19
+\epsftsize=\dimen20
+\epsfxsize=\dimen21
+\epsfysize=\dimen22
+\pspoints=\dimen23
+)
+\m=\count26
+\n=\count27
+)
+(pictures.1
+! Could not open file pictures.1, ignoring it.
+\epsfgetbb ...Could not open file #1, ignoring it}
+                                                  \else {\chardef \other = 1...
+
+\next #1->\epsfgetbb {#1}
+                         \epsfsetgraph {#1}
+\munch ...\else #1$$\epsfverbosetrue \epsfbox {#1}
+                                                  $$\par \okbreak \fi \munch 
+\munchline #1^^M->\catcode `\^^M=5 \munch #1\\ 
+                                               \vfill \end 
+<*> mproof pictures.1
+                     
+? 
+pictures.1: BoundingBox: llx = 72 lly = 72 urx = 540 ury = 720 
+pictures.1: scaled width = 469.74957pt scaled height = 650.42249pt
+)
+
+Overfull \vbox (23.44217pt too high) has occurred while \output is active
+\vbox(643.20255+0.0)x469.75499, glue set - 1.0
+.\glue(\topskip) 3.88889
+.\hbox(6.11111+2.22223)x469.75499, glue set 397.25545fil
+..\hbox(0.0+0.0)x20.0
+..\textt p
+..\textt i
+..\textt c
+..\textt t
+..etc.
+.\penalty 10000
+.\glue(\abovedisplayskip) 12.0 plus 3.0 minus 9.0
+.\glue(\lineskip) 1.0
+.etc.
+
+
+[1] [2]
+Output written on mproof.dvi (2 pages, 500 bytes).

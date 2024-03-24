@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{palatino,concmath,ccfonts}
+\begin{document}
+
+\gdef\mpxshipout{\shipout\hbox\bgroup
+  \setbox0=\hbox\bgroup}
+\gdef\stopmpxshipout{\egroup  \dimen0=\ht0 \advance\dimen0\dp0
+  \dimen1=\ht0 \dimen2=\dp0
+  \setbox0=\hbox\bgroup
+    \box0
+    \ifnum\dimen0>0 \vrule width1sp height\dimen1 depth\dimen2 
+    \else \vrule width1sp height1sp depth0sp\relax
+    \fi\egroup
+  \ht0=0pt \dp0=0pt \box0 \egroup}
+\mpxshipout% line 23 ./train.mp
+$y$%
+\stopmpxshipout
+\mpxshipout% line 24 ./train.mp
+$x$%
+\stopmpxshipout
+\mpxshipout% line 57 ./train.mp
+$y_0$%
+\stopmpxshipout
+\mpxshipout% line 58 ./train.mp
+$x_1$%
+\stopmpxshipout
+\mpxshipout% line 59 ./train.mp
+$x_2$%
+\stopmpxshipout
+\mpxshipout% line 60 ./train.mp
+$x_0$%
+\stopmpxshipout
+% line 63 ./train.mp
+\end{document}
+
+\end{document}
