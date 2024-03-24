@@ -1,0 +1,421 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath,mathrsfs,color}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+%\usepackage[frenchb]{babel}
+\usepackage[russian,english]{babel}
+%\usepackage{aeguill}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+%
+%\textheight = 22cm
+%\textwidth = 15cm
+%\hoffset = -1,4cm
+%\voffset = - 3cm
+%\parskip = 0.5mm
+\def\hbr{\hfil\break}
+%\newcommand\F{\mbox{I\kern-2pt F}}
+%%\newcommand\r{\rightarrow}
+%\newcommand\cA{{\cal A}}
+%\newcommand\cE{{\cal E}}
+%\newcommand\cF{{\cal F}}
+%\newcommand\cG{{\cal G}}
+%\newcommand\cL{{\cal L}}
+%\newcommand\cB{{\cal B}}
+%\newcommand\cN{{\cal N}}
+%\newcommand\cX{{\cal X}}
+%\newcommand\cM{{\cal M}}
+%\newcommand\cH{{\cal H}}
+%\newcommand\cP{{\cal P}}
+%\newcommand\cC{{\cal C}}
+%\newcommand\e{\varepsilon }
+%\newcommand\fdem{{$\Box$}}
+\newcommand\dm{{\sl Доказательство. }}
+\newtheorem{theo}{Теорема}[section]
+\newtheorem{prop}[theo]{Предложение}
+\newtheorem{lemm}[theo]{Лемма}
+\newtheorem{coro}[theo]{Следствие}
+
+
+
+
+
+%\documentclass[ 12pt,article]{amsart}
+%\documentclass[12pt, letterpaper]{amsart}
+\usepackage{graphicx, amssymb, color}
+\usepackage{hyperref}
+%\usepackage{refcheck}
+
+\addtolength{\hoffset}{-1.9cm}
+\addtolength{\textwidth}{3.8cm}
+\addtolength{\voffset}{-0.7cm}
+\addtolength{\textheight}{1.4cm}
+
+
+\renewcommand{\baselinestretch}{1.31}
+
+
+
+
+\newcommand\cA{{\mathcal A}}
+\newcommand\cE{{\mathcal E}}
+\newcommand\cC{{\mathcal C}}
+\newcommand\cF{{\mathcal F}}
+\newcommand\cG{{\mathcal G}}
+\newcommand\cI{{\mathcal I}}
+\newcommand\cK{{\mathcal K}}
+\newcommand\cL{{\mathcal L}}
+\newcommand\cB{{\mathcal B}}
+\newcommand\cN{{\mathcal N}}
+\newcommand\cM{{\mathcal M}}
+\newcommand\cX{{\mathcal X}}
+\newcommand\cD{{\mathcal D}}
+\newcommand\cO{{\mathcal O}}
+\newcommand\cR{{\mathcal R}}
+\newcommand\cP{{\mathcal P}}
+\newcommand\cQ{{\mathcal Q}}
+\newcommand\cS{{\mathcal S}}
+\newcommand\cT{{\mathcal T}}
+\newcommand\cU{{\mathcal U}}
+\newcommand\cV{{\mathcal V}}
+\newcommand\cY{{\mathcal Y}}
+\newcommand\cZ{{\mathcal Z}}
+\newcommand\cW{{\mathcal W}}
+
+\newcommand\bF{{\bf F}}
+\newcommand\bP{{\bf P}}
+\newcommand\bQ{{\bf Q}}
+\newcommand\bT{{\bf T}}
+\newcommand\fP{{\mathfrak P}}
+
+%\newcommand\E{{\mathbb E}}
+%\newcommand\T{{\mathbb T}}
+%\newcommand\Y{{\mathbb Y}}
+%\newcommand\R{{\mathbb R}}
+%\newcommand\N{{\mathbb N}}
+%\documentclass[12pt, letterpaper]{amsart}
+\usepackage{graphicx, amssymb, color}
+\usepackage{hyperref}
+%\usepackage{refcheck}
+
+\newcommand\D{{\mathbb D}}
+\newcommand\E{{\mathbb E}}
+\newcommand\T{{\mathbb T}}
+\newcommand\Y{{\mathbb Y}}
+\newcommand\R{{\mathbb R}}
+\newcommand\N{{\mathbb N}}
+\newcommand\e{{\varepsilon}}
+%\newcommand\dm{{\sl Доказательство}}
+%\newtheorem{theo}{Theorem}[section]
+%\newtheorem{prop}[theo]{Proposition}
+%\newtheorem{lemm}[theo]{Lemma}
+%\newtheorem{coro}[theo]{Corollary}
+%\newtheorem{defin}[theo]{Definition}
+%%\newtheorem{rem}[theorem]{Remark}
+%\newtheorem{rem}[theo]{Remark}
+
+\newcommand\fdem{$\Box$}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\bea{\begin{eqnarray}}
+\newcommand\eea{\end{eqnarray}}
+\newcommand\bean{\begin{eqnarray*}}
+\newcommand\eean{\end{eqnarray*}}
+
+%\renewcommand{\theequation}{\thesection.\arabic{equation}}
+%\renewcommand{\thetheo}{\thesection.\arabic{theo}}
+%\renewcommand{\theprop}{\thesection.\arabic{prop}}
+%\renewcommand{\thelemm}{\thesection.\arabic{lemm}}
+%\renewcommand{\therem}{\thesection.\arabic{rem}}
+%\renewcommand{\thedefin}{\thesection.\arabic{def}}
+\begin{document}
+\centerline{\bf \Large ЭКЗАМЕН 2021-2}
+%Exam 2020 (2nd year students)}
+\bigskip 
+%\centerline{\bf Фамилия И.О. }
+%\centerline{\bf Name}
+%\centerline{\bf Test 1}
+\bigskip
+\bigskip
+Во всех  задачах $w$ --- винеровский процесс, $\Lambda_t=t$, $||x||_t:=\sup_{s\le t}|x_s|$, 
+$||X||_B^2:=\E ||X||^2_T$.   
+
+\bigskip
+\noindent
+{\bf 1.} 
+Пусть $X=H\cdot w$, $H>0$, \\
+$\langle X\rangle_t=  H^2\cdot \Lambda_t<\infty$, $t<\infty$, \\
+$H^2\cdot \Lambda_\infty=\infty$. \\
+Пусть $t\mapsto A_t(\omega)$ ---  функция, обратная к функции  $t\mapsto H^2\cdot \Lambda_t$.
+Покажите, что процесс  $\tilde w_t=X_{A_t}$, $t\ge 0$, --- винеровский. 
+
+\smallskip
+{\bf  Решение.}  
+
+Пусть $X_t=\int_0^t H_s dW_s, H>0$ \\
+и $\langle X\rangle_t=\int_0^t H_s^2 ds <\infty, \\
+H_s^2\cdot\Lambda_\infty=\infty$. \\
+$t\mapsto A_t(\omega)$ — это функция, обратная к $t\mapsto H^2\cdot \Lambda_t,$ то есть $A_t=\inf\{0\le s : \langle X\rangle_s>t\} $ — по определению обобщенной обратной функции,\\
+ $B_t= A_t^{-1}=\int_0^t H_s^2 ds.$\\ 
+Покажем, что $Y_t=X_{A_t}$ — винеровский процесс, где $A_t=\inf\{0\le s : \langle X\rangle_s>t\}$. \\
+Заметим, что из определения $A_t$ следует \mbox{$\langle X\rangle_{A_t}=t$}.  \\
+Имеем:
+\begin{equation*} 
+\begin{cases} 
+1) B_t \text{ - непрерывная возрастающая функция} \Rightarrow A_t=B_t^{-1} \; \text{ тоже непрерывный}\\ 
+2) \langle X\rangle_{A_t}=t 
+\end{cases} 
+\end{equation*} 
+
+При этом $Y_t$ — локальный мартингал, потому что  его дифференциал содержит только слагаемое с дифференциалом от винеровского процесса и не содержит слагаемого с $dt$.\\
+Итак, $Y_t$ — это непрерывный локальный мартингал, у которого квадратическая вариация равна $t$.\\
+$\Rightarrow$ по теореме Леви:\\
+$Y_t$ — винеровский процесс.
+
+
+\bigskip
+\noindent
+{\bf 2.}  Пусть $f(s,t)$ ---  функция, интегрируемая по мере  Лебега на  $[0,T]^2$.
+Согласно определению через изометрию  стохастический интеграл $I_T(f(t))=\int_0^Tf(s,t)dw_s$ является классом эквива\-лентных с.в. Произвольный выбор представителей из каждого класса не гарантирует, что при фиксированном $\omega$ траектория  $t\mapsto I_T(f(t))$ будет измерима, т.е. обладать свойством, необходимым для интегрирования по  Лебегу. Поэтому, конструкция интеграла, зависящего от параметра требует некоторого дополнительного рассуждения.  
+ 
+Доказать, что  
+существует $\cF_T\times \cB_{[0,T]}$-измеримый процесс  $I_T(f(t))$, $t\le T$, такoй, что $I_T(f(s))$ 
+при почти всех $s$ значение процесса $I_T(f(t))$ является представителем стохастического интегрaла по переменной $s$ и
+$$
+\int_0^T \Big(\int_0^T f(s,t)dw_s \Big) dt =\int_0^T \Big(\int_0^T f(s,t)dt\Big)dw_s. 
+$$
+
+\smallskip
+{\bf  Решение.} 
+
+Дано, что функция $f(t,u)$ определена на $[0,T] \times [0,T]$ и такова, что $f \in L^2([0,T])=L^2([0,T] \times [0,T] ,  \cB_{[0,T] } \times  \cB_{[0,T]} , \mu \times \mu)$ , где $\mu$ - мера Лебега, $\cB_{[0,T]} \times \cB_{[0,T]} $ - уже пополнена по мере $\mu \times \mu)$.
+Предположим, что $\Delta_n = \int\limits_0^T \int\limits_0^T ( f(t,u) - f_n(t,u))^2 \, ds du \to 0 $ при $\delta_n \to 0$, где $f_n(s,u)= \sum \limits_{i=0}^{n-1} f(t,u_i^{(n)})I_{(u_i^{(n)},u_{i+1}^{(n)}]}(u), 0=u_0^{(n)}<u_1^{(n)}<...<u_n^{(n)}=T, \delta_n= \max _i (u_{i+1}^{(n)}-u_i^{(n)})$
+
+Функция $I_T(f(t)) =  \int\limits_0^T  f(t,u)\, dw_u $ для почти всех $\omega$ является $\cB{[0,T]}$ измеримой. Это вытекает из т.Фубини, так как $\int\limits_0^T  E |I_T(f(t))| \, dt < \ \infty$ . Это неравенство верно, поскольку $ E |I_T(f(t))|^2 = \int\limits_0^T  f^2(t,u) \, du$ , а мера $\mu \times P $ - конечная мера на $\cB{[0,T]} \times \cF $.
+
+При $\mu$ почти всех $u \in [0,T] $ функция $ g(u)=  \int\limits_0^T f(t,u) \, dt $ является  $\cB{[0,T]}$ измеримой также в силу т. Фубини. Действительно, $ \int\limits_0^T \int\limits_0^T | f(t,u) | \, dt du < \infty$ , поскольку  $f \in L^2([0,T])$. Кроме того, для $\mu$ почти всех $u$
+$ \Biggl( \int\limits_0^T f(t,u) \, du\Biggr)^2 \le T \int\limits_0^T f^2(t,u) \, dt $.
+Поэтому, $g \in \cL^2{[0,T]} $ как неслучайная функция, интегрируемая в квадрате.
+
+Далее,
+\begin{multline}
+\int\limits_0^T \Biggl( \int\limits_0^T f_n(t,u) ,\ dw_u \biggr) \, dt =  \int\limits_0^T \Biggl( \sum \limits _{i=0}^{n-1} f_n(t,u_i^{(n)})(w(u_{i+1}^{(n)})-w(u_i^{(n)})) \Biggr) dt = \\
+=\sum \limits _{i=0}^{n-1}(w(u_{i+1}^{(n)})-w(u_i^{(n)})) \int\limits_0^T f_n(t,u_i^{(n)}) dt
+\end{multline}
+
+Пользуясь линейностью стохастического интеграла по винеровскому процессу, имеем
+\begin{multline}
+\int\limits_0^T \Biggl( \int\limits_0^T f_n(t,u) ,\  dt \biggr) \, dw_u  = \int\limits_0^T \Biggl( \sum \limits _{i=0}^{n-1}  \int\limits_0^T f(t,u_i^{(n)})I_{(u_i^{(n)},u_{i+1}^{(n)}]}(u) dt \Biggr) dw_u=\\
+= \sum \limits _{i=0}^{n-1} (w(u_{i+1}^{(n)})-w(u_i^{(n)}))  \int\limits_0^T f(t,u_i^{(n)}) \,dt
+\end{multline}
+
+То есть для $f_n$ доказали, что можно поменять порядок интегрирования $\int\limits_0^T \Biggl( \int\limits_0^T f_n(t,u) ,\  dt \biggr) \, dw_u=\int\limits_0^T \Biggl( \int\limits_0^T f_n(t,u) ,\ dw_u \biggr) \, dt $
+
+Далее, воспользуемся т. Фубини, неравенствами Ляпунова и Коши-Буняковского:
+\begin{multline}
+E \Biggl| \int\limits_0^T \Biggl( \int\limits_0^T f(t,u) ,\ dw_u \Biggr) \, dt - \int\limits_0^T \Biggl( \int\limits_0^T f_n(t,u) ,\ dw_u \Biggr) \, dt \Biggr| \le\\
+\le \int\limits_0^T E  \Biggl| \int\limits_0^T (f(t,u)-f_n(t,u)) dw_u \Biggr| dt \le\\
+\le  \int\limits_0^T \Biggl(E  \Biggl( \int\limits_0^T (f(t,u)-f_n(t,u)) dw_u \Biggr)^2 \Biggr)^{1/2} dt =\\
+=\int\limits_0^T  \Biggl( \int\limits_0^T (f(t,u)-f_n(t,u))^2 du \Biggr)^{1/2} dt \le (T\Delta_n)^{1/2} \to 0 , n \to \infty
+\end{multline}
+
+Аналогично
+
+\begin{multline}
+E \Biggl| \int\limits_0^T \Biggl( \int\limits_0^T f(t,u) dt  \Biggr) \,  dw_u  - \int\limits_0^T \Biggl( \int\limits_0^T f_n(t,u)  dt  \Biggr) dw_u  \Biggr| \le\\
+\le \Biggl( E \Biggl(\int\limits_0^T \Biggl(  \int\limits_0^T (f(t,u)-f_n(t,u)) dt \Biggr) dw_u \Biggr)^2 \Biggr)^{1/2} =\\
+=\Biggl( \int\limits_0^T \Biggl( \int\limits_0^T (f(t,u)-f_n(t,u)) dt \Biggr)^2 du \Biggr)^{1/2} \le (T\Delta_n)^{1/2}
+\end{multline}
+
+Осталось заметить, что если $\xi_n \to \xi$ , $\zeta_n \to \zeta $ в $L^2(\Omega)$ и $\xi_n=\zeta_n$ п.н., то $\xi=\zeta$ п.н. 
+
+Таким образом доказано, что $\int\limits_0^T \Biggl( \int\limits_0^T f(t,u)   dt \biggr) \, dw_u=\int\limits_0^T \Biggl( \int\limits_0^T f(t,u)  dw_u \biggr) \, dt $ с вероятностью 1.
+
+
+
+
+
+
+
+\bigskip
+\noindent
+{\bf 3.} Показать, что 
+$$
+\int_0^t  \frac 1\e \int_0^r e^{-(r-s)/\e}dw_sdr=\int_0^t(1-e^{-(t-s)/\e})dw_s. 
+$$ 
+\smallskip
+{\bf  Решение.}  
+
+
+$$\int\limits_0^t{\frac{1}{\varepsilon}\int\limits_0^r e^{\frac{-(r-s)}{\varepsilon}}dW_s}dr\stackrel{?}{=}\int\limits_0^t{ (1-e^{\frac{-(t-s)}{\varepsilon}})dW_s}$$
+$$\int\limits_0^t{\frac{1}{\varepsilon}\underbrace{e^{-\frac{r}{\varepsilon}} \int\limits_0^r e^{\frac{s}{\varepsilon}}dW_s}_{=:Y_r}}dr\stackrel{?}{=}W_t-\underbrace{e^{-\frac{t}{\varepsilon}}\int\limits_0^t{ e^{\frac{s}{\varepsilon}}dW_s}}_{=:Y_t}$$
+$$\int\limits_0^t  \underbrace{{\frac{1}{\varepsilon} Y_r}}_{=:dW_t-dY_t}dr \stackrel{?}{=} W_t-Y_t$$
+
+Обоснуем последнее равенство:\\
+посмотрим на подынтегральное выражение в левой части:\\
+из 4-ой задачи знаем, какому СДУ удовдетворяет $Y_t$, поэтому из этого уравнения выразим $\frac{1}{\varepsilon}Y_tdt$ следующим образом:\\
+ $dY_t=-\frac{1}{\varepsilon}Y_tdt+dW_t\Rightarrow \frac{1}{\varepsilon}Y_tdt = dW_t-dY_t$\\
+ Отсюда получаем последнее равенство (которое было под знаком вопроса), что доказывает требуемое.
+
+
+\bigskip 
+\noindent
+{\bf 4.} Пусть   $\e>0$ и $Y=Y^\e$ --- решение СДУ $dY_t=-(1/\e)Y_tdt+dw_t$, $Y_0=0$. 
+Показать, что $\E Y^2_T=2\e(1-e^{-2T/\e})$. 
+Пользуясь формулой Ито, вывести отсюда, что для любого марковского момента $\tau\le T$ (в частности,  для $\tau_a:=\inf\{t: Y_t\ge a\}\wedge T$) справедливa оценк $\E Y^4_\tau \le 12T\e$. 
+
+Используя представление 
+$$
+E||Y||_T^2=\int_{0}^\infty {\mathbb P}(||Y||_T^2>a)da=\int_{0}^\infty {\mathbb P}(||Y||_{\tau_a}^2>a)da
+$$
+получить оценку $E||Y||_T^2\le C \e^{1/2}$, где $C=C_T$ --- константа. 
+
+\smallskip
+{\bf  Решение.}   
+
+
+a) \\
+$dY_t=-\frac 1\varepsilon Y_tdt+dw_t, \; Y_0=0.$ \\
+Пусть $H(t,x)=xe^{t/\varepsilon}$, тогда по формуле Ито:\\
+\[dZ_t=\frac{\partial H}{\partial t}(t, Y_t)dt+\frac{\partial H}{\partial x}(t, Y_t)dY_t+\frac 12 \frac{\partial^2 H}{\partial x^2}(t, Y_t)(dY_t)^2=e^{t/\varepsilon}dw_t \Rightarrow\] 
+\[e^{t/\varepsilon}dw_t =d(Y_t e^{t/\varepsilon}) \Rightarrow Y_t e^{t/\varepsilon}-0=\int_0^t e^{s/\varepsilon}dw_s \Rightarrow Y_t=\int_0^t e^{(-t+s)/\varepsilon}dw_s =
+e^{-\frac{t}{\varepsilon}} \int_0^t e^{s/\varepsilon}dw_s \] 
+Получается: 
+\[\E Y^2_T= \E e^{-2T/\varepsilon} \left(\int_0^T e^{s/\varepsilon}dw_s\right)^2= e^{-2T/\varepsilon} \int_0^T e^{2s/\varepsilon}ds=\frac \varepsilon2 e^{-2T/\varepsilon} \left. e^{2s/\varepsilon}\right|_0^T= \frac \varepsilon2 (1-e^{-2T/\varepsilon})\]
+
+
+b)\\
+$dY_t=-\frac{1}{\varepsilon }Y_tdt+ dW_t$\\
+Возьмем $f(x,t):=x^4$\\
+Тогда по формуле Ито:\\
+$d(Y_t^4) = \left( 6Y_t^2 -\frac{4}{\varepsilon} Y_t^4 \right)dt + 4Y_t^3dW_t$\\
+
+$\Rightarrow Y_t^4 = \int_{0}^{t} \left( 6Y_s^2 -\frac{4}{\varepsilon} Y_s^4 \right)ds + 4\int_{0}^{t} Y_s^3dW_s$\\
+
+$\Rightarrow \forall \tau \leq T: Y_\tau^4 = \int_{0}^{\tau} \left( 6Y_s^2 -\frac{4}{\varepsilon} Y_s^4 \right)ds + 4\int_{0}^{\tau} Y_s^3dW_s$\\
+
+У последнего слагаемого матожидание равно нулю, матожидание второго слагаемого отрицательно, поэтому (используя результат пункта a)):\\
+$EY_\tau^4 \leq \int_{0}^{T} 6EY_s^2ds = \int_{0}^{T} 6 \cdot \frac{\varepsilon}{2} (1-e^{-2T/\varepsilon}) \leq 3T\varepsilon$
+
+
+\bigskip
+\noindent
+{\bf 5.}  Пусть процесс $(X^\e,V^\e)$ --- решение системы дифференциальных уравнений
+\bean
+dX^\e_t&=&V^\e_t dt, \qquad  \qquad \qquad \qquad \qquad X^\e_0=x,\\
+\e dV^\e_t&=&-V^\e_t dt +h(X_t^\e)dt +dw_t, \qquad V^\e_0=0, 
+\eean
+$X$ ---  решение СДУ $dX_t=h(X_t)dt +dw_t$, $X_0=x$, где $h$  удовлетворяет условию Липшица и линейного роста,  $\Delta^\e:=X^\e-X$.
+
+
+Доказать, что $\lim_{\e\downarrow 0} ||\Delta^\e||_B=0$. 
+
+\bigskip
+\noindent
+{\bf 6.} 
+ Пусть   $M\in \cM^{2,c}_0$,   $\langle M\rangle_t\to \infty$        при  $t\to \infty$. 
+Показать, что   $M_t/\langle M\rangle_t\to 0$ при $t\to \infty$.
+
+\smallskip
+{\bf  Решение.}  
+
+
+Докажем сначала вспомогательное утверждение:\\
+$P\left( M_t > \langle M\rangle_t^{\frac{1}{2} + \frac{1}{4}} \right) \to 0$\\
+Действительно, от противного:\\
+пусть существует $t_n; n \in N$: $P\left( M_{t_n} > \langle M\rangle_{t_n}^{\frac{1}{2} + \frac{1}{4}} \right) > 2p$ для некоторого $p \ge 0$\\
+По условию $\langle M\rangle_t \to \infty$\\
+$\Rightarrow P\left( \langle M\rangle_t \leq \frac{2}{p^4} \right) \to 0, t \to \infty$\\
+
+Значит, для достаточно больших $n$ существует множество меры хотя бы $p$, на котором одновременно
+$M_{t_n} \ge \langle M\rangle_{t_n}^{\frac{1}{2} + \frac{1}{4}}$ и
+$ \langle M\rangle_t \ge \frac{2}{p^4}$\\
+
+Пусть $A_n$ — это множество.
+Тогда:\\
+$M_{t_n}^2 -  \langle M\rangle_{t_n} \ge \left(  M\rangle_{t_n}^{\frac{3}{2}} - \langle M\rangle_{t_n} \right) \cdot I_{A_n} + \left(  -  \langle M\rangle_{t_n}\right) \cdot I_{\overline{A_n}}$\\
+
+Поэтому:\\
+$0=E\left( M_{t_n}^2 - \langle M\rangle_{t_n} \right)  \ge E  \langle M\rangle_{t_n}^{\frac{3}{2}} \cdot I_{A_n}
+ - E \langle M\rangle_{t_n} \geq
+ E \left(  \langle M\rangle_{t_n}^{\frac{3}{2}} \cdot p -\langle M\rangle_{t_n} \right)  =
+ E \left(  \langle M\rangle_{t_n}^{\frac{3}{2}} \cdot p -\langle M\rangle_{t_n} \right) \cdot I_{A_n} +
+ E \left(  \langle M\rangle_{t_n}^{\frac{3}{2}} \cdot p -\langle M\rangle_{t_n} \right) \cdot I_{\overline{A_n}} \ge 
+ \left(  p\cdot  \left( \frac{2}{p^4} \right)^{\frac{3}{2}} - \frac{2}{p^4} \right)\cdot p - \frac{2(1-p)}{9p^2}=
+ \frac{2\sqrt2}{p^4} - \frac{2}{p^3} - \frac{2}{9p^2} + \frac{2}{9p} > 0$ при достаточно маленьких $p$\\
+
+Противоречие.\\
+
+Значит, для любого $N:$ $P\left( \langle M\rangle_t \leq N \right) \to 0$ и $P\left( M_t  \ge  \langle M\rangle_{t_n}^{\frac{1}{2} + \frac{1}{4}} \right) \to 0$\\
+Отсюда для любого $N:$\\
+$P\left( \langle M\rangle_t \ge N ; M_t \leq \langle M\rangle_t ^{\frac{1}{2} + \frac{1}{4}}  \right) \to 1$\\
+
+
+
+Но из $\langle M\rangle _t  \ge N>$ и $M_t \leq \langle M\rangle_{t}^{\frac{1}{2} + \frac{1}{4}} $ следует, что:\\
+$\frac{M_t}{\langle M\rangle_t} \leq \frac{1}{\langle M\rangle_t^{\frac{1}{4}}} \le \frac{1}{N^{\frac{1}{4}}}$\\
+
+То есть для любого $N:$\\
+$P\left( \frac{M_t}{\langle M\rangle_t} \le \frac{1}{N^{\frac{1}{4}}} \right) \to 1$\\
+Получаем, что $ \frac{M_t}{\langle M\rangle_t} \to 0$
+
+
+
+\bigskip
+\noindent
+{\bf 7.}  Определим полиномы Эрмита формулой 
+$$
+H_n(t,x):=(-t)^n \frac 1{n!}e^{x^2/(2t)}\frac {\partial^n}{\partial x^n} \left( e^{-x^2/(2t)} \right). 
+$$
+Доказать, что $M_t:=H_n(t,W_t)$ ---  мартингал. 
+
+\smallskip
+{\bf  Решение.} 
+
+Используя формулу Ито, видим, что для мартингальности  достаточно проверить равенство нулю коэффициента при  $dt$, то есть\\
+$\frac {\partial H_n}{\partial t} + \frac{1}{2}  \frac {\partial^2 H_n}{\partial x^2} = 0$\\
+
+Для $n\geq2$ сначала выведем рекуррентную формулу для многочленов Эрмита:\\
+$H_n=(-t)^n \cdot \frac{1}{n!}  \cdot e^{x^2/(2t)} \cdot  \frac {\partial^{(n-1)}}{\partial x^{(n-1)}} \left( - \frac{x}{t}  \cdot e^{-x^2/(2t)} \right)=_{...}=$\\
+$=(-t)^n \cdot \frac{1}{n!} \cdot  e^{x^2/(2t)} \cdot  \left( - \frac{x}{t}  \cdot  \frac {\partial^{(n-1)}}{\partial x^{(n-1)}} \left(  e^{-x^2/(2t)} \right) - \frac{n-1}{t} \cdot   \frac {\partial^{(n-2)}}{\partial x^{(n-2)}} \left(  e^{-x^2/(2t)} \right)  \right)=$\\
+$= \frac{x}{n} H_{n-1} - \frac{t}{n} H_{n-2}$ при $n\geq2$\\
+
+Для $\frac {\partial H_n}{\partial x}:$\\
+$\frac {\partial H_n}{\partial x} = 
+(-t)^n \cdot \frac{1}{n!}  \cdot e^{x^2/(2t)} \cdot  \frac {\partial^{(n+1)}}{\partial x^{(n+1)}} \left( - \frac{x}{t}  \cdot e^{-x^2/(2t)} \right)
++
+(-t)^n \cdot \frac{1}{n!}  \cdot \frac{x}{t}  \cdot e^{x^2/(2t)} \cdot  \frac {\partial^{(n)}}{\partial x^{(n)}} \left( - \frac{x}{t}  \cdot e^{-x^2/(2t)} \right)=$\\
+$-\frac{n+1}{t} H_{n+1} + \frac{x}{t}H_n =  $ \\
+используем рекуррентную формулу для $H_{n+1}$ = \\
+$-\frac{n+1}{t} \left( \frac{x}{n+1}H_n -\frac{t}{n+1}H_{n-1} \right) + \frac{x}{t}H_n =H_{n-1}$ при $n\geq2$\\
+
+$\Rightarrow \frac {\partial^2 H_n}{\partial x^2} =
+ \frac {\partial }{\partial x} \left(  \frac {\partial H_n}{\partial x}  \right) =  
+  \frac {\partial }{\partial x} \left(  H_{n-1} \right)  = H_{n-2}$ при $n\geq2$\\
+  
+ Далее:\\
+ $\frac {\partial H_n}{\partial t} =$ {три слагаемых} = \\
+$ n \cdot (-1) \cdot  (-t)^{n-1} \cdot \frac{1}{n!}  \cdot e^{x^2/(2t)} \cdot  \frac {\partial^{(n)}}{\partial x^{(n)}} \left( e^{-x^2/(2t)} \right) + \\
+ +(-t)^n \cdot \frac{1}{n!}  \cdot \frac{x^2}{2} \cdot \left( -\frac{1}{t^2} \right)  \cdot e^{x^2/(2t)} \cdot  \frac {\partial^{(n)}}{\partial x^{(n)}} \left( \cdot e^{-x^2/(2t)} \right) +\\
++ (-t)^n \cdot \frac{1}{n!}  \cdot e^{x^2/(2t)} \cdot  \frac {\partial^{(n)}}{\partial x^{(n)}} \left( - \frac{x^2}{2}\cdot \left( -\frac{1}{t^2} \right)   \cdot e^{-x^2/(2t)} \right)=$\\
+$=\frac{n}{t}H_n +  (-t)^n \cdot \frac{1}{n!}  \cdot e^{x^2/(2t)} \cdot \left(  -\frac{x^2}{2t^2} \cdot  \frac {\partial^{(n)}}{\partial x^{(n)}} \left( e^{-x^2/(2t)} \right) + \frac {\partial^{(n)}}{\partial x^{(n)}} \left(  \frac{x^2}{2t^2} \cdot e^{-x^2/(2t)} \right) \right)=$\\
+$=\frac{n}{t}H_n +  
+(-t)^n \cdot \frac{1}{n!}  \cdot e^{x^2/(2t)} \cdot \left( n \cdot \frac{x}{t^2} \frac {\partial^{(n-1)}}{\partial x^{(n-1)}} \left( e^{-x^2/(2t)} \right)  + 
+\frac{n(n-1)}{2t^2} \frac {\partial^{(n-2)}}{\partial x^{(n-2)}} \left( e^{-x^2/(2t)} \right) \right)=$\\
+$=\frac{n}{t}H_n -\frac{x}{t}H_{n-1} + \frac{1}{2}H_{n-2} =$\\
+применяем рекуррентную формулу для $H_{n}$ = \\
+$=\frac{n}{t}\left( \frac{x}{n} H_{n-1} - \frac{t}{n} H_{n-2} \right) -\frac{x}{t}H_{n-1} + \frac{1}{2}H_{n-2}= -\frac{1}{2}H_{n-2}$ при $n\geq2$\\
+
+Поэтому при $n\geq2:$\\
+$\frac {\partial H_n}{\partial t} + \frac{1}{2}  \frac {\partial^2 H_n}{\partial x^2} =-\frac{1}{2}H_{n-2}  + \frac{1}{2}H_{n-2} = 0$\\
+$\Rightarrow H_n(t,W_t)$ - мартингал.\\
+
+При $n=0,1$ проверим мартингальность отдельно:\\
+$H_0(t,x)=e^{x^2/(2t)} \cdot e^{-x^2/(2t)} = 1$ - мартингал\\
+$H_1(t,x)= (-t) \cdot e^{x^2/(2t)} \cdot  \left( -\frac{x}{t} \cdot e^{-x^2/(2t)} \right) = x$\\
+$\Rightarrow H_1(t,W_t) = W_t$ - мартингал. Чтд.
+
+
+\end{document}
+
+
