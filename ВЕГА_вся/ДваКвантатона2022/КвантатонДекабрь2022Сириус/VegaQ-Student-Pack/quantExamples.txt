@@ -1,0 +1,362 @@
+Examples for Quantathon by kramkov
+
+INTEREST RATE OPTIONS IN HULL-WHITE MODEL
+
+PARAMETERS OF HULL-WHITE MODEL:
+
+interest rate = 0.07
+sigma = 0.02
+lambda = 0.05
+initial time = 0
+
+quality = 200
+
+CAP IN INTEREST RATE MODEL
+
+cap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.077
+
+RISK REPORT: 
+
+price = 4.5771
+delta = -436.731
+one percent gamma = 330.572
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           120.802
+ 0.15           96.2911
+ 0.13           71.0954
+ 0.11           45.4291
+ 0.09           20.8753
+ 0.07            4.5771
+ 0.05          0.677671
+ 0.03         0.0623211
+ 0.01        0.00320394
+-0.01       8.08522e-05
+-0.03        8.3588e-07
+
+SWAP IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay float and receive fixed
+
+RISK REPORT: 
+
+price = -0.869617
+delta = 1384.09
+one percent gamma = 19.6642
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17          -129.895
+ 0.15          -105.534
+ 0.13          -80.4718
+ 0.11          -54.6877
+ 0.09          -28.1609
+ 0.07         -0.869617
+ 0.05           27.2082
+ 0.03           56.0956
+ 0.01           85.8159
+-0.01           116.393
+-0.03           147.853
+
+SWAP IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay fixed and receive float
+
+RISK REPORT: 
+
+price = 0.869617
+delta = -1384.09
+one percent gamma = -19.6642
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           129.895
+ 0.15           105.534
+ 0.13           80.4718
+ 0.11           54.6877
+ 0.09           28.1609
+ 0.07          0.869617
+ 0.05          -27.2082
+ 0.03          -56.0956
+ 0.01          -85.8159
+-0.01          -116.393
+-0.03          -147.853
+
+SWAPTION IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay float and receive fixed
+
+maturity = 1.5
+
+RISK REPORT: 
+
+price = 11.3781
+delta = 592.318
+one percent gamma = 202.465
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17       0.000128513
+ 0.15        0.00424875
+ 0.13         0.0696886
+ 0.11          0.624955
+ 0.09           3.32589
+ 0.07           11.3781
+ 0.05           27.2818
+ 0.03           50.3176
+ 0.01           77.9697
+-0.01            108.62
+-0.03           141.881
+
+SWAPTION IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay fixed and receive float
+
+maturity = 1.5
+
+RISK REPORT: 
+
+price = 12.161
+delta = -562.862
+one percent gamma = 153.826
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17            94.416
+ 0.15           78.8945
+ 0.13             61.94
+ 0.11           43.8781
+ 0.09           26.2553
+ 0.07            12.161
+ 0.05           3.97222
+ 0.03          0.838708
+ 0.01           0.10564
+-0.01        0.00731502
+-0.03       0.000252931
+
+CANCELLABLE COLLAR IN INTEREST RATE MODEL
+
+cap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.077
+
+floor rate = 0.063
+
+RISK REPORT: 
+
+price = 4.38707
+delta = -476.262
+one percent gamma = 279.597
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           120.802
+ 0.15           96.2911
+ 0.13           71.0954
+ 0.11           45.4288
+ 0.09           20.8644
+ 0.07           4.38707
+ 0.05          -2.74701
+ 0.03          -8.09666
+ 0.01          -13.1192
+-0.01          -18.1658
+-0.03          -23.2375
+
+DOWN-AND-OUT CAP IN INTEREST RATE MODEL
+
+cap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.077
+
+lower barrier = 0.063
+
+RISK REPORT: 
+
+price = 4.26716
+delta = -455.197
+one percent gamma = 333.172
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           120.802
+ 0.15           96.2911
+ 0.13           71.0954
+ 0.11           45.4279
+ 0.09            20.847
+ 0.07           4.26716
+ 0.05          0.271873
+ 0.03       0.000483986
+ 0.01      -2.45848e-08
+-0.01      -1.26729e-10
+-0.03      -6.53261e-13
+
+LIBOR FUTURES IN INTEREST RATE MODEL
+
+period for LIBOR = 0.25
+number of futures times = 20
+maturity = 0.25
+
+RISK REPORT: 
+
+price = 0.929347
+delta = 0.998767
+one percent gamma = -0.00245055
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17          0.828235
+ 0.15          0.848657
+ 0.13          0.868978
+ 0.11            0.8892
+ 0.09          0.909323
+ 0.07          0.929347
+ 0.05          0.949274
+ 0.03          0.969102
+ 0.01          0.988834
+-0.01           1.00847
+-0.03           1.02801
+
+DROP-LOCK SWAP IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay float and receive fixed
+
+lower rate = 0.055
+upper rate = 0.095
+
+RISK REPORT: 
+
+price = -1.97131
+delta = 731.227
+one percent gamma = 51.7457
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17          -103.412
+ 0.15          -78.5415
+ 0.13          -52.9603
+ 0.11          -27.9416
+ 0.09          -14.0669
+ 0.07          -1.97131
+ 0.05           13.7622
+ 0.03           38.0194
+ 0.01           67.2829
+-0.01           97.4967
+-0.03           128.585
+
+DROP-LOCK SWAP IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay fixed and receive float
+
+lower rate = 0.055
+upper rate = 0.095
+
+RISK REPORT: 
+
+price = 1.97131
+delta = -731.227
+one percent gamma = -51.7457
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           103.412
+ 0.15           78.5415
+ 0.13           52.9603
+ 0.11           27.9416
+ 0.09           14.0669
+ 0.07           1.97131
+ 0.05          -13.7622
+ 0.03          -38.0194
+ 0.01          -67.2829
+-0.01          -97.4967
+-0.03          -128.585
+
+AUTO CAP IN INTEREST RATE MODEL
+
+cap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+
+number of paid caplets = 3
+
+RISK REPORT: 
+
+price = 4.03921
+delta = -302.394
+one percent gamma = 305.926
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           70.1982
+ 0.15           56.6524
+ 0.13           42.9072
+ 0.11           28.9633
+ 0.09           15.0163
+ 0.07           4.03921
+ 0.05           1.14518
+ 0.03           0.14929
+ 0.01         0.0100125
+-0.01       0.000340411
+-0.03       7.84555e-06
+

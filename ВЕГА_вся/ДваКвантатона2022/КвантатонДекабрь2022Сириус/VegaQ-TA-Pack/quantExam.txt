@@ -1,0 +1,272 @@
+Quantathon: final exam by kramkov
+
+INTEREST RATE OPTIONS IN HULL-WHITE MODEL
+
+PARAMETERS OF HULL-WHITE MODEL:
+
+interest rate = 0.07
+sigma = 0.02
+lambda = 0.05
+initial time = 0
+
+quality = 200
+
+UP-AND-OUT FLOOR IN INTEREST RATE MODEL
+
+cap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.063
+
+upper barrier = 0.077
+
+RISK REPORT: 
+
+price = 3.74678
+delta = 414.509
+one percent gamma = 304.051
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17      -2.26473e-13
+ 0.15      -4.39345e-11
+ 0.13      -8.52307e-09
+ 0.11       0.000288765
+ 0.09          0.202708
+ 0.07           3.74678
+ 0.05           19.9429
+ 0.03            46.249
+ 0.01           75.4517
+-0.01           105.822
+-0.03           137.098
+
+AMERICAN PUT ON FUTURES PRICE OF ZERO-COUPON BOND IN INTEREST RATE MODEL
+
+maturity of futures = 0.25
+number of futures times = 10
+maturity of bond = 0.35
+notional of bond = 1000
+strike = 993.049
+
+RISK REPORT: 
+
+price = 0.404202
+delta = -49.141
+one percent gamma = 35.0809
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           9.71832
+ 0.15           7.79122
+ 0.13           5.85838
+ 0.11           3.91979
+ 0.09           1.97672
+ 0.07          0.404202
+ 0.05        0.00922398
+ 0.03       4.04426e-06
+ 0.01      -2.31244e-13
+-0.01      -1.19201e-15
+-0.03      -6.14456e-18
+
+CANCELLABLE SWAP SET IN ARREARS IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay float and receive fixed
+
+RISK REPORT: 
+
+price = 5.94534
+delta = 833.463
+one percent gamma = 315.767
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17          -24.3835
+ 0.15          -19.5869
+ 0.13          -14.7661
+ 0.11          -9.92099
+ 0.09          -4.77608
+ 0.07           5.94534
+ 0.05           27.9832
+ 0.03           55.4146
+ 0.01           84.6342
+-0.01           114.826
+-0.03           145.901
+
+CANCELLABLE SWAP SET IN ARREARS IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay fixed and receive float
+
+RISK REPORT: 
+
+price = 7.14615
+delta = -860.464
+one percent gamma = 286.232
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           128.379
+ 0.15            104.33
+ 0.13           79.5925
+ 0.11           54.2357
+ 0.09           28.9507
+ 0.07           7.14615
+ 0.05          -4.35129
+ 0.03          -9.70442
+ 0.01          -14.6734
+-0.01          -19.6669
+-0.03          -24.6857
+
+DOUBLE-UP SWAP IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay float and receive fixed
+
+lower barrier = 0.0636364
+
+RISK REPORT: 
+
+price = 5.35693
+delta = 1901.87
+one percent gamma = 332.15
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17          -129.895
+ 0.15          -105.534
+ 0.13          -80.4666
+ 0.11          -54.5919
+ 0.09          -27.1778
+ 0.07           5.35693
+ 0.05           49.9844
+ 0.03           102.357
+ 0.01           156.767
+-0.01           212.867
+-0.03           270.706
+
+DOUBLE-UP SWAP IN INTEREST RATE MODEL
+
+swap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+we pay fixed and receive float
+
+lower barrier = 0.0636364
+
+RISK REPORT: 
+
+price = 1.57709
+delta = -1347.93
+one percent gamma = -30.3846
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           129.895
+ 0.15           105.534
+ 0.13           80.4719
+ 0.11           54.6927
+ 0.09           28.2469
+ 0.07           1.57709
+ 0.05          -26.3766
+ 0.03          -55.9536
+ 0.01          -85.8063
+-0.01          -116.393
+-0.03          -147.853
+
+CALLABLE CAPPED RESETTABLE FLOATER IN INTEREST RATE MODEL
+
+(floater can be repaid only at reset times)
+
+cap parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 12
+rate = 0.09
+
+number of coupons between resets = 4
+spread over LIBOR = 0.01
+initial coupon rate = 0.07
+repayment price (percent of notional) = 1.02
+
+RISK REPORT: 
+
+price = 1009.11
+delta = 1527.05
+one percent gamma = -224.392
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17           804.002
+ 0.15           844.981
+ 0.13           887.949
+ 0.11           932.017
+ 0.09           974.071
+ 0.07           1009.11
+ 0.05            1035.6
+ 0.03           1057.29
+ 0.01           1077.86
+-0.01            1098.6
+-0.03           1119.73
+
+PUTABLE BOND WITH RESETTABLE COUPON IN INTEREST RATE MODEL
+
+bond parameters:
+
+notional = 1000
+period between payments = 0.25
+number of payments = 6
+rate = 0.07
+
+reset value for coupon rate = 0.05
+redemption price (percent of notional) = 0.98
+
+RISK REPORT: 
+
+price = 981.548
+delta = 973.111
+one percent gamma = 98.2623
+
+OPTION VALUES VERSUS SHORT RATE:
+
+ rate            option
+ 0.17            869.51
+ 0.15           892.744
+ 0.13           916.228
+ 0.11           939.922
+ 0.09           962.389
+ 0.07           981.548
+ 0.05           1004.02
+ 0.03           1031.87
+ 0.01           1061.11
+-0.01            1091.2
+-0.03           1122.16
+
