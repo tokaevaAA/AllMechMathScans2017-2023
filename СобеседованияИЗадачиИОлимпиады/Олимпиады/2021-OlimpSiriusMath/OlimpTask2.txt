@@ -1,0 +1,26 @@
+#task2
+import math
+my_dict=dict()
+
+def get_max_degNa(N,a):
+    if (N,a) in my_dict:
+        return my_dict[(N,a)]
+    if (N<a):
+        return 0
+    if (N%a!=0):
+        return 0
+    
+    otv=1+get_max_degNa(N//a,a)
+    my_dict[(N,a)]=otv
+    return otv
+
+def get_max_degN(N):
+    otv=0
+    for i in range(2,int(math.sqrt(N))+1):
+        tek_deg=get_max_degNa(N,i)
+        otv=max(otv,tek_deg)
+    return otv
+
+N=int(input())
+otv=get_max_degN(N)
+print(otv)

@@ -1,0 +1,57 @@
+#task1
+
+def get_nod(a,b):
+    while b!=0:
+        a,b=b,a%b
+    return a
+    
+def startegy_from_atob(a,b,N,name1,name2):
+    x=0
+    y=0
+    otv_log=[]
+    while (x!=N and y!=N):
+        if (y==b):
+            y=0
+            otv_log.append(name2+">")
+        if (x==0):
+            x=a
+            otv_log.append(">"+name1)
+       
+            
+        if (x+y>b):
+            x,y=x+y-b,b
+            otv_log.append(name1+">"+name2)
+       
+        else:
+            x,y=0,x+y
+            otv_log.append(name1+">"+name2)
+    return otv_log
+
+def solution(a,b,N):
+    if (a==N):
+        return ['>A']
+    if (b==N):
+        return ['>B']
+    if (N>max(a,b) or N%get_nod(a,b)!=0):
+        return list()
+    res1=startegy_from_atob(a,b,N,'A','B')
+    res2=startegy_from_atob(b,a,N,'B','A')
+    
+    if (len(res1)<len(res2)):
+        return res1
+    else:
+        return res2
+    
+a=int(input())
+b=int(input())
+N=int(input())
+otv=solution(a,b,N)
+
+
+
+if(len(otv)==0):
+    print("Impossible")
+else:
+    for el in otv:
+        print(el,end='\n')
+    

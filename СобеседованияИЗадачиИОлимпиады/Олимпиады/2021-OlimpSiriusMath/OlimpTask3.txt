@@ -1,0 +1,43 @@
+#task3
+
+A,B,C=tuple(map(int,input().split()))
+N=int(input())
+d=list(map(int,input().split()))
+
+INF = 10000000
+border=[INF for i in range(B+1)]
+border[0]=-1
+for c in range(1,B+1):
+    for i in range(N):
+        if (c==d[i]):
+            border[c]=i
+            break
+        if (border[c-d[i]]<i):
+            border[c]=i
+            break
+
+#print(border)
+has_sum_d_greaterCAlessB=0
+otv=[]
+for c in range(C-A+1, B+1):
+    #print(border[c])
+    if border[c]!=INF:
+        has_sum_d_greaterCAlessB=1
+        tek_c=c
+        while(tek_c!=0):
+            #print("old",tek_c)
+            otv.append(border[tek_c])
+            tek_c=tek_c-d[border[tek_c]]
+            #print("new",tek_c)
+        break
+if (has_sum_d_greaterCAlessB==0):
+    print(A+B)
+    print(-1)
+else:
+    sum_di=0
+    for i in otv:
+        sum_di+=d[i]
+    print(A+sum_di)
+    print(len(otv),end=' ')
+    for el in sorted(otv):
+        print(el+1,end=' ')
