@@ -1,0 +1,132 @@
+\nonstopmode
+
+\documentclass[a4paper, 12pt, oneside]{ncc}
+\usepackage[warn]{mathtext}          % русские буквы в формулах, с предупреждением
+\usepackage{ucs}                     % Unicode input support
+\usepackage[T2A]{fontenc}            % внутренняя кодировка  TeX
+\usepackage[utf8x]{inputenc}         % кодовая страница документа
+\usepackage[english, russian]{babel} % локализация и переносы
+\usepackage{indentfirst}             % русский стиль: отступ первого абзаца раздела
+\usepackage{misccorr}                % точка в номерах заголовков
+\usepackage{cmap}                    % русский поиск в pdf
+\usepackage{graphicx}                % Работа с графикой \includegraphics{}
+\usepackage{caption}                 % Работа с подписями для фигур, таблиц и пр.
+\usepackage{soul}                    % Разряженный текст \so{} и подчеркивание \ul{}
+\usepackage{soulutf8}                % Поддержка UTF8 в soul
+\usepackage{fancyhdr}                % Для работы с колонтитулами
+\usepackage{multirow}                % Аналог multicolumn для строк
+\usepackage{ltxtable}                % Микс tabularx и longtable
+\usepackage{paralist}                % Списки с отступом только в первой строчке
+\usepackage[shortcuts]{extdash}      % Переносы в словах с дефисами
+\usepackage[perpage]{footmisc}       % Нумерация сносок на каждой странице с 1
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+% Задаем отступы: слева 30 мм, справа 10 мм, сверху до колонтитула 10 мм снизу 25 мм
+\usepackage[a4paper, top=20mm, left=30mm, right=10mm, bottom=25mm]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% цвета для гиперссылок
+\definecolor{linkcolor}{HTML}{340DAB} % цвет ссылок
+\definecolor{urlcolor}{HTML}{340DAB} % цвет гиперссылок
+
+\hypersetup{unicode=true, linkcolor=linkcolor, urlcolor=urlcolor, colorlinks=true, breaklinks=true}
+
+\def\EUR{\,\euro}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE]{\textit{ Конференция <<Ломоносов 2022>>}}
+\fancyhead[LO]{\textit{ Конференция <<Ломоносов 2022>>}}
+\fancyfoot{}
+\fancyfoot[RE,RO]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\title{ Оптимальный план исполнения заявки для случая детерминированной структуры ликвидности }
+\author{ Токаева Александра Александовна }
+
+\begin{document}
+\begin{flushright}
+Секция <<Дифференциальные уравнения, динамические системы и оптимальное управление >>
+\end{flushright}
+
+\begin{center}
+\textbf{Оптимальный план исполнения заявки для случая детерминированной структуры ликвидности}
+\end{center}
+
+\begin{center}
+\textbf{Научный руководитель -- Фалин Геннадий Иванович  }\\
+\vspace{0.2cm}
+\textbf{\textit{Токаева Александра Александровна}}\\
+\textit{Студент (специалист)}\\
+Московский государственный университет имени М.В.Ломоносова, Механико-математический факультет, Кафедра теории вероятностей, Москва, Россия\\
+\textit{E-mail: galynka@ymail.com}
+\\
+\end{center}
+
+Рассмотрим модель, в которой агент хочет купить $x$ единиц актива (например, акций), причем $x$ настолько велико, что оказывает влияние на цену актива, и цель исполнителя — придумать оптимальную стратегию для минимизации издержек.
+
+Пусть $X=\left( X_{t} \right)_{t\geq0}$ — непрерывный справа возрастающий процесс с $X_{0-}=0$. 
+Он интерпретируется как число акций, находящихся у агента в момент времени $t$. Назовем класс таких процессов {\em допустимыми.} Рассматриваются только возрастающие (в отличие от статьи [3]) процессы $X_t$, что соответствует монотонным стратегиям исполнения заявки. Время в модели идет с $t=0-$, а не с $t=0$, чтобы в нулевой момент разрешать процессу $X_t$ делать скачок.
+
+
+Отклонение цены вследствие исполнения заявок описывается процессом $\eta_t$, удовлетворяющим стохастическому дифференциальному уравнению:
+$$
+\begin{cases}
+d\eta^X_t=\frac{dX_t}{\delta_t} -r_t\eta^X_tdt\\
+\eta^X_{0-}=\eta_{0}\geq 0 
+\end{cases}
+$$
+
+Параметры $r_t$ и $\delta_t$ интерпретируются как упругость книги заявок и глубина рынка соответственно. В статье [2] оба эти параметра предполагались постоянными, а в данном исследовании обоим параметрам разрешено быть зависящими от времени (но детерминированными) функциями. 
+
+Минимизируемый функционал задается формулой:
+$$C\left( X \right)=\int_{[0,+\infty)} \left( \eta^X_{t-} + \frac{\Delta_t X}{2\delta_t}\right)dX_t$$
+
+{\em Целью работы} является нахождение допустимого процесса $X_t$, минимизирующего функционал издержек на множестве $X\in \mathbb X$, 
+где $\mathbb X$  — множество непрерывных справа возрастающих процессов с $X_{0-}=0, X_{\infty}=x, C(X)\le\infty $. Здесь $\Delta_t X = X_{t+}-X_{t-}; X_{\infty}=\lim_{t\to\infty} X_t$.
+
+\smallskip
+\textbf{Теорема 1.}
+
+Пусть $\rho_t=\exp\left( {\int_0^t r_s ds} \right)$,
+
+$r_t: [0,\infty)\to(0,\infty)$ – строго положительна и локально интегрируема по Лебегу,
+
+$\delta_t: [0,\infty)\to(0,\infty)$ — неотрицательна, не тождественно нулевая, ограниченная, полунепрерывная сверху, и $\limsup_{t\to\infty}  \frac{\delta_t}{\rho_t}= 0.
+
+Обозначим
+
+$\lambda_t:=\frac{\delta_t}{\rho_t}$, 
+
+$\widetilde{\lambda_t}=sup_{u\geq t } \lambda_u$
+
+$L_t^*=\inf_{u > t} \frac{\widetilde{\lambda_u}-\widetilde{\lambda_t}}{\frac{\widetilde{\lambda_u}}{\rho_u} -  \frac{\widetilde{\lambda_t}}{\rho_t}}$.
+
+Тогда оптимальная стратегия имеет вид:
+$$X_t^*=\lambda_{0}(y^*L_0^*-\eta_0)^{+} + \int_{(0,t]} \lambda_s d sup_{0\leq v\leq s} \left[ (y^*L_v^*) \vee \eta_0 \right] $$
+
+Константа $y^*>0$ выбирается так, чтобы $x_{\infty}^*=x$.  Это можно сделать, если правая часть выражения при $y^*=1$ ограничена при $t\to \infty$, иначе решения нет.
+
+Отметим, что если взять решение теоремы 1 для константных $r_t$ и $\delta_t$, то получится в точности результат, полученный Обижаевой и Вангом в [2].
+
+
+\begin{center}\textbf{Источники и литература}\end{center}
+\begin{enumerate}
+\item {\em P. Bank and A. Fruth. } Optimal Order Scheduling for Deterministic Liquidity Patterns// Society for Industrial and Applied Mathematics. 2014. V.~5. P.~137--152.{\sloppy
+
+}
+\item {\em A. A. Obizhaeva and J. Wang. } Optimal trading strategy and supply/demand dynamics.// J. Finan.Markets. 2013. V.~16. P.~1–32.{\sloppy
+
+}
+\item {\em A. Alfonsi and J. Acevedo. } Optimal execution and price manipulations in time-varying limit order books, preprint// https://arxiv.org/abs/1204.2736v1. 2012{\sloppy
+
+}
+
+\end{enumerate}
+\\
+
+
+\end{document}

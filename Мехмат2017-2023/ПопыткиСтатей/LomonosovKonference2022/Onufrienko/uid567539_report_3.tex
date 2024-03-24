@@ -1,0 +1,147 @@
+\nonstopmode
+
+\documentclass[a4paper, 12pt, oneside]{ncc}
+\usepackage[warn]{mathtext}          % русские буквы в формулах, с предупреждением
+\usepackage{ucs}                     % Unicode input support
+\usepackage[T2A]{fontenc}            % внутренняя кодировка  TeX
+\usepackage[utf8x]{inputenc}         % кодовая страница документа
+\usepackage[english, russian]{babel} % локализация и переносы
+\usepackage{indentfirst}             % русский стиль: отступ первого абзаца раздела
+\usepackage{misccorr}                % точка в номерах заголовков
+\usepackage{cmap}                    % русский поиск в pdf
+\usepackage{graphicx}                % Работа с графикой \includegraphics{}
+\usepackage{caption}                 % Работа с подписями для фигур, таблиц и пр.
+\usepackage{soul}                    % Разряженный текст \so{} и подчеркивание \ul{}
+\usepackage{soulutf8}                % Поддержка UTF8 в soul
+\usepackage{fancyhdr}                % Для работы с колонтитулами
+\usepackage{multirow}                % Аналог multicolumn для строк
+\usepackage{ltxtable}                % Микс tabularx и longtable
+\usepackage{paralist}                % Списки с отступом только в первой строчке
+\usepackage[shortcuts]{extdash}      % Переносы в словах с дефисами
+\usepackage[perpage]{footmisc}       % Нумерация сносок на каждой странице с 1
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+% Задаем отступы: слева 30 мм, справа 10 мм, сверху до колонтитула 10 мм снизу 25 мм
+\usepackage[a4paper, top=20mm, left=30mm, right=10mm, bottom=25mm]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% цвета для гиперссылок
+\definecolor{linkcolor}{HTML}{340DAB} % цвет ссылок
+\definecolor{urlcolor}{HTML}{340DAB} % цвет гиперссылок
+
+\hypersetup{unicode=true, linkcolor=linkcolor, urlcolor=urlcolor, colorlinks=true, breaklinks=true}
+
+\def\EUR{\,\euro}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE]{\textit{ Конференция <<Ломоносов 2021>>}}
+\fancyhead[LO]{\textit{ Конференция <<Ломоносов 2021>>}}
+\fancyfoot{}
+\fancyfoot[RE,RO]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\title{ Типичные особенности интегрируемых гамильтоновых систем }
+\author{ Онуфриенко Мария Викторовна }
+
+\begin{document}
+\begin{flushright}
+Секция <<Геометрия и топология>>
+\end{flushright}
+
+\begin{center}
+\textbf{Типичные особенности интегрируемых гамильтоновых систем}
+\end{center}
+
+\begin{center}
+\textbf{Научный руководитель -- Кудрявцева Елена Александровна  }\\
+\vspace{0.2cm}
+\textbf{\textit{Онуфриенко Мария Викторовна}}\\
+\textit{Студент (специалист)}\\
+Московский государственный университет имени М.В.Ломоносова, Механико-математический факультет, Кафедра дифференциальной геометрии и приложений, Москва, Россия\\
+\textit{E-mail: mary.onufrienko@gmail.com}
+\\
+\end{center}
+
+Фиксируем любое $s\in\mathbb N$ и рассмотрим действие группы $G=\mathbb{Z}_s$ на плоскости $\mathbb{R}^2$ вида 
+$z\longrightarrow e^{2\pi i/{s}}z,$ где $z=x+iy\in\mathbb C\approx\mathbb{R}^2.$
+Рассмотрим морсовские функции $g_0=g_0^{\pm,\pm}(z)=\pm|z|^2=\pm (x^2+y^2)$ при любом $s\ge1$, и $g_0=g_0^{+,-}(z)=x^2-y^2$ при $s=1,2$. 
+
+Рассмотрим два семейства $\mathbb{Z}_s-$инвариантных ростков $g_k=g_k(z,\lambda,a)$, $k=1,2$, в нуле:
+$$
+g_1=g_1(z,\lambda,a)=\left\{
+\begin{array}{ll}
+\pm x^2+y^3+\lambda y, & s=1, \\
+\pm x^2\pm y^4 +\lambda y^2, & s=2, \\
+Re(z^3)+\lambda|z|^2, & s=3, \\
+Re(z^s)\pm a|z|^4+\lambda |z|^2, & s\ge4,\ a^2\neq 1 \mbox{ при }s=4,\ a>0 \mbox{ при }s\ge5,
+\end{array}
+\right.
+%\eqno(2)
+$$
+$$
+g_2=g_2(z,\lambda,a)=\left\{
+\begin{array}{ll}
+\pm x^2\pm y^4-\lambda_2 y^2+\lambda_1 y, & s=1, \\
+\pm x^2\pm y^6 +\lambda_2 y^4+\lambda_1 y^2, & s=2, \\
+Re(z^4)\pm(1+\lambda_2)|z|^4 \pm a|z|^6+\lambda_1 |z|^2, & s=4,\ a>0, \\
+Re(z^5)\pm a|z|^6+\lambda_2|z|^4+\lambda_1 |z|^2, & s=5,\ a>0, \\
+Re(z^6)+a_1 |z|^6\pm a_2 |z|^8+\lambda_2|z|^4+\lambda_1 |z|^2, & s=6,\ a_1^2\ne1, a_1a_2\ne0.
+\end{array}
+\right.
+$$
+Здесь $\lambda\in\mathbb{R}^k$ --- малый параметр, $a\in\mathbb{R}^m$ --- <<модуль>>, $m\in\{0,1,2\}$ --- <<модальность>>.
+
+\smallskip
+\textbf{Теорема 1. } {\sl
+%Рассмотрим действие группы $G=\mathbb{Z}_s$ на плоскости $\mathbb{R}^2$ вида {\rm (1)}, $s\in\mathbb{N}$. 
+Рассмотрим классы {\em правой} $G-$эквивалентности $G-$инва\-ри\-ант\-ных ростков функций $g_k(z,0,\hat a)$ двух переменных в нуле, $k=0,1,2$.
+Эти особенности имеют $G-$кораз\-мер\-ность $k$, $G-$кратность Милнора $k+m+1$, $G-$версальную деформацию $g_k(z,\lambda,a)+\lambda_0$, и образуют полный список $G-$инва\-ри\-ант\-ных особенностей $G-$ко\-раз\-мер\-ности $k\le 2$. Дополнение к их объединению в множестве $\mathfrak{n}^2_G
+%:=\mathfrak{m}^2\cap \mathcal{E}_G
+$
+$G-$инва\-ри\-ант\-ных ростков в нуле, имеющих критическую точку 0 с критическим значением 0, имеет коразмерность $>2$ в $\mathfrak{n}_G^2$.}
+
+\smallskip
+Теорема 1 не следует из классификации [1] особенностей $G-$кратности Милнора $\le 5$. 
+
+{\em Интегрируемая система} на $2n$-мерном симплектическом многообразии $(M,\Omega)$ задается гладким отображением $F=(f_1,\dots,f_n):\ M \longrightarrow{\mathbb R}^n,$ где $\{f_i,f_j\}=0$. Возникает {\em лагранжево слоение с особенностями} на $M$, слои которого --- это связные компоненты множеств $F^{-1}(c)$. Пусть $M$ компактно, поля $X_{f_j}$ касаются $\partial M$, и $F$ имеет <<хорошее>> поведение около $\partial M$. Отображение $F$ порождает гамильтоново $\mathbb{R}^n-$действие на $M$.
+
+Рассмотрим свободное действие группы $\mathbb{Z}_s$ на полнотории $V:=D^2\times S^1\subset\mathbb{R}^2\times S^1$ вида 
+$(z,\varphi_1)\longrightarrow (e^{2\pi \ell i/{s}}z,\varphi_1+\frac{2\pi}{s}),$ 
+где $\varphi_1\in S^1=\mathbb R/(2\pi\mathbb Z),
+%\eqno(2)
+$
+$0\le\ell<s$, $(\ell,s)=1$. Рассмотрим <<цилиндр>> $W:=D^{n-1}\times(S^1)^{n-2}$ с координатами $(\lambda,\varphi')=(\lambda_1,\dots,\lambda_{n-1},\varphi_2,\dots,\varphi_{n-1})$.
+
+Оказывается, локальные особенности (т.е.\ $\mathbb{R}^n-$орбиты) коранга 1 типичных интегрируемых систем имеют окрестности, послойно диффеоморфные {\em стандартной модели} вида
+$$
+F_{st}:(V/\mathbb{Z}_s)\times W \to \mathbb R^n, \
+F_{st}(z,\varphi_1,\lambda,\varphi')=(g_k(z,\lambda',a(\lambda)),\lambda), \quad
+\Omega_{st} = \mathrm dx\wedge\mathrm dy + \sum\limits_{j=1}^{n-1}\mathrm d\lambda_j\wedge\mathrm  d\varphi_j,
+$$
+где $0\le k<n$, $\lambda'=(\lambda_1,\dots,\lambda_k)$,
+$a(\lambda)$ и $a_1(\lambda)$ --- гладкие функции при $(k,s)\in\{(1,4),(2,6)\}$,
+$a(\lambda)\equiv1$ для остальных пар $(k,s)$; 
+$a(\lambda)=(a_1(\lambda),1)$ при $(k,s)=(2,6)$.
+
+\textbf{Теорема 2 (Кудрявцева Е.\,А., Онуфриенко М.\,В.). } {\sl Пусть $n=\frac12\dim M\in\{2,3\}$. Рассмотрим класс $\mathcal I=\mathcal I(M)$ интегрируемых систем на $M$, для которых функции $f_2,\dots,f_n$ порождают локально-свободное гамильтоново действие $(n-1)-$мерного тора на $M$. Если некоторая окрестность $\mathbb{R}^n-$орбиты послойно диффеоморфна стандартной модели, то эта орбита структурно устойчива относительно возмущений в классе $\mathcal I$. Если орбита структурно устойчива, то некоторая ее окрестность послойно гомеоморфна стандартной модели. Класс $\mathcal I_{st}\subset\mathcal I$ систем, все локальные особенности которых послойно диффеоморфны стандартным, открыт в $\mathcal I$ (относительно $C^\infty-$топологии), и $\mathcal I\setminus\mathcal I_{st}$ имеет коразмерность $>0$.}
+
+\smallskip
+Теорема 2 при $n=2$, $k=1$ описывает параболические траектории с резонансами [2], а при $n=3$, $k=2$ --- их типичные бифуркации.
+
+\begin{center}\textbf{Источники и литература}\end{center}
+\begin{enumerate}
+\item {\em Wassermann G.} Classification of singularities with compact Abelian symmetry // Singularities Banach Center Publications. 1988. V.~20. P.~475--498.{\sloppy
+
+}
+\item {\em Калашников В.В.} Типичные интегрируемые гамильтоновы системы на четырехмерном симплектическом многообразии // Изв.\ РАН, Сер.\ матем. 1998. Т.~62. No.~2. С.~49--74.{\sloppy
+
+}
+\end{enumerate}
+\\
+
+
+\end{document}

@@ -1,0 +1,439 @@
+\documentclass[a4paper,11pt,english]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{babel,amsmath,amssymb,amsthm,enumitem}
+\usepackage[sort]{natbib}
+\usepackage[colorlinks,allcolors=blue]{hyperref}
+\usepackage[margin=1.25in]{geometry}
+\usepackage[small,bf]{titlesec}
+\titlelabel{\thetitle.\hspace{0.5em}}
+\PassOptionsToPackage{usenames,dvipsnames}{xcolor}
+\usepackage{tikz}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\newcommand{\floor}[1]{\lfloor{#1}\rfloor}
+\newcommand{\ceil}[1]{\lceil{#1}\rceil}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\I}{I}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Law}{Law}
+\DeclareMathOperator{\argmax}{arg\,max}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\P}{\mathrm{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bt}{\tilde{b}}
+\renewcommand{\b}{\bar b}
+\newcommand{\M}{\mathcal{M}}
+\let\Ss\S
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\cadlag}{c\`adl\`ag}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+
+\title{An evolutionary finance model with short-lived assets\\ and
+affine payoffs}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+\section{The model}
+
+Let $(\Omega,\F,\P)$ be a probability space with a complete discrete-time
+ filtration $\mathbb{F} = (\F_t)_{t\ge 0}$.
+The market in the model consists of $M\ge 2$ agents and $N\ge 2$ short-lived assets. Agent
+$m$, where $m=1,\ldots,M$, is  characterized by her wealth $W^m$ and her
+strategy $\Lambda^m$. The wealth $W^m = (W_t^m)_{t=0}^\infty$ is an
+$\mathbb{F}$-adapted random sequence, where $W_t^m=W_t^m(\omega)$ is the wealth
+held by the agent at time $t$. The variables $W_t^m$  depend on the payoffs yielded by the assets and the
+strategies of the other agents through a certain equation which will be
+stated later. The total market wealth at time $t$ will be denoted by $C_t =
+W_t^1+\ldots+W_t^M$. 
+
+A strategy of agent $m$ is a sequence $\Lambda^m =
+(\Lambda_t^m)_{t=0}^\infty$ of vector-valued functions $\Lambda_t^m =
+\Lambda_t^m(\omega,c)$ with values in the standard $N$-simplex $\Delta_N
+=\{\lambda \in \R^N_+ : \lambda^1+\ldots+\lambda^N = 1\}$ and measurable with
+respect to $\F_t\otimes \mathcal{B}(\R_+)$. For $n=1,\ldots,N$, the $n$-th
+coordinate $\Lambda_t^{m,n}$ specifies the proportion of wealth which agent
+$m$ allocates for buying asset $n$ at time $t$. Short sales are not allowed.
+A strategy may depend on a random state of the world $\omega$ and the total
+market wealth $C_t$ (through the argument $c$ of $\Lambda_t^m$), so that if
+the total market wealth at state $\omega$ is $C_t(\omega)$, then agent $m$
+allocates her wealth in proportions given by the vector $\Lambda_t^m(\omega,
+C_t(\omega))$.
+
+It is possible to consider strategies of a more general form, for example
+depending on full market history, but this will not increase the generality
+of the main results. On the other hand, the dependence on the total market
+wealth is necessary and cannot be removed from the model because the
+survival strategy that we construct below needs it.
+
+Each asset $n=1,\ldots,N$ at each moment of time $t\ge 1$ yields a random
+payoff which depends on the total amount of wealth invested by the agents in
+this asset at time $t-1$ according to the formula
+\begin{equation}
+P_t^n(\omega) = X_t^n(\omega) \sum_{m=1}^M
+\lambda_{t-1}^{m,n}(\omega)W_{t-1}^m(\omega) + Y_t^n(\omega),\label{P}
+\end{equation}
+where $X^n = (X_t^n)_{t=1}^\infty$ and $Y^n = (Y_t^n)_{t=1}^\infty$ are some exogenously
+given non-negative random sequence adapted to the filtration $\mathbb{F}$, and
+\[
+\lambda_{t-1}^{m,n}(\omega) = \Lambda_{t-1}^{m,n}(\omega,
+C_{t-1}(\omega)),\qquad C_{t-1}(\omega) = \sum_{m=1}^M W_{t-1}^m(\omega).
+\]
+We will assume that for each $t\ge 0$ and
+$n=1,\ldots,N$ it holds that
+\begin{equation}
+\P(Y_{t+1}^n >0 \mid \F_t) >0\ \text{a.s.}\label{Y-positive}
+\end{equation}
+
+The payoff of each asset is divided between the agents proportionally to the amount of
+wealth they allocated for investing in this asset at time $t-1$. As a result, the wealth
+sequence of agent $m$ satisfies the recursive relation
+\begin{equation}
+W_{t+1}^m = \sum_{n=1}^N \frac{\lambda_t^{m,n} W_t^m}{\sum_{k=1}^M
+\lambda_t^{k,n} W_t^k} P_{t+1}^n = \sum_{n=1}^N\lambda_t^{m,n} W_t^m
+\biggl(X_{t+1}^n + \frac{Y_{t+1}^n}{\sum_{k=1}^M \lambda_t^{k,n} W_t^k}
+\biggr).\label{capital}
+\end{equation}
+It is clear that given an initial condition $W_0=(W_0^1,\ldots,W_0^M)$ and a
+strategy profile $\Lambda=(\Lambda^1,\ldots,\Lambda^M)$, the sequence
+$W_t=(W_t^1,\ldots,W_t^M)$ is well-defined by the above relation, provided
+that for all $t \ge 0$ with probability 1 we have
+\begin{equation}
+\sum_{k=1}^M \lambda_t^{k,n} W_t^k \neq 0.\label{feasible}
+\end{equation}
+In what follows we will always assume that the objects defining the
+market model (i.e.\ agents' strategies and asset payoffs) are such
+that inequality (\ref{feasible}) holds true. A  sufficient condition for its
+validity consists in that for each $t\ge 1$ we have, with probability 1,
+\begin{equation}
+\label{feasible-2}
+\sum_{n=1}^N (X_t^n + Y_t^n) >0,
+\end{equation}
+and there is at least one agent who uses a fully diversified strategy, i.e.\
+for some $m=1,\ldots,M$ and all $t\ge 0$, $n=1,\ldots, N$ we have
+\begin{equation}
+\label{feasible-2}
+\lambda_t^{m,n} > 0.
+\end{equation}
+It is not difficult to see that if inequalities
+\eqref{feasible-2}--\eqref{feasible-2} are true, then agent $m$ has 
+strictly positive wealth at all moments of time, so \eqref{feasible} also
+holds. The survival strategy $\hat\Lambda$ which we construct below will
+satisfy assumption \eqref{feasible-2}.
+
+It is easy to see that if one formally puts $Y_{t+1}^n=0$ for all $t,n$
+(although our models does not permit to do so in view of assumption
+(\ref{Y-positive})), the model reduces to the standard mathematical finance
+model of an asset market with exogenous prices, where $X_{t+1}^n$ are equal
+to relative changes of asset prices, i.e. $X_{t+1}^n = S_{t+1}^n / S_t^n$.
+When $X_{t+1}^n=0$ for all $t,n$, it becomes the evolutionary finance model
+of a market with short-lived assets introduced by \cite{AmirEvstigneev+13}.
+
+\section{Survival strategies}
+\begin{definition}
+A strategy $\hat \Lambda$ is called \emph{survival} if for any strategy profile
+$\Lambda = (\Lambda^{1},\ldots,\Lambda^M)$ with $\Lambda^1 = \hat \Lambda$ and any
+initial wealth vector $W_0=(W_0^1,\ldots,W_0^M)$ with $W_0^1 > 0$ it holds that
+\[
+\inf_{t\ge 0} W_t^1 > 0\ \text{a.s.}
+\]
+\end{definition}
+
+Denote by $C_t$ the total market wealth, and $r_t^m$ the relative wealth of agent $m$:
+\[
+C_t = \sum_{m=1}^M W_t^m, \qquad r_t^m = \frac{W_t^m}{C_t}.
+\]
+\begin{definition}
+A strategy $\hat \Lambda$ is called \emph{relative growth optimal} if for any strategy profile
+$\Lambda = (\Lambda^{1},\ldots,\Lambda^M)$ with $\Lambda^1 = \hat \Lambda$ and any
+initial wealth vector $W_0=(W_0^1,\ldots,W_0^M)$ with $W_0^1 > 0$ it holds that $\ln r_t^1$ is a submartingale.
+\end{definition}
+
+\begin{proposition}
+A relative growth optimal strategy is survival.
+\end{proposition}
+\begin{proof}
+The result follows from that a non-positive submartingale converges to a finite limit with probability one. Hence, if agent 1 uses a relative growth optimal strategy, $\ln r_t^1$ has a finite limit as $t\to\infty$.
+\end{proof}
+
+Now we will construct a relative growth optimal strategy. Let us introduce 
+notation, which will be used in what follows.
+
+For each $t\ge 0$, let $\P_t(\omega, d\tilde \omega)$ denote
+some variant of the regular conditional probability conditioned on $\F_t$,
+i.e.\ $\P_t(\omega, A) = \P(A \mid \F_t)(\omega)$ a.s.\ 
+for any $A\in \F$. By $\E_t$ we will denote the conditional expectation
+computed with respect to $\P_t$, i.e. $(\E_t Z)(\omega) = \int_\Omega Z(\tilde \omega)
+\P(\omega, d\tilde \omega)$ for any random variable $Z$ for which the
+integral is well-defined.
+
+For an $\F\otimes\mathcal{B}(\R^d)$-measurable function $f(\omega,x)$, the
+conditional expectation $\E_t f$ will be interpreted as the
+$\F_t\otimes\mathcal{B}(\R^d)$-measurable function
+\[
+(\E_t f)(\omega,x) = \int_\Omega f(\tilde \omega,x) \P(\omega,d\tilde \omega).
+\]
+ 
+
+\begin{lemma}
+\label{lemma1}
+For each $t\ge 0$, consider the $\F_t\otimes \mathcal{B}(\R_+)\otimes
+\mathcal{B}(\Delta_N)$-measurable function $L_t \colon \Omega
+\times \R_+ \times \Delta_N \to \Delta_N$ defined by
+\[
+L_t^n(\omega,c,\lambda) = \E_t\biggl(\frac{c\lambda^n
+X_{t+1}^n + Y_{t+1}^n}{\sum_{i=1}^N (c \lambda^i X_{t+1}^i + Y_{t+1}^i)}\biggr).
+\]
+Then there exists an $\F_t\otimes\mathcal{B}(\R_+)$-measurable function $\hat
+\Lambda_t(\omega,c)$ with values in $\Delta_N$ such that
+\begin{equation}
+L(\omega,c,\hat \Lambda_t(\omega,c)) = \hat \Lambda_t(\omega,c)\
+\text{for all $\omega,c$}.\label{lambda-hat}
+\end{equation}
+\end{lemma}
+\begin{proof}
+(Not finished).
+For fixed $(w,c)$, the map $\lambda\mapsto
+L_t^n(\omega,c,\lambda)$ is a continuous map of the compact convex set $\Delta_N$ to
+itself. (Next need to apply Brouwer's  fixed point theorem and prove the measurability.)
+\end{proof}
+
+\begin{theorem}
+\label{theorem1}
+The strategy $\hat \Lambda$ defined by \eqref{lambda-hat} is relative growth optimal.
+\end{theorem}
+
+The following auxiliary result will be used in the proof of
+Theorem~\ref{theorem1}.
+
+\begin{lemma}
+\label{lemma-logsum}
+Suppose $\alpha,\beta\in\R_+^N$ are two vectors such that
+$\sum_n \alpha^n \le 1$, $\sum_n \beta^n \le 1$ and for each $n=1,\ldots,N$ it
+holds that if $\beta^n=0$, then also $\alpha^n=0$. Then 
+\begin{equation}
+\sum_{n=1}^N\alpha^n \ln\frac{\alpha^n}{\beta^n} \ge
+\frac{\|\alpha-\beta\|^2}{4} + \sum_{n=1}^N (\alpha^n-\beta^n),\label{logsum-1}
+\end{equation}
+where we define $\alpha^n \ln\frac{\alpha^n}{\beta^n} = 0$ if $\alpha^n=0$ or $\beta^n=0$.
+\end{lemma}
+\begin{proof}
+We follow the lines of the proof of Lemma~2 in~\cite{AmirEvstigneev+13},
+which establishes the above inequality in the case $\sum_n \alpha^n =
+\sum_n \beta^n=1$.
+Using that $\ln x \le 2(\sqrt x -1)$ for any $x>0$, we obtain
+\[
+\begin{split}
+\sum_{n=1}^N \alpha^n \ln\frac{\alpha^n}{\beta^n} &= -\sum_{n\,:\,\alpha^n\neq 0}\alpha^n\ln\frac{\beta^n}{\alpha^n} \ge
+2\sum_{n=1}^N (\alpha^n-\sqrt{\alpha^n\beta^n}) \\&= \sum_{n=1}^N(\sqrt{\alpha^n} -
+\sqrt{\beta^n})^2 + \sum_{n=1}^N (\alpha^n - \beta^n).
+\end{split}
+\]
+Then we can use the inequality $(\sqrt x - \sqrt y)^2 \ge (x-y)^2/4$, which
+is true for any $x,y\in[0,1]$, and obtain \eqref{logsum-1}. 
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{theorem1}]
+By the standard argument based on introduction of the representative agent, we can
+assume that the number of agents in the model $N=2$.
+
+Let $r_t$ denote the relative wealth of agent 1, i.e.\
+\[
+r_t = \frac{W_t^1}{C_t},
+\]
+where $C_t = W_t^1 + W_t^2$. 
+
+Let $\hat\lambda_t(\omega) = \hat\Lambda_t(\omega,C_{t-1}(\omega))$ and denote
+by $\bar \lambda_t = (\bar\lambda_t^1,\ldots,\bar\lambda_t^N)$ the representative investment proportions of the two
+agents, i.e.
+\[
+\bar \lambda_t^n(\omega) = r_t(\omega) \lambda_t^{1,n}(\omega) + (1-r_t(\omega)) \lambda_t^{2,n}(\omega).
+\]
+Also introduce the notation
+\[
+\mu_t^n = \frac{\hat\lambda_t^n}{\bar \lambda_t^n}.
+\]
+From equation \eqref{capital}, one can see that
+\[
+W_{t+1}^1 = r_t \sum_{n=1}^N ( C_t\hat\lambda_t^{n} X_{t+1}^n  + \mu_t^n Y_{t+1}^n), \qquad C_{t+1} = \sum_{n=1}^N
+(C_t\bar \lambda_t^n X_{t+1}^n + Y_{t+1}^n).
+\]
+From these two relations, we find
+\[
+\ln r_{t+1} - \ln r_t = \ln \biggl(\sum_{n=1}^N (C_t\hat\lambda_t^{n} X_{t+1}^n
+ + \mu_t^n Y_{t+1}^n)\biggr) - \ln\biggl(\sum_{n=1}^N (C_t \bar\lambda_t^n
+ X_{t+1}^n + Y_{t+1}^n)\biggr).
+\]
+Then we can write
+\begin{equation}
+\E_t \ln r_{r+1} - \ln r_t = F_t + G_t,\label{loc-submart}
+\end{equation}
+where
+\[
+F_t = \E_t \ln \biggl(\frac{\sum_n (C_t \hat\lambda_t^n X_{t+1}^n +
+\mu_t^nY_{t+1}^n)}
+{\sum_i (C_t\hat\lambda_t^i X_{t+1}^i + Y_{t+1}^i)}\biggr), \qquad
+G_t = \E_t \ln\biggl( \frac{\sum_i (C_t\hat\lambda_t^i X_{t+1}^i + Y_{t+1}^i)}{\sum_n (C_t\bar\lambda_t^n X_{t+1}^n + Y_{t+1}^n)}\biggr).
+\]
+Let us show that $F_t+ G_t \ge 0$. Let
+\begin{equation}
+d_t^n = 1- \E_t \frac{C_tX_{t+1}^n}{\sum_i (C_t \hat \lambda_t^i X_{t+1}^i +
+Y_{t+1}^i)},\label{dt}
+\end{equation}
+so that from the definition of the strategy $\hat\Lambda$ we have
+\[
+d_t^n \hat\lambda_t^n =  \E_t \biggl(\frac{Y_{t+1}^n}{\sum_i(C_t\hat\lambda_t^iX_{t+1}^i + Y_{t+1}^i)} \biggr).
+\]
+Note that $d_t^n>0$ due to assumption (\ref{Y-positive}). Using the
+concavity of the logarithm and applying Lemma~\ref{lemma-logsum}, we obtain
+\begin{multline}
+\label{F}
+F_t \ge \E_t\biggl( \sum_{n=1}^N
+\frac{Y_{t+1}^n}{\sum_i(C_t\hat\lambda_t^iX_{t+1}^i + Y_{t+1}^i)}\ln
+\mu_t^n\biggr) = \sum_{n=1}^N d_t^n \hat\lambda_t^n \ln \mu_t^n \\
+= \sum_{n=1}^n d_t^n \hat\lambda_t^n
+\ln\frac{d_t^n\hat\lambda_t^n}{d_t^n\bar\lambda_t^n} \ge
+\frac 14\sum_{n=1}^N (d_t^n(\hat\lambda_t^n - \bar \lambda_t^n))^2 + \sum_{n=1}^N d_t^n(\hat\lambda_t^n - \bar \lambda_t^n),
+\end{multline}
+where in the first inequality we considered the argument of the logarithm in
+the definition of $F_t$ as the convex combination of the values
+\[
+1,\ \mu_t^1,\ \ldots ,\ \mu_t^N
+\]
+with the coefficients
+\[
+\frac{\sum_n C_t \hat\lambda_t^n X_{t+1}^n}{\sum_i(C_t\hat\lambda_t^iX_{t+1}^i +
+Y_{t+1}^i)},\quad
+\frac{Y_{t+1}^1}{\sum_i(C_t\hat\lambda_t^iX_{t+1}^i +
+Y_{t+1}^i)},\quad \ldots\ ,\quad 
+\frac{Y_{t+1}^N}{\sum_i(C_t\hat\lambda_t^iX_{t+1}^i +
+Y_{t+1}^i)}.
+\]
+Using the inequality $\ln a \ge 1 - a^{-1}$, which is valid for
+any $a>0$, we find
+\begin{equation}
+\label{G}
+G_t \ge \E_t \frac{\sum_n C_t(\hat\lambda_t^n - \bar \lambda_t^n)
+X_{t+1}^n}{\sum_i(C_t\hat\lambda_t^i X_{t+1}^i + Y_{t+1}^i)} = \sum_{n=1}^N
+d_t^n (\bar\lambda_t^n - \hat \lambda_t^n).
+\end{equation}
+Thus, $F_t+G_t \ge 0$. Therefore, from (\ref{loc-submart}), one can see that
+$\ln r_t$ is a generalized submartingale\footnote{Recall
+that a sequence $S_t$ is called a generalized submartingale if $\E
+|S_0|<\infty$ and $\E(S_t\mid\F_{t-1})\ge S_{t-1}$ for all $t\ge 1$ (but not
+necessarily $\E|S_t|<\infty$). One can show that if $S_t\le C_t$ for
+all $t$ with some integrable random variables $C_t$, then $S_t$ is
+integrable, and hence a true submartingale.}, and hence a true submartingale
+since it is bounded from above.
+\end{proof}
+
+To state the second theorem, let us introduce the notation
+$\nu_t=(\nu_t^1,\ldots,\nu_t^N)$ for the representative strategy of agents
+$m=2,\ldots,M$, i.e.
+\[
+\nu_t^n(\omega) = \frac{1}{1-r_t^1(\omega)}\sum_{m=2}^m r_t^m(\omega) \lambda_t^{m,n}(\omega).
+\]
+\begin{theorem}
+\label{theorem2} Suppose that agent 1 uses the strategy $\hat\Lambda$. Then
+she is a single survivor, i.e.\ $\lim_{t\to\infty} r_t^1 = 1$, a.s.\ on the
+set
+\begin{equation}
+\biggl\{\omega : \sum_{t=0}^\infty\sum_{n=1}^N (d_t^n(\omega)(\lambda_t^{1,n}(\omega) -
+\nu_t^n(\omega)))^2 = \infty\biggr\},\label{far}
+\end{equation}
+where $d_t^n$ are defined as in \eqref{dt}.
+\end{theorem}
+\begin{proof}
+In the proof of Theorem~\ref{theorem1} we showed that $\ln r_t^1$ is a convergent
+submartingale, and as follows from \eqref{loc-submart}, \eqref{F},
+\eqref{G}, its compensator (i.e.\ a predictable non-decreasing sequence $A_t$
+such that $\ln r_t - A_t$ is a martingale)
+\[
+A_t = \sum_{s=1}^t (\E_{s-1}\ln r_{s}^1 - \ln r_{s-1}^1)
+\]
+can be bounded
+from below by
+\[
+A_{t+1} \ge \frac14\sum_{s=1}^t \sum_{n=1}^N (d_s^n(\lambda_s^{1,n} - \bar \lambda_s^n))^2 =
+\frac14\sum_{s=1}^t (1-r_s)^2 \sum_{n=1}^N (d_s^n(\lambda_s^{1,n} - \nu_s^n))^2.
+\]
+Since the compensator of a convergent submartingale converges with
+probability 1, on the set
+\eqref{far} we necessarily have $\lim_{t\to\infty} r_t = 1$ a.s., which proves the theorem.
+\end{proof}
+
+
+\section{Relation to other results}
+\paragraph{1. The modeld with exogenous returns.} Assume that in our model $Y_t^n \equiv 0$. Then equation \eqref{capital} becomes
+\[
+W_{t+1}^m = \sum_{n=1}^N \lambda_t^{m,n} W_t^m X_{t+1}^n.
+\]
+This is the familiar equation which defines the wealth of a self-financing strategy in a market with exogenous returns $X_t^n$. For example, if the asset prices are $S_t^n$, then it is natural to put $X_{t}^n = S_{t}^n/S_{t-1}^n$. Clearly, in this case the wealth of an agent depends only on his/her strategy and does not depend on the strategy of the other agents. Let us denote the corresponding wealth sequence by $W_t(\lambda)$.
+
+A strategy $\hat\lambda$ is called \textit{growth optimal} (or a \textit{numeraire portfolio}), if for any other strategy $\lambda$
+\[
+\frac{W_t(\lambda)}{W_t(\hat\lambda)}\ \text{is a supermartingale},
+\]
+which is equivalent to our definition of a relative growth optimal strategy when $Y_t^n\equiv0$. 
+
+The classic result (see, e.g, \cite{AlgoetCover88}) is that if the log-returns are integrable (i.e. $\E \ln X_{t+1}^n < \infty$), then the growth optimal strategy can be found by maximizing the expected log-return of the portfolio:
+\[
+\hat\lambda_t \in \argmax_{\lambda} \E\left(\ln \frac{W_{t+1}(\lambda)}{W_t(\lambda)} \mid \F_t\right)= 
+\argmax_{\lambda} \E\left(\ln \sum_{n=1}^N \lambda_t^{n}  X_{t+1}^n\mid \F_t\right).
+\]
+If the log-returns are not integrable, this problem may be have no solution, however it is easy to see that if one introduces the relative returns $R_t^n = X_t^n /\sum_{i=1}^N X_t^i$, then the growth-optimal strategy can be found as 
+\begin{equation}
+\label{log-max}
+\hat\lambda_t \in
+\argmax_{\lambda} \E\left(\ln \sum_{n=1}^N \lambda_t^{n}  R_{t+1}^n\mid \F_t\right).
+\end{equation}
+This maximization problem always has a solution, provided that $\sum_{n=1}^N R_t^n > 0$ a.s. However, note that the solution may be not unique if, e.g., the $R_t^n$ are linearly dependent. 
+
+Let us show that our strategy $\hat\lambda_t$ solves \eqref{log-max}. 
+\red{Show that our strategy is a solution of \eqref{log-max} (or, it will be better to show that any fixed point defined in Lemma 1 is a solution of \eqref{log-max})}.
+
+
+\paragraph{2. The model with short-lived assets and endogenous prices.} Now suppose that $X_t^n\equiv 0$. In this case we get the evolutionary finance model with short-lived assets of \cite{AmirEvstigneev+13}. They found the optimal strategy
+\[
+\hat\lambda_t^n = \E\left( \frac{Y_{t+1}^n}{\sum_{k=1}^N Y_t^{n}} \mid \F_t\right),
+\]
+which clearly agrees with formula \eqref{lambda-hat}.
+
+\paragraph{3. The model with endogenous short-lived assets with exogenous assets.} 
+Consider the model of a market with $N=N_1+N_2$ assets of two types: assets of the first type ($n=1,\dots,N_1$) have exogenous prices and returns like in the first example, while assets of the second type ($n=N_1+1,\ldots,N$) have endogenous prices and are short-lived like in the second example. For simplicity, assume that the log-returns of the assets of the first type are integrable, i.e.\ $\E |\ln X_t^n| < \infty$ for $n=1,\ldots,N_1$.
+
+This model was considered by \cite{Zhitlukhin22} in a somewhat more general form
+and it was found that the relative growth optimal strategy $\hat\lambda_t = (\hat\alpha_t^1,\dots,\hat\alpha_t^{N_1}, \hat\beta_t^1, \dots, \hat\beta_t^{N^2})$, can be found as follows. First, one finds $\hat\alpha_t^n$ by solving the optimization problem
+\[
+\hat\alpha_t = \argmax_{\alpha}\Biggl\{ \E\biggl( \ln\biggl( C_t \sum_{n=1}^{N_1} \alpha^n X_{t+1}^n + \sum_{n=N_1+1}^N Y_t^n\biggr) \mid \F_t \biggr) - \sum_{n=1}^{N_1} \alpha\Biggr\},
+\]
+where $C_t = \sum_{m=1}^M W_t^m$ denotes the total market wealth, and the maximum in the above formula is taken over the set $\{\alpha \in \R_+^{N_1} : a^1+\dots+a^{N_1} \le 1\}$. 
+Then, $\hat\beta_t^n$, $n=1,\dots,N_2$, are defined by
+\[
+\hat \beta_t^n = \E \left( \frac{Y_{t+1}^{N_1+n}}{C_t\sum_{n=1}^{N_1} \alpha_t^n X_{t+1}^n  + \sum_{n=1}^{N_2} Y_{t+1}^{N_1+n}} \mid \F_t \right). 
+\]
+\red{Show how to obtain this formula from our formula.}
+
+
+\small 
+\setlength{\bibsep}{0.2em plus 0.3em}
+\bibliographystyle{apalike}
+\bibliography{affine}
+
+\end{document}

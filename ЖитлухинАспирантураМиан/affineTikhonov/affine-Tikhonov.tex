@@ -1,0 +1,281 @@
+\documentclass[a4paper,11pt,english]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{babel,amsmath,amssymb,amsthm,enumitem}
+\usepackage[sort]{natbib}
+\usepackage[colorlinks,allcolors=blue]{hyperref}
+\usepackage[margin=1.25in]{geometry}
+\usepackage[small,bf]{titlesec}
+\titlelabel{\thetitle.\hspace{0.5em}}
+\PassOptionsToPackage{usenames,dvipsnames}{xcolor}
+\usepackage{tikz}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\newcommand{\floor}[1]{\lfloor{#1}\rfloor}
+\newcommand{\ceil}[1]{\lceil{#1}\rceil}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\I}{I}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Law}{Law}
+\DeclareMathOperator{\argmax}{arg\,max}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\P}{\mathrm{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bt}{\tilde{b}}
+\renewcommand{\b}{\bar b}
+\newcommand{\M}{\mathcal{M}}
+\let\Ss\S
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\cadlag}{c\`adl\`ag}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+
+\title{Interpretation of the existence of a survival strategy in an evolutionary finance model with short-lived assets and affine payoffs}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Abstract}
+The paper examines a game-theoretic discrete time model of a financial market 
+in which asset prices are determined endogenously in terms of a short-run equilibrium. 
+This model was proposed in the recent article "Survival strategies in an evolutionary finance 
+model with endogenous asset payoffs". The main novelty of the model with affine payoffs 
+is that we allow the payoffs of the assets to depend on the agents' strategies, 
+which makes the task of a survival strategy search a non-trivial one. 
+We elaborate on one of the key results obtained in the above-mentioned article. 
+Our main goal is to interpret the existence of a survival strategy as 
+the extension of the Tikhonov fixed point theorem.
+
+\section{The model}
+
+Let $(\Omega,\F,\P)$ be a probability space with a complete discrete-time
+ filtration $\mathbb{F} = (\F_t)_{t\ge 0}$.
+The market in the model consists of $N\ge 2$ agents and $K\ge 2$ short-lived assets. Agent
+$n$, where $m=1,\ldots,N$, is  characterized by his wealth $W^n$ and his
+strategy $\Lambda^n$. The wealth $W^n = (W_t^n)_{t=0}^\infty$ is an
+$\mathbb{F}$-adapted random sequence, where $W_t^n=W_t^n(\omega)$ is the wealth
+held by the agent at time $t$. The variables $W_t^n$  depend on the payoffs yielded by the assets and the strategies of the other agents through a certain equation which will be
+stated later. The total market wealth at time $t$ will be denoted by $C_t =
+W_t^1+\ldots+W_t^N$. 
+
+A strategy of agent $n$ is a sequence $\Lambda^n =
+(\Lambda_t^n)_{t=0}^\infty$ of vector-valued functions $\Lambda_t^n =
+\Lambda_t^n(\omega,w)$ with values in the standard $K$-simplex $\Delta_K
+=\{\bar \lambda \in \R^K_+ : \lambda^1+\ldots+\lambda^K = 1\}$ and measurable with
+respect to $\F_t\otimes \mathcal{B}(\R_+)$. For $n=1,\ldots,K$, the $k$-th
+coordinate $\Lambda_t^{n,k}$ specifies the proportion of wealth which agent
+$n$ allocates for buying asset $k$ at time $t$. Short sales are not allowed.
+A strategy may depend on a random state of the world $\omega$ and the total
+market wealth $C_t$ (through the argument $c$ of $\Lambda_t^m$), so that if
+the total market wealth at state $\omega$ is $C_t(\omega)$, then agent $m$
+allocates her wealth in proportions given by the vector $\Lambda_t^m(\omega,
+W_t(\omega))$.
+
+It is possible to consider strategies of a more general form, for example
+depending on full market history, but this will not increase the generality
+of the main results. On the other hand, the dependence on the total market
+wealth is necessary and cannot be removed from the model because the
+survival strategy that we construct below needs it.
+
+Each asset $n=1,\ldots,K$ at each moment of time $t\ge 1$ yields a random
+payoff which depends on the total amount of wealth invested by the agents in
+this asset at time $t-1$ according to the formula
+\begin{equation}
+A_t^k(\omega) = X_t^k(\omega) \sum_{n=1}^N
+\lambda_{t-1}^{n,k}(\omega)W_{t-1}^n(\omega) + Y_t^k(\omega),\label{P}
+\end{equation}
+where $X^k = (X_t^k)_{t=1}^\infty$ and $Y^k = (Y_t^k)_{t=1}^\infty$ are some exogenously
+given non-negative random sequence adapted to the filtration $\mathbb{F}$, and
+\[
+\lambda_{t-1}^{n,k}(\omega) = \Lambda_{t-1}^{n,k}(\omega,
+W_{t-1}(\omega)),\qquad W_{t-1}(\omega) = \sum_{n=1}^N W_{t-1}^n(\omega).
+\]
+We will assume that for each $t\ge 0$ and
+$k=1,\ldots,K$ it holds that
+\begin{equation}
+\P(Y_{t+1}^k >0 \mid \F_t) >0\ \text{a.s.}\label{Y-positive}
+\end{equation}
+
+The payoff of each asset is divided between the agents proportionally to the amount of
+wealth they allocated for investing in this asset at time $t-1$. As a result, the wealth
+sequence of agent $m$ satisfies the recursive relation
+
+\begin{equation}
+W_{t+1}^n = \sum_{k=1}^K \frac{\lambda_t^{n,k} W_t^n}{\sum_{n=1}^N
+\lambda_t^{n,k} W_t^n} A_{t+1}^n = \sum_{k=1}^K\lambda_t^{n,k} W_t^n
+\biggl(X_{t+1}^k + \frac{Y_{t+1}^k}{\sum_{n=1}^N \lambda_t^{n,k} W_t^n}
+\biggr).\label{capital}
+\end{equation}
+
+It is clear that given an initial condition $W_0=(W_0^1,\ldots,W_0^N)$ and a
+strategy profile $\Lambda=(\Lambda^1,\ldots,\Lambda^N)$, the sequence
+$C_t=(W_t^1,\ldots,W_t^N)$ is well-defined by the above relation, provided
+that for all $t \ge 0$ with probability 1 we have
+\begin{equation}
+\sum_{n=1}^N \lambda_t^{n,k} W_t^n \neq 0.\label{feasible-1}
+\end{equation}
+
+In what follows we will always assume that the objects defining the
+market model (i.e.\ agents' strategies and asset payoffs) are such
+that inequality \eqref{feasible-1} holds true. A  sufficient condition for its
+validity consists in that for each $t\ge 1$ we have, with probability 1,
+\begin{equation}
+\label{feasible-2}
+\sum_{k=1}^K (X_t^k + Y_t^k) >0,
+\end{equation}
+and there is at least one agent who uses a fully diversified strategy, i.e.\
+for some $n=1,\ldots,N$ and all $t\ge 0$, $k=1,\ldots, K$ we have
+\begin{equation}
+\label{feasible-3}
+\lambda_t^{n,k} > 0.
+\end{equation}
+
+It is not difficult to see that if inequalities
+\eqref{feasible-2}--\eqref{feasible-3} are true, then agent $n$ has 
+strictly positive wealth at all moments of time, so \eqref{feasible-1} also
+holds. The survival strategy $\hat\Lambda$ which was constructed in the article 2023
+satisfies assumption \eqref{feasible-2}.
+
+
+\section{Results from article 2023: existence of a survival strategy}
+\begin{definition}
+A strategy $\hat \Lambda$ is called \emph{survival} if for any strategy profile
+$\Lambda = (\Lambda^{1},\ldots,\Lambda^N)$ with $\Lambda^1 = \hat \Lambda$ and any
+initial wealth vector $W_0=(W_0^1,\ldots,W_0^N)$ with $W_0^1 > 0$ it holds that
+\[
+\inf_{t\ge 0} W_t^1 > 0\ \text{a.s.}
+\]
+\end{definition}
+
+Denote by $C_t$ the total market wealth, and $r_t^m$ the relative wealth of agent $n$:
+\[
+C_t = \sum_{n=1}^N W_t^n, \qquad r_t^n = \frac{W_t^n}{W_t}.
+\]
+
+\begin{definition}
+A strategy $\hat \Lambda$ is called \emph{relative growth optimal} if for any strategy profile
+$\Lambda = (\Lambda^{1},\ldots,\Lambda^N)$ with $\Lambda^1 = \hat \Lambda$ and any
+initial wealth vector $W_0=(W_0^1,\ldots,W_0^N)$ with $W_0^1 > 0$ it holds that $\ln r_t^1$ is a submartingale.
+\end{definition}
+
+In the article 2023 the authors proved that a relative growth optimal strategy is survival and constructed a relative growth optimal strategy. Let us formulate their result in the form of the following lemma.
+
+
+\begin{lemma}
+\label{lemma1}
+For each $t\ge 0$, consider the $\F_t\otimes \mathcal{B}(\R_+)\otimes
+\mathcal{B}(\Delta_N)$-measurable function $L_t \colon \Omega
+\times \R_+ \times \Delta_N \to \Delta_N$ defined by
+\[
+L_t^k(\omega,c,\lambda) = \E_t\biggl(\frac{c\lambda^k
+X_{t+1}^n + Y_{t+1}^n}{\sum_{k=1}^K (c \lambda^k X_{t+1}^k + Y_{t+1}^k)}\biggr).
+\]
+Then there exists an $\F_t\otimes\mathcal{B}(\R_+)$-measurable function $\hat
+\Lambda_t(\omega,c)$ with values in $\Delta_N$ such that
+\begin{equation}
+L(\omega,c,\hat \Lambda_t(\omega,c)) = \hat \Lambda_t(\omega,c)\
+\text{for all $\omega,c$}.\label{lambda-hat}
+\end{equation}
+And this strategy $\hat \Lambda$ is relative growth optimal (and hence, survival).
+\end{lemma}
+
+\section{Main result}
+We will show that in affine model the set of strategies $\bar\lambda$ form a *-weak (but not strong) compact set 
+and on this set the above-mentioned function $L_t$ is strongly (but not *-weakly) continuous. 
+So Tikhonov's fixed point theorem does not guarantee the existence of a fixed point. 
+Nevertheless, in article 2023 it was proved that the fixed point exists.
+
+Let's interpret strategy $\bar\lambda$ as random variables from $L^{\infty}$ 
+(defined on $\Omega \otimes \R_+$) and having values in simplex $\Delta^k$.
+Then by Banah-Alaogly's theorem we obtain that the set of such random variables in a compact in *-weak topology.
+Indeed, this theorem states that a closed bounded set in a dual space to some normed vector 
+space is a compact in *-weak topology. Let's check boundedness and closedness for our set of random variables.
+
+1) It is clearly bounded, since $||\xi||_{\infty}=1$, because $|\xi_1| +\dots+ |\xi_k| =1$.
+
+2) Now let's show that this set is closed. To do this, we will show that it contains all its limit points
+ (limit is taken in *-weak sence).
+
+ So we take $\bar\xi_t$ satisfying $\sum_{k=1}^K \xi_t^k =1$ and $\xi_t^k \geq 0$ for all $k=1,\dots,K$.
+ And let's denote the limit random variable as $\bar\xi$: $\bar\xi_t \to^{*} \bar\xi$.
+
+ 2a) Let's show that $\sum_{k=1}^K \xi^k =1$.
+ We have that $\xi_t \to^{*} \xi$ and $\bar 1 \cdot \bar \xi_t =1$.\\
+ Let's consider a new random variable $\eta:=I\left(\bar 1\cdot \xi \geq 1\right) \cdot \bar 1$.\\
+ Then, due to *-weak convergence definition, 
+ we have $\E\left(\eta \cdot \xi_t \right) \to \E\left( \eta \cdot \xi\right)$.\\
+ It means 
+ $\P(\bar 1 \cdot \xi \geq 1 ) \to \E\left( I\left( \bar 1 \cdot \xi \geq 1 \right) \cdot \bar 1 \cdot \xi \right) 
+ \geq \P\left( \bar 1 \cdot \xi \geq 1\right)$.\\
+
+ So $\bar 1 \cdot \xi =1$ on set, where $\bar 1 \cdot \xi \geq 1$.\\
+ Analogously considering $\eta:=I\left(\bar 1\cdot \xi \leq 1\right) \cdot \bar 1$, we obtain that 
+ $\bar 1 \cdot \xi =1$ on set, where $\bar 1 \cdot \xi \leq 1$.\\
+ So $\bar 1 \cdot \xi =1$ on the whole set.
+
+ 2b) Let's show that $\xi^k \geq 0$ for all $k=1,\dots,K$.\\
+ Let's consider a new random variable 
+ $\eta:=I\left(\bar e_k \cdot \xi \leq 0\right) \cdot \bar e_k$.\\
+
+ Then, due to *-weak convergence definition, 
+ we have $\E\left(\eta \cdot \xi_t \right) \to \E\left( \eta \cdot \xi\right)$.\\
+ It means 
+ $\E \left( I \left( \bar e_k \cdot \xi \leq 0 \right) \cdot e_k \cdot \xi_t \right) \to
+ \E\left( I\left( \bar e_k \cdot \xi \leq 0 \right) \cdot \bar e_k \cdot \xi \right)$.\\
+
+Lefthandside is $\geq 0$ while righthandside is $\leq 0$.
+Hence, $I\left(\bar e_k \cdot \xi \geq 0\right) \equiv 1$.\\
+
+So we have proved that our set is a compact in *-weak topology. 
+But now we will show that $L_t$ is not necessarily continuous in *-weak toplogy even for two assets.
+
+Recall that 
+\[
+L_t^k(\omega,c,\lambda) = \E_t\biggl(\frac{c\lambda^k
+X_{t+1}^n + Y_{t+1}^n}{\sum_{k=1}^K (c \lambda^k X_{t+1}^k + Y_{t+1}^k)}\biggr).
+\]
+
+Let's put $X^1 \equiv 2, X^2 \equiv 1, Y^1\equiv 1, Y^2 \equiv 1, C\equiv 1$. 
+This means that there are two assets, and total capital is always 1.
+Then $L^1 = \frac{2\lambda + 1}{2\lambda + 1 +(1-\lambda) + 1} 
+=\frac{2\lambda +1 }{\lambda +3 } = 2-\frac{5}{\lambda + 3}$.
+
+Let's show that $f(\lambda) =frac{5}{\lambda + 3}$ is not *-weak continuous.
+Take $\lambda_t \to^{*} \lambda$, where $\lambda_t =
+\sum_{i=0}^{s^{t-1}-1} I\left( \frac{2i}{2^t},  \frac{2i+1}{2^t}\right)$.
+
+And we want to prove that $\forall \xi \in L_1: \E f(\lambda_t)\xi \to^{*} \E f(\lambda)\xi$.
+
+But we can see that even for $\xi \equiv 1$: $ \E f(\lambda_t) \not\to \E f(\lambda)$.
+
+Indeed, $\E f(\lambda_t) = 0.5( \frac{5}{3} +\frac{5}{4}) = \frac{35}{24} \not\to \E f(\lambda)=\frac{5}{0.5+3}$.
+
+So we have proven that $f(\lambda) =frac{5}{\lambda + 3}$ is not *-weak continuous and hence $L_t$ is not *-weak continuous.
+
+And at the same time we have found a contradiction to 
+the fact that our set of random variables is strongly (sequentially) compact in $L_{\infty}$, 
+because we have found a sequence, that is *-weak convergent, but does not a strongly convergent subsequence.\\
+Indeed, let's take sequence $\lambda_t$. By constraction, for all $t,s$ 
+we have $|| \L^1_t - \L^1_s ||_{L_{\infty}} \equiv 1$. 
+But space $L_{\infty}$ is complete, which means that if any sequence converges, it must be fundamental.
+But our sequence is not fundamental.
+
+So we have proven that our set of strategies $\bar\lambda$ form a *-weak (but not strong) compact set 
+and on this set the above-mentioned function $L_t$ is strongly (but not *-weakly) continuous. 
+Tikhonov's fixed point theorem says that if we have a strong compact and strong continuity, 
+then there will be a fixed point. In our case we have strong continuity but weak compact - and nevertheless there is a fixed point.
+
+
+\end{document}
