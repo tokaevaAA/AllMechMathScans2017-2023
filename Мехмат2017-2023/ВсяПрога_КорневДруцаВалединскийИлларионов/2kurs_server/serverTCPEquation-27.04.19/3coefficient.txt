@@ -1,0 +1,1 @@
+START LINE a=1 ggg b=-3 hhh c=2 END LINE

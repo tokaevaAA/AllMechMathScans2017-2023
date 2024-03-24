@@ -1,0 +1,16 @@
+
+ from StPetersburg   to Riga   plane A330   maxmest=440  freemest=440   day=8  month=10 year=2019  price=272 
+ from AdlerSochi   to Makhachkala   plane A320   maxmest=149  freemest=149   day=19  month=0 year=2019  price=165 
+ from Stockholm   to Burgas   plane A310   maxmest=183  freemest=183   day=23  month=7 year=2019  price=729 
+ from Oslo   to Stuttgart   plane B747   maxmest=285  freemest=285   day=19  month=9 year=2019  price=157 
+ from Shanghai   to Vladikavkaz   plane SSJ   maxmest=86  freemest=86   day=18  month=8 year=2019  price=335 
+ from Frankfurt   to Saratov   plane A310   maxmest=183  freemest=183   day=7  month=2 year=2019  price=633 
+ from Kishinev   to Hanoi   plane A310   maxmest=183  freemest=183   day=21  month=7 year=2019  price=672 
+ from Istanbul   to Bukhara   plane A330   maxmest=440  freemest=440   day=5  month=8 year=2019  price=91 
+ from Karaganda   to Paris   plane A330   maxmest=440  freemest=440   day=23  month=4 year=2019  price=944 
+ from Anapa   to Lisbon   plane A330   maxmest=440  freemest=440   day=26  month=6 year=2019  price=903 
+ from Izhevsk   to Tivat   plane B777   maxmest=550  freemest=550   day=14  month=5 year=2019  price=853 
+ from Belgorod   to Tivat   plane A330   maxmest=440  freemest=440   day=13  month=10 year=2019  price=981 
+ from Tomsk   to Nizhnekamsk   plane A310   maxmest=183  freemest=183   day=4  month=11 year=2019  price=536 
+ from Nizhnekamsk   to Male   plane SSJ   maxmest=86  freemest=86   day=4  month=9 year=2019  price=501 
+ from Tallinn   to NewYork   plane B747   maxmest=285  freemest=285   day=14  month=3 year=2019  price=298 

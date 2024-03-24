@@ -1,0 +1,9 @@
+8
+2000 plane 1 A330 buy #
+2000 plane 1 SSJ buy #
+2000 plane 1 A330  buy#
+2000 plane 1 SSJ  #
+2000 plane 1 A330 #
+2000 plane 1 SSJ  #
+2000 plane 1 A330 #
+2000 plane 1 SSJ  #

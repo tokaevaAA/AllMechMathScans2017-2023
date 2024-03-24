@@ -1,0 +1,260 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define a(i,j) a[(i-1)*n+(j-1)]
+#define u(i,j) u[(i-1)*n+(j-1)]
+#define anew(i,j) anew[(i-1)*n+(j-1)]
+#define e(i,j) e[(i-1)*n+(j-1)]
+#define x(i) x[i-1]
+
+
+int get_matrix_from_file(int n, double* a,FILE*f){
+    int n0;
+    fscanf(f,"%d",&n0);
+    printf("n0=%d\n",n0);
+    if (n0 != n){printf("Matrix size does not match; Program terminates;\n"); return -1;}
+
+    for (int i=1; i<n+1; i=i+1){
+	for (int j=1; j<n+1; j=j+1){
+	    fscanf(f,"%lf ",&a(i,j));    
+        }
+        	
+    }
+    return 0;
+    
+}
+
+int get_matrix_po_formule(int n, double*a){
+    for (int i=1; i<n+1; i=i+1){
+	for (int j=1; j<n+1; j=j+1){
+	    a(i,j)=i+j;    
+        }
+        
+    }
+    return 0;
+
+}
+
+int get_matrix(int n, double* a,  int argv, char** argc ){
+    int otv=0;
+    if (argv==3){
+    	FILE*f;
+    	f=fopen(argc[2],"r"); if (f==0){printf("Cannot open %s\n",argc[2]);}
+
+	otv= get_matrix_from_file(n,a,f);
+        fclose(f);
+	}
+
+    else if (argv ==2){
+    otv= get_matrix_po_formule(n,a);
+
+    }
+    return otv;
+	
+	
+}
+
+void pechat_matrix(int n, double* a){
+    printf("Start Pechat matrix:\n");
+    for (int i=0; i<n; i=i+1){
+	for (int j=0; j<n; j=j+1){
+	    printf("%f ",a[i*n+j]);
+	}
+	printf("\n");
+    }
+    printf("End Pechat matrix\n");
+}
+
+
+void pechat_vector(int n, double* b){
+    printf("Start Pechat vector:\n");
+    for (int i=0; i<n; i=i+1){
+	
+	    printf("%f\n",b[i]);
+	
+    }
+    printf("End Pechat vector\n");
+}
+
+
+void pechat_matrix_rasshir(int n, double* a, double* e){
+    printf("Start Pechat matrix:\n");
+    for (int i=0; i<n; i=i+1){
+	for (int j=0; j<n; j=j+1){
+	    printf("%f ",a[i*n+j]);
+	}
+	printf(" | ");
+        for (int j=0; j<n; j=j+1){
+	    printf("%f ",e[i*n+j]);
+        }
+	printf("\n");
+    }
+    printf("End Pechat matrix\n");
+}
+
+void make_u(int n, double* x, double* u, int k){
+    int i; int j;
+    for (i=1; i<n+1; i=i+1){
+	for (j=1; j<n+1; j=j+1){
+            if(i==j) {u(i,j)=1;}
+     	    else {u(i,j)=0;}
+	}
+    }
+
+
+
+
+    for ( i=k; i<n+1; i=i+1){
+	for ( j=k; j<n+1; j=j+1){
+	    if (i==j){u(i,j)=1-2*(x(i))*(x(j));}
+	    else {u(i,j)=-2*(x(i))*(x(j));}
+	}
+    }
+
+}
+
+void matrix_mult(int n, int k, double* a, double* u, double* anew){
+    double tmp;
+    
+    for (int i=k; i<n+1; i=i+1){
+	for (int j=k; j<n+1; j=j+1){
+	    
+	    tmp=0;
+	    for(int l=k; l<n+1;l=l+1){tmp=tmp+u(i, l)*a(l,j); }
+            anew(i,j)=tmp;
+	}
+    }
+    for (int i=k; i<n+1; i=i+1){
+	for (int j=k; j<n+1; j=j+1){
+            a(i,j)=anew(i,j);
+	}
+    }
+}
+
+void ue_matrix_mult(int n, int k, double* e, double* u, double* anew){
+    double tmp;
+    int i; int j; int l;
+    
+    //printf("matrix u=:");
+    //pechat_matrix(n,u);
+    
+    for (i=1; i<n+1; i=i+1){
+	for ( j=1; j<n+1; j=j+1){
+	    
+	    tmp=0;
+	    for(l=1; l<n+1;l=l+1){tmp=tmp+u(i, l)*e(l,j); }
+            anew(i,j)=tmp;
+	}
+    }
+    for (i=1; i<n+1; i=i+1){
+	for (j=1; j<n+1; j=j+1){
+            e(i,j)=anew(i,j);
+	}
+    }
+
+}
+
+
+void one_step(int n, int k, double* a, double* x ,double* u, double* anew, double* e){
+    printf("STEP =%d\n",k);
+    double s=0; int j=0;
+    for ( j=k+1; j<n+1; j=j+1){s=s+(a(j,k))*(a(j,k));}
+    printf("s=%f\n",s);
+
+    double norma_ak= sqrt( (a(k,k))*(a(k,k))+s );
+    printf("norma_ak=%f\n",norma_ak);
+
+    x(k)=a(k,k)-norma_ak;
+    for(j=k+1; j<n+1; j=j+1){x(j)=a(j,k);}
+    double norma_x=sqrt( (x(k))*(x(k)) +s );
+    printf("norma_x=%f\n",norma_x);
+
+    for(j=k; j<n+1; j=j+1){x(j)=x(j)/norma_x;}
+    //pechat_vector(n,x);
+    
+    make_u(n,x, u,k);
+    pechat_matrix(n,u);
+    
+    
+    matrix_mult(n,k,a,u,anew);
+    ue_matrix_mult(n,k,e,u,anew);
+
+    pechat_matrix_rasshir(n,a,e);
+   
+
+
+}
+
+
+void obratny_hod(int n, int k, double* a, double* e){
+    printf("obratny_hod, k=%d\n",k);
+    int i; int j; int l=0; double akk=a(k,k);
+    for (i=k;i<n+1;i=i+1){a(k,i)=a(k,i)/akk;}
+    for (i=1;i<n+1;i=i+1){e(k,i)=e(k,i)/akk;}
+    
+    //pechat_matrix_rasshir(n,a,e);
+
+    
+    for(j=k-1; j>0; j=j-1){ 
+	for (l=1; l<n+1; l=l+1){
+		e(j,l)= e(j,l)-a(j,k)*e(k,l);
+				}
+    }
+
+    for(j=k-1; j>0; j=j-1){a(j,k)=0;}
+			  
+    //pechat_matrix_rasshir(n,a,e);
+    
+
+
+}
+
+
+
+
+int main(int argv,char** argc){
+    printf("Hello\n");
+    printf("argv=%d argc[0]= %s argc[1]= %s \n",argv,argc[0],argc[1]);
+    
+    int n=atoi(argc[1]); printf("n=%d\n",n);
+    
+    
+    double* a=(double*)malloc(n*n*sizeof(double));
+    
+    
+    int smogli_prochitat=get_matrix(n,a,argv,argc);
+    if (smogli_prochitat== -1){return -1;}
+
+    pechat_matrix(n,a);
+
+    double* x=(double*)malloc(n*(sizeof(double)));
+    double* u=(double*)malloc(n*n*(sizeof(double)));
+    double* anew=(double*)malloc(n*n*(sizeof(double)));
+    double* e=(double*)malloc(n*n*(sizeof(double)));
+
+    
+    for(int i=1; i<n+1;i=i+1){e(i,i)=1;}
+		    
+    
+    for (int k=1; k<n+1; k=k+1){one_step(n,k,a,x,u,anew,e);}
+    for (int k=n; k>0; k=k-1){obratny_hod(n,k,a,e);}
+
+    pechat_matrix(n,e);
+    
+
+    free(a);
+    free(x);
+    free(u);
+    free(anew);
+    free(e);
+
+    
+   
+    printf("Goodbuy\n");
+   
+    
+    return 0;
+    
+
+
+}

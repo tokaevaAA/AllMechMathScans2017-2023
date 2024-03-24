@@ -1,0 +1,11 @@
+
+ from Belgorod   to Tyumen   plane A330   maxmest=440  freemest=440   day=9  month=10 year=2019  price=272 
+ from Samarkand   to Larnaca   plane A320   maxmest=149  freemest=149   day=20  month=0 year=2019  price=165 
+ from Dubai   to Prague   plane A310   maxmest=183  freemest=183   day=24  month=7 year=2019  price=729 
+ from Tel   to Ulyanovsk   plane B747   maxmest=285  freemest=285   day=20  month=9 year=2019  price=157 
+ from Baku   to Saransk   plane SSJ   maxmest=86  freemest=86   day=19  month=8 year=2019  price=335 
+ from Magnitogorsk   to Copenhagen   plane A310   maxmest=183  freemest=183   day=8  month=2 year=2019  price=633 
+ from Bangkok   to Al   plane A310   maxmest=183  freemest=183   day=22  month=7 year=2019  price=672 
+ from Tyumen   to Anapa   plane A330   maxmest=440  freemest=440   day=6  month=8 year=2019  price=91 
+ from Cairo   to Permian   plane A330   maxmest=440  freemest=440   day=24  month=4 year=2019  price=944 
+ from Nalchik   to Copenhagen   plane A330   maxmest=440  freemest=440   day=27  month=6 year=2019  price=903 

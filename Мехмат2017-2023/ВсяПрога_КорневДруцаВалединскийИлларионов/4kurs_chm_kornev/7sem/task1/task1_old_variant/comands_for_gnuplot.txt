@@ -1,0 +1,1 @@
+plot 'output_ravnom_uzel_func_P_n_1_L_n.txt' using 1:2 with lines, 'output_ravnom_uzel_func_P_n_1_L_n.txt' using 1:3 with lines, 'output_ravnom_uzel_func_P_n_1_L_n.txt' using 1:4 with lines,  'output_ravnom_uzel_func_P_n_1_L_n.txt' using 1:2 with points 

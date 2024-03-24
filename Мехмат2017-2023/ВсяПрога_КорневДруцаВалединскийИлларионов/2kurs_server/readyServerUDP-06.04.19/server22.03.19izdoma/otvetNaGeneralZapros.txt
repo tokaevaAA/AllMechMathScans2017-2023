@@ -1,0 +1,23 @@
+
+ from Burgas   to MineralWaters   plane SSJ   maxmest=86  freemest=68   day=16  month=0 year=2019  price=426 
+ from Bologna   to Riga   plane SSJ   maxmest=86  freemest=68   day=7  month=2 year=2019  price=324 
+ from NewYork   to Tivat   plane SSJ   maxmest=86  freemest=68   day=26  month=1 year=2019  price=280 
+ from NewUrengoy   to Tivat   plane SSJ   maxmest=86  freemest=68   day=20  month=1 year=2019  price=500 
+ from Astrakhan   to Shymkent   plane SSJ   maxmest=86  freemest=68   day=4  month=7 year=2019  price=763 
+ from Bukhara   to Seoul   plane SSJ   maxmest=86  freemest=68   day=27  month=5 year=2019  price=996 
+ from Tivat   to StPetersburg   plane SSJ   maxmest=86  freemest=68   day=23  month=2 year=2019  price=499 
+ from Magnitogorsk   to Tallinn   plane SSJ   maxmest=86  freemest=68   day=0  month=5 year=2019  price=139 
+ from Orenburg   to Stavropol   plane SSJ   maxmest=86  freemest=68   day=3  month=10 year=2019  price=568 
+ from Ljubljana   to RostovonDon   plane SSJ   maxmest=86  freemest=68   day=19  month=9 year=2019  price=904 
+ from Nice   to Sofia   plane SSJ   maxmest=86  freemest=68   day=13  month=1 year=2019  price=754 
+ from Atyrau   to MineralWaters   plane SSJ   maxmest=86  freemest=68   day=18  month=0 year=2019  price=189 
+ from Simferopol   to NNovgorod   plane SSJ   maxmest=86  freemest=68   day=17  month=5 year=2019  price=892 
+ from Voronezh   to Verona   plane SSJ   maxmest=86  freemest=68   day=0  month=11 year=2019  price=593 
+ from Amsterdam   to Astrakhan   plane SSJ   maxmest=86  freemest=68   day=16  month=10 year=2019  price=284 
+ from Tyumen   to Hamburg   plane SSJ   maxmest=86  freemest=68   day=19  month=5 year=2019  price=363 
+ from Vladivostok   to StPetersburg   plane SSJ   maxmest=86  freemest=68   day=24  month=2 year=2019  price=713 
+ from Havana   to Barcelona   plane SSJ   maxmest=86  freemest=68   day=18  month=1 year=2019  price=836 
+ from Phuket   to NewYork   plane SSJ   maxmest=86  freemest=68   day=8  month=6 year=2019  price=904 
+ from Orenburg   to Yakutsk   plane SSJ   maxmest=86  freemest=68   day=10  month=0 year=2019  price=503 
+ from Kaliningrad   to Burgas   plane SSJ   maxmest=86  freemest=68   day=15  month=0 year=2019  price=204 
+ from Beijing   to Stockholm   plane SSJ   maxmest=86  freemest=68   day=3  month=5 year=2019  price=848 #

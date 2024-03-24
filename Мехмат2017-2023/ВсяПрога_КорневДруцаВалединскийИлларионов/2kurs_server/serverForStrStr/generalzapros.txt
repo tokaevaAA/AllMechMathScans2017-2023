@@ -1,0 +1,6 @@
+buy
+from 6 Milan Bologna Cairo Dubai Samarkand Sochi
+to 5 Ulyanovsk Simferopol Larnaca Riga Omsk
+plane 2 A330 SSJ
+day 5 25
+price 30 990

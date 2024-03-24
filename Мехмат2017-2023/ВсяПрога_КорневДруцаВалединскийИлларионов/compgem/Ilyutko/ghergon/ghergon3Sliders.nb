@@ -1,0 +1,491 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     19324,        483]
+NotebookOptionsPosition[     18907,        468]
+NotebookOutlinePosition[     19261,        484]
+CellTagsIndexPosition[     19218,        481]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"poluperimetr", "[", 
+      RowBox[{"A1_", ",", "A2_", ",", "A3_"}], "]"}], ":=", 
+     RowBox[{"0.5", "*", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Norm", "[", 
+         RowBox[{"A1", "-", "A2"}], "]"}], "+", 
+        RowBox[{"Norm", "[", 
+         RowBox[{"A1", "-", "A3"}], "]"}], "+", 
+        RowBox[{"Norm", "[", 
+         RowBox[{"A2", "-", "A3"}], "]"}]}], ")"}]}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"radiusVpis", "[", 
+      RowBox[{"A1_", ",", "A2_", ",", "A3_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"poluperimetr", "[", 
+           RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], "-", 
+          RowBox[{"Norm", "[", 
+           RowBox[{"A1", "-", "A2"}], "]"}]}], ")"}], "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"poluperimetr", "[", 
+           RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], "-", 
+          RowBox[{"Norm", "[", 
+           RowBox[{"A1", "-", "A3"}], "]"}]}], ")"}], "*", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"poluperimetr", "[", 
+            RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], "-", 
+           RowBox[{"Norm", "[", 
+            RowBox[{"A2", "-", "A3"}], "]"}]}], ")"}], "/", 
+         RowBox[{"poluperimetr", "[", 
+          RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}]}]}], ")"}], "^", 
+      "0.5"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"kosinusAlpha", "[", 
+      RowBox[{"A1_", ",", "A2_", ",", "A3_"}], "]"}], ":=", 
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"Norm", "[", 
+          RowBox[{"A1", "-", "A3"}], "]"}], ")"}], "^", "2"}], "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"Norm", "[", 
+          RowBox[{"A1", "-", "A2"}], "]"}], ")"}], "^", "2"}], "-", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"Norm", "[", 
+          RowBox[{"A2", "-", "A3"}], "]"}], ")"}], "^", "2"}]}], 
+      RowBox[{"2", "*", 
+       RowBox[{"(", 
+        RowBox[{"Norm", "[", 
+         RowBox[{"A1", "-", "A3"}], "]"}], ")"}], "*", 
+       RowBox[{"(", 
+        RowBox[{"Norm", "[", 
+         RowBox[{"A1", "-", "A2"}], "]"}], ")"}]}]]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"kosinusAlphaPopolam", "[", 
+      RowBox[{"A1_", ",", "A2_", ",", "A3_"}], "]"}], ":=", 
+     SqrtBox[
+      FractionBox[
+       RowBox[{"1", "+", 
+        RowBox[{"kosinusAlpha", "[", 
+         RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}]}], "2"]]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"sinusAlphaPopolam", "[", 
+      RowBox[{"A1_", ",", "A2_", ",", "A3_"}], "]"}], ":=", 
+     SqrtBox[
+      RowBox[{"1", "-", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"kosinusAlphaPopolam", "[", 
+          RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], ")"}], "^", "2"}]}]]}],
+     ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"tochkaKasania1", "[", 
+      RowBox[{"A1_", ",", "A2_", ",", "A3_"}], "]"}], ":=", 
+     RowBox[{"A1", "+", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"A3", "-", "A1"}], ")"}], "*", 
+        RowBox[{"radiusVpis", "[", 
+         RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], "*", 
+        RowBox[{"kosinusAlphaPopolam", "[", 
+         RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}]}], 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"Norm", "[", 
+          RowBox[{"A3", "-", "A1"}], "]"}], ")"}], "*", 
+        RowBox[{"sinusAlphaPopolam", "[", 
+         RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}]}]]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"centrvpis", "[", 
+      RowBox[{"A1_", ",", "A2_", ",", "A3_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"tochkaKasania1", "[", 
+       RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], " ", "+", 
+      RowBox[{
+       RowBox[{"(", 
+        FractionBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"A3", "-", "A1"}], ")"}], ".", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1"}], "}"}]}], ",", 
+           RowBox[{"-", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"A3", "-", "A1"}], ")"}], ".", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "0"}], "}"}]}]}]}], "}"}], 
+         RowBox[{"Norm", "[", 
+          RowBox[{"A3", "-", "A1"}], "]"}]], ")"}], "*", 
+       RowBox[{"radiusVpis", "[", 
+        RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}]}]}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"tochkaKasania2", "[", 
+      RowBox[{"A1_", ",", "A2_", ",", "A3_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"centrvpis", "[", 
+       RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], "+", 
+      RowBox[{
+       RowBox[{"radiusVpis", "[", 
+        RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], "*", 
+       RowBox[{"(", 
+        FractionBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"A2", "-", "A1"}], ")"}], ".", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1"}], "}"}]}], ",", 
+           RowBox[{"-", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"A2", "-", "A1"}], ")"}], ".", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "0"}], "}"}]}]}]}], "}"}], 
+         RowBox[{"Norm", "[", 
+          RowBox[{"A2", "-", "A1"}], "]"}]], ")"}]}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"tochkaKasania3", "[", 
+      RowBox[{"A1_", ",", "A2_", ",", "A3_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"centrvpis", "[", 
+       RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], "+", 
+      RowBox[{
+       RowBox[{"radiusVpis", "[", 
+        RowBox[{"A1", ",", "A2", ",", "A3"}], "]"}], "*", 
+       RowBox[{"(", 
+        FractionBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"A2", "-", "A3"}], ")"}], ".", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "1"}], "}"}]}]}], ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"A2", "-", "A3"}], ")"}], ".", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", "0"}], "}"}]}]}], "}"}], 
+         RowBox[{"Norm", "[", 
+          RowBox[{"A2", "-", "A3"}], "]"}]], ")"}]}]}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"rvpis", "=", 
+     RowBox[{"radiusVpis", "[", 
+      RowBox[{"pt1", ",", "pt2", ",", "pt3"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{"GraphicsComplex", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"pt1", ",", "pt2", ",", "pt3"}], "}"}], "~", "Join", "~", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"tochkaKasania1", "[", 
+            RowBox[{"pt1", ",", "pt2", ",", "pt3"}], "]"}], ",", 
+           RowBox[{"centrvpis", "[", 
+            RowBox[{"pt1", ",", "pt2", ",", "pt3"}], "]"}], ",", 
+           RowBox[{"tochkaKasania2", "[", 
+            RowBox[{"pt1", ",", "pt2", ",", "pt3"}], "]"}], ",", 
+           RowBox[{"tochkaKasania3", "[", 
+            RowBox[{"pt1", ",", "pt2", ",", "pt3"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thin", ",", 
+          RowBox[{"Line", "[", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "2", ",", "3", ",", "1"}], "}"}], "]"}], ",", 
+          "Cyan", ",", "Thick", ",", 
+          RowBox[{"Line", "[", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "4"}], "}"}], "]"}], ",", 
+          RowBox[{"Line", "[", 
+           RowBox[{"{", 
+            RowBox[{"3", ",", "6"}], "}"}], "]"}], ",", 
+          RowBox[{"Line", "[", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "7"}], "}"}], "]"}], ",", "Blue", ",", 
+          RowBox[{"Circle", "[", 
+           RowBox[{"5", ",", "rvpis"}], "]"}], ",", "Orange", ",", 
+          RowBox[{"PointSize", "[", "Large", "]"}], ",", 
+          RowBox[{"Point", "[", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "6", ",", "7"}], 
+            "}"}], "]"}], ",", "Purple", ",", 
+          RowBox[{"Point", "[", 
+           RowBox[{"{", "5", "}"}], "]"}]}], "}"}]}], "]"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", "2"}]}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"pt1", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"pt2", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", 
+       RowBox[{"-", "1.2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"pt3", ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.7653589810530643`*^9, 3.7653589819936943`*^9}, {
+   3.765359043563888*^9, 3.765359061186886*^9}, {3.7653590988120317`*^9, 
+   3.7653591829688272`*^9}, {3.765359253853364*^9, 3.765359257418508*^9}, 
+   3.765359303103383*^9, {3.765359380713748*^9, 3.765359384855256*^9}, 
+   3.765359439596546*^9, {3.7653595724453373`*^9, 3.76535958321319*^9}, {
+   3.765367056227297*^9, 3.765367119204702*^9}, {3.765367155704247*^9, 
+   3.765367238074963*^9}, {3.7653672792151957`*^9, 3.765367387123822*^9}, {
+   3.765367430918398*^9, 3.765367469617269*^9}, {3.76536751571378*^9, 
+   3.765367531181807*^9}, {3.7653675746751137`*^9, 3.765367631906543*^9}, {
+   3.7653677765060043`*^9, 3.76536780132055*^9}, {3.765367838492406*^9, 
+   3.765367842705618*^9}, {3.7653678814045763`*^9, 3.765367887978197*^9}, {
+   3.765368082354879*^9, 3.7653680913033953`*^9}, {3.765368149961123*^9, 
+   3.765368159791874*^9}, {3.7653682424212523`*^9, 3.7653682654170017`*^9}, {
+   3.765368295724105*^9, 3.7653683049665194`*^9}, 3.765368338135055*^9, {
+   3.766552369898675*^9, 3.76655242646865*^9}, {3.766552665766656*^9, 
+   3.7665526707112093`*^9}, {3.7665536412283897`*^9, 3.766553646040403*^9}, {
+   3.766553742138152*^9, 3.766553805395996*^9}, {3.766553839063796*^9, 
+   3.766553847279613*^9}, {3.76767130565231*^9, 3.767671395089305*^9}},
+ CellLabel->"In[66]:=",ExpressionUUID->"9754f65d-384d-4107-a197-418b21240799"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`pt1$$ = {-1, 
+     0.3900000000000001}, $CellContext`pt2$$ = {-1, -1.2}, $CellContext`pt3$$ \
+= {0.8150000000000001, -0.62}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`pt1$$], {-1, -1}, {1, 1}}, {
+      Hold[$CellContext`pt2$$], {-1, -1.2}, {1, 1}}, {
+      Hold[$CellContext`pt3$$], {0, -1}, {1, 1}}}, Typeset`size$$ = {
+    360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`pt1$49465$$ = {0, 
+    0}, $CellContext`pt2$49466$$ = {0, 0}, $CellContext`pt3$49467$$ = {0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`pt1$$ = {-1, -1}, $CellContext`pt2$$ = \
+{-1, -1.2}, $CellContext`pt3$$ = {0, -1}}, "ControllerVariables" :> {
+        Hold[$CellContext`pt1$$, $CellContext`pt1$49465$$, {0, 0}], 
+        Hold[$CellContext`pt2$$, $CellContext`pt2$49466$$, {0, 0}], 
+        Hold[$CellContext`pt3$$, $CellContext`pt3$49467$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ($CellContext`poluperimetr[
+          Pattern[$CellContext`A1, 
+           Blank[]], 
+          Pattern[$CellContext`A2, 
+           Blank[]], 
+          Pattern[$CellContext`A3, 
+           Blank[]]] := 
+        0.5 (Norm[$CellContext`A1 - $CellContext`A2] + 
+          Norm[$CellContext`A1 - $CellContext`A3] + 
+          Norm[$CellContext`A2 - $CellContext`A3]); $CellContext`radiusVpis[
+          Pattern[$CellContext`A1, 
+           Blank[]], 
+          Pattern[$CellContext`A2, 
+           Blank[]], 
+          Pattern[$CellContext`A3, 
+           
+           Blank[]]] := ((($CellContext`poluperimetr[$CellContext`A1, \
+$CellContext`A2, $CellContext`A3] - 
+            Norm[$CellContext`A1 - $CellContext`A2]) \
+($CellContext`poluperimetr[$CellContext`A1, $CellContext`A2, $CellContext`A3] - 
+            Norm[$CellContext`A1 - $CellContext`A3])) \
+(($CellContext`poluperimetr[$CellContext`A1, $CellContext`A2, \
+$CellContext`A3] - 
+            Norm[$CellContext`A2 - \
+$CellContext`A3])/$CellContext`poluperimetr[$CellContext`A1, $CellContext`A2, \
+$CellContext`A3]))^0.5; $CellContext`kosinusAlpha[
+          Pattern[$CellContext`A1, 
+           Blank[]], 
+          Pattern[$CellContext`A2, 
+           Blank[]], 
+          Pattern[$CellContext`A3, 
+           Blank[]]] := (Norm[$CellContext`A1 - $CellContext`A3]^2 + 
+          Norm[$CellContext`A1 - $CellContext`A2]^2 - 
+          Norm[$CellContext`A2 - $CellContext`A3]^2)/((2 
+          Norm[$CellContext`A1 - $CellContext`A3]) 
+         Norm[$CellContext`A1 - $CellContext`A2]); \
+$CellContext`kosinusAlphaPopolam[
+          Pattern[$CellContext`A1, 
+           Blank[]], 
+          Pattern[$CellContext`A2, 
+           Blank[]], 
+          Pattern[$CellContext`A3, 
+           Blank[]]] := 
+        Sqrt[(1 + $CellContext`kosinusAlpha[$CellContext`A1, $CellContext`A2, \
+$CellContext`A3])/2]; $CellContext`sinusAlphaPopolam[
+          Pattern[$CellContext`A1, 
+           Blank[]], 
+          Pattern[$CellContext`A2, 
+           Blank[]], 
+          Pattern[$CellContext`A3, 
+           Blank[]]] := 
+        Sqrt[1 - $CellContext`kosinusAlphaPopolam[$CellContext`A1, \
+$CellContext`A2, $CellContext`A3]^2]; $CellContext`tochkaKasania1[
+          Pattern[$CellContext`A1, 
+           Blank[]], 
+          Pattern[$CellContext`A2, 
+           Blank[]], 
+          Pattern[$CellContext`A3, 
+           
+           Blank[]]] := $CellContext`A1 + (($CellContext`A3 - \
+$CellContext`A1) $CellContext`radiusVpis[$CellContext`A1, $CellContext`A2, \
+$CellContext`A3]) ($CellContext`kosinusAlphaPopolam[$CellContext`A1, \
+$CellContext`A2, $CellContext`A3]/(
+           Norm[$CellContext`A3 - $CellContext`A1] \
+$CellContext`sinusAlphaPopolam[$CellContext`A1, $CellContext`A2, \
+$CellContext`A3])); $CellContext`centrvpis[
+          Pattern[$CellContext`A1, 
+           Blank[]], 
+          Pattern[$CellContext`A2, 
+           Blank[]], 
+          Pattern[$CellContext`A3, 
+           
+           Blank[]]] := $CellContext`tochkaKasania1[$CellContext`A1, \
+$CellContext`A2, $CellContext`A3] + ({
+             Dot[$CellContext`A3 - $CellContext`A1, {0, 1}], -
+             Dot[$CellContext`A3 - $CellContext`A1, {1, 0}]}/
+           Norm[$CellContext`A3 - $CellContext`A1]) \
+$CellContext`radiusVpis[$CellContext`A1, $CellContext`A2, $CellContext`A3]; \
+$CellContext`tochkaKasania2[
+          Pattern[$CellContext`A1, 
+           Blank[]], 
+          Pattern[$CellContext`A2, 
+           Blank[]], 
+          Pattern[$CellContext`A3, 
+           
+           Blank[]]] := $CellContext`centrvpis[$CellContext`A1, \
+$CellContext`A2, $CellContext`A3] + $CellContext`radiusVpis[$CellContext`A1, \
+$CellContext`A2, $CellContext`A3] ({
+             Dot[$CellContext`A2 - $CellContext`A1, {0, 1}], -
+             Dot[$CellContext`A2 - $CellContext`A1, {1, 0}]}/
+           Norm[$CellContext`A2 - $CellContext`A1]); \
+$CellContext`tochkaKasania3[
+          Pattern[$CellContext`A1, 
+           Blank[]], 
+          Pattern[$CellContext`A2, 
+           Blank[]], 
+          Pattern[$CellContext`A3, 
+           
+           Blank[]]] := $CellContext`centrvpis[$CellContext`A1, \
+$CellContext`A2, $CellContext`A3] + $CellContext`radiusVpis[$CellContext`A1, \
+$CellContext`A2, $CellContext`A3] ({-
+             Dot[$CellContext`A2 - $CellContext`A3, {0, 1}], 
+             Dot[$CellContext`A2 - $CellContext`A3, {1, 0}]}/
+           Norm[$CellContext`A2 - $CellContext`A3]); $CellContext`rvpis = \
+$CellContext`radiusVpis[$CellContext`pt1$$, $CellContext`pt2$$, \
+$CellContext`pt3$$]; Graphics[
+         GraphicsComplex[
+          
+          Join[{$CellContext`pt1$$, $CellContext`pt2$$, $CellContext`pt3$$}, \
+{
+            $CellContext`tochkaKasania1[$CellContext`pt1$$, \
+$CellContext`pt2$$, $CellContext`pt3$$], 
+            $CellContext`centrvpis[$CellContext`pt1$$, $CellContext`pt2$$, \
+$CellContext`pt3$$], 
+            $CellContext`tochkaKasania2[$CellContext`pt1$$, \
+$CellContext`pt2$$, $CellContext`pt3$$], 
+            $CellContext`tochkaKasania3[$CellContext`pt1$$, \
+$CellContext`pt2$$, $CellContext`pt3$$]}], {Thin, 
+           Line[{1, 2, 3, 1}], Cyan, Thick, 
+           Line[{2, 4}], 
+           Line[{3, 6}], 
+           Line[{1, 7}], Blue, 
+           Circle[5, $CellContext`rvpis], Orange, 
+           PointSize[Large], 
+           Point[{1, 2, 3, 4, 6, 7}], Purple, 
+           Point[{5}]}], PlotRange -> 2]), 
+      "Specifications" :> {{$CellContext`pt1$$, {-1, -1}, {1, 
+         1}}, {$CellContext`pt2$$, {-1, -1.2}, {1, 1}}, {$CellContext`pt3$$, {
+         0, -1}, {1, 1}}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{405., {335., 341.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",
+ CellChangeTimes->{3.767696566769743*^9},
+ CellLabel->"In[73]:=",ExpressionUUID->"64598599-f50a-477c-9f09-0cf85b226cf9"]
+},
+WindowSize->{1029, 608},
+WindowMargins->{{0, Automatic}, {36, Automatic}},
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 5, \
+2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 10712, 277, 866, "Input",ExpressionUUID->"9754f65d-384d-4107-a197-418b21240799"],
+Cell[11273, 299, 7630, 167, 691, InheritFromParent,ExpressionUUID->"64598599-f50a-477c-9f09-0cf85b226cf9"]
+}
+]
+*)
+
